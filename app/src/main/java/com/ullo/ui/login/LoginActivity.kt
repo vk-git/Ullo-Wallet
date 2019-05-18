@@ -4,11 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProviders
-import com.google.gson.JsonObject
 import com.ullo.BR
 import com.ullo.R
 import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivityLoginBinding
+import com.ullo.ui.forgot_password.ForgotPasswordActivity
 import com.ullo.ui.main.MainActivity
 import com.ullo.utils.Validation
 import com.ullo.utils.Validation.ValidationType
@@ -17,6 +17,7 @@ import javax.inject.Inject
 
 
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), LoginNavigator {
+
 
     companion object {
         fun newIntent(context: Context): Intent {
@@ -51,12 +52,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), Logi
     }
 
     override fun onLoginHandle() {
-        if (isValid()) {
+        onMainScreen()
+        /*if (isValid()) {
             val loginReq = JsonObject()
             loginReq.addProperty("email", mActivityLoginBinding!!.txtUserName.text.toString())
             loginReq.addProperty("password", mActivityLoginBinding!!.txtUserPassword.text.toString())
             viewModel?.login(loginReq)
-        }
+        }*/
     }
 
     private fun isValid(): Boolean {
@@ -81,6 +83,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), Logi
         }
 
         return validInput
+    }
+
+    override fun onForgotPasswordHandle() {
+        val intent = ForgotPasswordActivity.newIntent(this)
+        startActivity(intent)
     }
 
     override fun onMainScreen() {

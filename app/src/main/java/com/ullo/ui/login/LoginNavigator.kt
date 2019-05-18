@@ -6,4 +6,5 @@ import com.ullo.base.BaseNavigator
 interface LoginNavigator : BaseNavigator {
     fun onLoginHandle()
     fun onMainScreen()
+    fun onForgotPasswordHandle()
 }

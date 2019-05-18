@@ -8,6 +8,7 @@ import com.ullo.db.DataManager
 import com.ullo.ui.change_password.ChangePasswordViewModel
 import com.ullo.ui.choose_patient.ChoosePatientViewModel
 import com.ullo.ui.contact.ContactViewModel
+import com.ullo.ui.forgot_password.ForgotPasswordViewModel
 import com.ullo.ui.landing.LandingViewModel
 import com.ullo.ui.login.LoginViewModel
 import com.ullo.ui.main.MainViewModel
@@ -51,6 +52,7 @@ class ViewModelProviderFactory : ViewModelProvider.Factory {
             modelClass.isAssignableFrom(RegisterViewModel::class.java) -> RegisterViewModel(mApplication, mUlloService, mSession, mDataManager) as T
             modelClass.isAssignableFrom(SplashViewModel::class.java) -> SplashViewModel(mApplication, mUlloService, mSession, mDataManager) as T
             modelClass.isAssignableFrom(TermsOfUseViewModel::class.java) -> TermsOfUseViewModel(mApplication, mUlloService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(ForgotPasswordViewModel::class.java) -> ForgotPasswordViewModel(mApplication, mUlloService, mSession, mDataManager) as T
             else -> throw IllegalArgumentException("Unknown class name")
         }
     }

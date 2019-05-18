@@ -25,57 +25,17 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.landing.LandingActivity" />
-        <activity
-            android:name=".ui.login.LoginActivity"
-            android:theme="@style/AppTheme.White" />
-        <activity
-            android:name=".ui.register.RegisterActivity"
-            android:theme="@style/AppTheme.White" />
-        <activity
-            android:name=".ui.confirm_account.ConfirmAccountActivity"
-            android:theme="@style/AppTheme.White" />
+        <activity android:name=".ui.login.LoginActivity" />
+        <activity android:name=".ui.register.RegisterActivity" />
         <activity
             android:name=".ui.main.MainActivity"
-            android:launchMode="singleTask"
-            android:theme="@style/AppTheme.White" />
-        <activity
-            android:name=".ui.contact.ContactActivity"
-            android:theme="@style/AppTheme.White" />
-        <activity
-            android:name=".ui.profile.ProfileActivity"
-            android:theme="@style/AppTheme.White" />
-        <activity
-            android:name=".ui.facility.FacilityActivity"
-            android:theme="@style/AppTheme.White" />
-        <activity
-            android:name=".ui.edit_patient.EditPatientActivity"
-            android:theme="@style/AppTheme.White" />
-        <activity
-            android:name=".ui.create_patient.CreatePatientActivity"
-            android:theme="@style/AppTheme.White" />
-        <activity
-            android:name=".ui.imprint.ImprintActivity"
-            android:theme="@style/AppTheme.White" />
-        <activity
-            android:name=".ui.delete_account.DeleteAccountActivity"
-            android:theme="@style/AppTheme.White" />
-        <activity
-            android:name=".ui.privacy_policy.PrivacyPolicyActivity"
-            android:theme="@style/AppTheme.White" />
-        <activity
-            android:name=".ui.terms_of_use.TermsOfUseActivity"
-            android:theme="@style/AppTheme.White" />
-        <activity
-            android:name=".ui.tutorial_video.TutorialVideoActivity"
-            android:theme="@style/AppTheme.White" />
-        <activity
-            android:name=".ui.change_password.ChangePasswordActivity"
-            android:theme="@style/AppTheme.White" />
-        <activity
-            android:name=".ui.choose_patient.ChoosePatientActivity"
-            android:theme="@style/AppTheme.White" />
-        <activity
-            android:name=".ui.start_analysis.StartAnalysisActivity"
-            android:theme="@style/AppTheme.White" />
+            android:launchMode="singleTask" />
+        <activity android:name=".ui.contact.ContactActivity" />
+        <activity android:name=".ui.profile.ProfileActivity" />
+        <activity android:name=".ui.privacy_policy.PrivacyPolicyActivity" />
+        <activity android:name=".ui.terms_of_use.TermsOfUseActivity" />
+        <activity android:name=".ui.change_password.ChangePasswordActivity" />
+        <activity android:name=".ui.choose_patient.ChoosePatientActivity" />
+        <activity android:name=".ui.forgot_password.ForgotPasswordActivity" />
     </application>
 </manifest>

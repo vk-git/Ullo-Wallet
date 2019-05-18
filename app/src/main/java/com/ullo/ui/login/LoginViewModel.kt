@@ -19,6 +19,10 @@ class LoginViewModel(application: Application, ulloService: UlloService, session
         getNavigator()?.onLoginHandle()
     }
 
+    fun onForgotPasswordButtonClick() {
+        getNavigator()?.onForgotPasswordHandle()
+    }
+
     fun login(loginReq: JsonObject) {
         getCompositeDisposable()?.add(getLinderaService().userLogin(loginReq, object : ResponseListener<Response<BaseResponse<AppUser>>, String> {
             override fun onSuccess(response: Response<BaseResponse<AppUser>>) {

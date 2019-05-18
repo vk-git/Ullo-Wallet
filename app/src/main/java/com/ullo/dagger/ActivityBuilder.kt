@@ -4,6 +4,7 @@ import com.ullo.ui.change_password.ChangePasswordActivity
 import com.ullo.ui.choose_patient.ChoosePatientActivity
 import com.ullo.ui.choose_patient.ChoosePatientActivityModule
 import com.ullo.ui.contact.ContactActivity
+import com.ullo.ui.forgot_password.ForgotPasswordActivity
 import com.ullo.ui.landing.LandingActivity
 import com.ullo.ui.login.LoginActivity
 import com.ullo.ui.main.MainActivity
@@ -50,4 +51,7 @@ abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = [ChoosePatientActivityModule::class])
     internal abstract fun bindChoosePatientActivity(): ChoosePatientActivity
+
+    @ContributesAndroidInjector
+    internal abstract fun bindForgotPasswordActivity(): ForgotPasswordActivity
 }
