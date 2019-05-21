@@ -1,8 +1,12 @@
 package com.ullo.ui.main
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
 import com.ullo.BR
 import com.ullo.R
@@ -14,8 +18,10 @@ import javax.inject.Inject
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNavigator {
 
-
     companion object {
+
+        private const val READ_CONTACT_PERMISSION_REQUEST_CODE = 76
+
         fun newIntent(context: Context): Intent {
             return Intent(context, MainActivity::class.java)
         }
@@ -41,6 +47,27 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mActivityMainBinding = getViewDataBinding()
-        viewModel?.setNavigator(this)
+        viewModel.setNavigator(this)
+
+        fetchContacts()
+    }
+
+    private fun fetchContacts() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) ==
+                PackageManager.PERMISSION_GRANTED) {
+            viewModel.fetchContactAndUpload()
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(arrayOf(Manifest.permission.READ_CONTACTS),
+                        READ_CONTACT_PERMISSION_REQUEST_CODE)
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        if (requestCode == READ_CONTACT_PERMISSION_REQUEST_CODE
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            fetchContacts()
+        }
     }
 }

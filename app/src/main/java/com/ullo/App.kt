@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.github.tamir7.contacts.Contacts
 import com.ullo.dagger.DaggerAppComponent
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
@@ -27,6 +28,7 @@ class App : Application(), HasActivityInjector, Application.ActivityLifecycleCal
     override fun onCreate() {
         super.onCreate()
         instance = this
+        Contacts.initialize(this)
 
         DaggerAppComponent.builder()
                 .application(this)

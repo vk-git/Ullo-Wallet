@@ -40,20 +40,22 @@
             android:paddingBottom="16dp"
             android:weightSum="2">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/search_icon" />
-
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/search_edit_text"
-                android:fontFamily="@font/roboto_regular"
-                android:hint="@string/dashboard_search"
-                android:padding="15dp"
-                android:textSize="16sp" />
+                android:textColorHint="@color/medium_grey">
+
+                <EditText
+                    android:id="@+id/etTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_search"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:hint="Search people or enter a number"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -67,14 +69,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_launcher" />
+                android:src="@drawable/ic_qr_code_blue" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Scan QA Code"
+                android:layout_marginTop="14dp"
+                android:gravity="center"
+                android:text="@string/scan_qa_code"
                 android:textColor="#712CE2"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -95,7 +100,9 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_marginTop="30dp"
+                tools:listitem="@layout/patient_list_item" />
 
         </LinearLayout>
     </LinearLayout>

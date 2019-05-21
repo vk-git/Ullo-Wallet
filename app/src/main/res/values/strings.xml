@@ -195,4 +195,7 @@
     <string name="patient_save">Save</string>
     <string name="find_and_select_your_home">Find and select your home</string>
     <string name="select_home_title">Select Home</string>
+
+    <!--Ullo Application-->
+    <string name="scan_qa_code">Scan\nQA Code</string>
 </resources>

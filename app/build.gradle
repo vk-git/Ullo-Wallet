@@ -71,4 +71,6 @@ dependencies {
     // database
     implementation "androidx.room:room-rxjava2:$rootProject.roomDatabaseVersion"
     kapt "androidx.room:room-compiler:$rootProject.roomDatabaseVersion"
+
+    implementation 'com.github.tamir7.contacts:contacts:1.1.7'
 }

@@ -7,6 +7,7 @@ import android.view.View
 import androidx.lifecycle.ViewModelProviders
 import com.ullo.BR
 import com.ullo.R
+import com.ullo.adapter.ContactAdapter
 import com.ullo.api.response.patient.Patient
 import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivityChoosePatientBinding
@@ -27,14 +28,10 @@ class ChoosePatientActivity : BaseActivity<ActivityChoosePatientBinding, ChooseP
     override val viewModel: ChoosePatientViewModel
         get() = ViewModelProviders.of(this, factory).get(ChoosePatientViewModel::class.java)
 
-    /* @set:Inject
-     var mPatientAdapter: PatientAdapter? = null*/
+    @set:Inject
+    var contactAdapter: ContactAdapter? = null
 
     private var mActivityChoosePatientBinding: ActivityChoosePatientBinding? = null
-
-/*
-    var patientSections = ArrayList<PatientSection>()
-*/
 
     override val bindingVariable: Int
         get() = BR.viewModel
@@ -56,7 +53,15 @@ class ChoosePatientActivity : BaseActivity<ActivityChoosePatientBinding, ChooseP
         })
 
         viewModel.run {
-            getDataManager().allPatients.observeForever { patientList -> setPatientData(patientList) }
+            val q = Contacts.getQuery()
+            q.hasPhoneNumber()
+            getCompositeDisposable()?.run {
+                add(Observable.just(q.find()).subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread()).subscribe {
+
+                        })
+            }
+           // getDataManager().allPatients.observeForever { patientList -> setPatientData(patientList) }
         }
     }
 
