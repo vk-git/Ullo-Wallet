@@ -3,15 +3,21 @@ package com.ullo.ui.choose_patient
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.tamir7.contacts.Contact
+import com.github.tamir7.contacts.Contacts
 import com.ullo.BR
 import com.ullo.R
 import com.ullo.adapter.ContactAdapter
-import com.ullo.api.response.patient.Patient
 import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivityChoosePatientBinding
 import com.ullo.utils.ViewModelProviderFactory
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class ChoosePatientActivity : BaseActivity<ActivityChoosePatientBinding, ChoosePatientViewModel>(), ChoosePatientNavigator {
@@ -58,53 +64,20 @@ class ChoosePatientActivity : BaseActivity<ActivityChoosePatientBinding, ChooseP
             getCompositeDisposable()?.run {
                 add(Observable.just(q.find()).subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread()).subscribe {
-
+                            Log.d("mytag", "Contact::" + it.size)
+                            setContactData(it)
                         })
             }
-           // getDataManager().allPatients.observeForever { patientList -> setPatientData(patientList) }
+            // getDataManager().allPatients.observeForever { patientList -> setPatientData(patientList) }
         }
     }
 
-    private fun setPatientData(patientList: List<Patient>) {
-        // val patientSectionList = Sort.onPatientListWithAlphabeticalSection(patientList)
-
-        /*with(mActivityChoosePatientBinding!!.recyclerView) {
-            layoutManager = StickyHeaderLayoutManager()
-            adapter = mPatientAdapter
+    private fun setContactData(patientList: List<Contact>) {
+        with(mActivityChoosePatientBinding!!.recyclerView) {
+            layoutManager = LinearLayoutManager(this@ChoosePatientActivity)
+            adapter = contactAdapter
         }
 
-        patientSections = patientSectionList
-        patientSections?.let {
-            mPatientAdapter?.setPatientSections(it)
-        }
-
-        mPatientAdapter!!.setOnPatientItemListener(object : PatientAdapter.OnPatientItemListener {
-            override fun onItemClick(patient: Patient) {
-                val intent = EditPatientActivity.newIntent(this@ChoosePatientActivity)
-                intent.putExtra(Constant.PARAM_PATIENT, patient)
-                startActivity(intent)
-            }
-        })
-
-        mActivityChoosePatientBinding!!.alphabetView.onSectionIndexClickListener(object : Alphabetik.SectionIndexClickListener {
-            override fun onItemClick(view: View, position: Int, character: String) {
-                val scrollIndex = getPositionFromData(character)
-                if (scrollIndex != -1) {
-                    val scrollToPosition = mPatientAdapter?.getAdapterPositionForSectionHeader(scrollIndex)
-                    if (scrollToPosition != -1)
-                        mActivityChoosePatientBinding!!.recyclerView.scrollToPosition(scrollToPosition!!)
-                }
-            }
-        })*/
+        contactAdapter?.run { setContactListData(patientList as ArrayList<Contact>) }
     }
-
-    /*private fun getPositionFromData(character: String): Int {
-        for ((position, patientSection) in patientSections.withIndex()) {
-            val letter = patientSection.headerTitle
-            if (letter == character) {
-                return position
-            }
-        }
-        return -1
-    }*/
 }

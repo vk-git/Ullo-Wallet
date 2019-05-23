@@ -10,6 +10,7 @@ import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivitySplashBinding
 import com.ullo.ui.landing.LandingActivity
 import com.ullo.ui.main.MainActivity
+import com.ullo.ui.tutorial.TutorialActivity
 import com.ullo.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
@@ -47,7 +48,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(), S
     }
 
     override fun onLandingScreen() {
-        val intent = LandingActivity.newIntent(this)
+        val intent = TutorialActivity.newIntent(this)
         startActivity(intent)
         finish()
     }

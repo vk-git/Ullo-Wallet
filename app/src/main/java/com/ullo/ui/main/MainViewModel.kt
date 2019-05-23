@@ -15,6 +15,15 @@ import io.reactivex.schedulers.Schedulers
 
 class MainViewModel(application: Application, ulloService: UlloService, session: Session, dataManager: DataManager) : BaseViewModel<MainNavigator>(application, ulloService, session, dataManager) {
 
+
+    fun onMenuButtonClick(){
+        getNavigator()?.onMenuHandle()
+    }
+
+    fun onSendMoneyButtonClick(){
+        getNavigator()?.onSendMoneyHandle()
+    }
+
     fun definePatientLists(list: List<Patient>) {
         /* getCompositeDisposable()?.run {
              add(getDataManager().savePatientList(list)

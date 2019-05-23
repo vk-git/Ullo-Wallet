@@ -11,8 +11,12 @@ import com.ullo.ui.main.MainActivity
 import com.ullo.ui.privacy_policy.PrivacyPolicyActivity
 import com.ullo.ui.profile.ProfileActivity
 import com.ullo.ui.register.RegisterActivity
+import com.ullo.ui.setting.SettingActivity
+import com.ullo.ui.setting.SettingViewModel
 import com.ullo.ui.splash.SplashActivity
 import com.ullo.ui.terms_of_use.TermsOfUseActivity
+import com.ullo.ui.tutorial.TutorialActivity
+import com.ullo.ui.tutorial.TutorialActivityModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -54,4 +58,10 @@ abstract class ActivityBuilder {
 
     @ContributesAndroidInjector
     internal abstract fun bindForgotPasswordActivity(): ForgotPasswordActivity
+
+    @ContributesAndroidInjector(modules = [TutorialActivityModule::class])
+    internal abstract fun bindTutorialActivity(): TutorialActivity
+
+    @ContributesAndroidInjector
+    internal abstract fun bindSettingActivity(): SettingActivity
 }

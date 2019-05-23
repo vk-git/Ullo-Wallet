@@ -15,8 +15,10 @@ import com.ullo.ui.main.MainViewModel
 import com.ullo.ui.privacy_policy.PrivacyPolicyViewModel
 import com.ullo.ui.profile.ProfileViewModel
 import com.ullo.ui.register.RegisterViewModel
+import com.ullo.ui.setting.SettingViewModel
 import com.ullo.ui.splash.SplashViewModel
 import com.ullo.ui.terms_of_use.TermsOfUseViewModel
+import com.ullo.ui.tutorial.TutorialViewModel
 import io.reactivex.disposables.CompositeDisposable
 
 class ViewModelProviderFactory : ViewModelProvider.Factory {
@@ -53,6 +55,8 @@ class ViewModelProviderFactory : ViewModelProvider.Factory {
             modelClass.isAssignableFrom(SplashViewModel::class.java) -> SplashViewModel(mApplication, mUlloService, mSession, mDataManager) as T
             modelClass.isAssignableFrom(TermsOfUseViewModel::class.java) -> TermsOfUseViewModel(mApplication, mUlloService, mSession, mDataManager) as T
             modelClass.isAssignableFrom(ForgotPasswordViewModel::class.java) -> ForgotPasswordViewModel(mApplication, mUlloService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(TutorialViewModel::class.java) -> TutorialViewModel(mApplication, mUlloService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(SettingViewModel::class.java) -> SettingViewModel(mApplication, mUlloService, mSession, mDataManager) as T
             else -> throw IllegalArgumentException("Unknown class name")
         }
     }

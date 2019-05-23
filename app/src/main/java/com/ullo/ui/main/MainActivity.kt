@@ -12,11 +12,14 @@ import com.ullo.BR
 import com.ullo.R
 import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivityMainBinding
+import com.ullo.ui.choose_patient.ChoosePatientActivity
+import com.ullo.ui.setting.SettingActivity
 import com.ullo.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNavigator {
+
 
     companion object {
 
@@ -69,5 +72,15 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             fetchContacts()
         }
+    }
+
+    override fun onMenuHandle() {
+        val intent = SettingActivity.newIntent(this)
+        startActivity(intent)
+    }
+
+    override fun onSendMoneyHandle() {
+        val intent = ChoosePatientActivity.newIntent(this)
+        startActivity(intent)
     }
 }

@@ -71,8 +71,10 @@
                 </LinearLayout>
 
                 <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btnMenu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="@{()->viewModel.onMenuButtonClick()}"
                     android:padding="16dp"
                     android:src="@drawable/menu_icon" />
 
@@ -96,8 +98,9 @@
                     android:layout_width="185dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="15dp"
+                    android:layout_marginBottom="5dp"
                     app:cardBackgroundColor="#F2FFFFFF"
-                    app:cardElevation="3dp">
+                    app:cardElevation="5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -152,8 +155,9 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="145dp"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp"
                     app:cardBackgroundColor="#F2FFFFFF"
-                    app:cardElevation="3dp">
+                    app:cardElevation="5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -204,6 +208,7 @@
             android:orientation="vertical">
 
             <RelativeLayout
+                android:onClick="@{()->viewModel.onSendMoneyButtonClick()}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"

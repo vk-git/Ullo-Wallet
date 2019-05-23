@@ -13,7 +13,7 @@ class ContactAdapter(var context: Context) : RecyclerView.Adapter<ContactAdapter
 
     var contactList: ArrayList<Contact> = ArrayList()
 
-    fun setContactData(contactList: ArrayList<Contact>) {
+    fun setContactListData(contactList: ArrayList<Contact>) {
         this.contactList = contactList
         notifyDataSetChanged()
     }

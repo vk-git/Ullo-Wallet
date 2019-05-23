@@ -38,5 +38,7 @@
         <activity android:name=".ui.change_password.ChangePasswordActivity" />
         <activity android:name=".ui.choose_patient.ChoosePatientActivity" />
         <activity android:name=".ui.forgot_password.ForgotPasswordActivity" />
+        <activity android:name=".ui.tutorial.TutorialActivity" />
+        <activity android:name=".ui.setting.SettingActivity" />
     </application>
 </manifest>

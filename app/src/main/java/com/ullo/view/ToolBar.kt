@@ -53,6 +53,14 @@ class ToolBar : LinearLayout {
                 toolbarLeftButton.gone()
             }
 
+            if (typedArray.hasValue(R.styleable.ToolBar_rightDrawable)) {
+                val leftDrawable = typedArray.getDrawable(R.styleable.ToolBar_rightDrawable)
+                toolbarRightButton.setImageDrawable(leftDrawable)
+                toolbarRightButton.visible()
+            } else {
+                toolbarRightButton.gone()
+            }
+
         } finally {
             typedArray.recycle()
         }
@@ -63,7 +71,7 @@ class ToolBar : LinearLayout {
     }
 
     fun setBackButton(isBackButtonEnable: Boolean) {
-        toolbarLeftButton.setImageResource(if (isBackButtonEnable) R.drawable.ic_back_arrow else R.drawable.ic_launcher)
+        toolbarLeftButton.setImageResource(if (isBackButtonEnable) R.drawable.baseline_navigate_right else R.drawable.ic_launcher)
     }
 
     fun setBackButtonListener(listener: View.OnClickListener?) {
