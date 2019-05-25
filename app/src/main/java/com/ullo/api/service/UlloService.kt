@@ -5,6 +5,7 @@ import com.ullo.api.ApiResponseCallbackWrapper
 import com.ullo.api.ResponseListener
 import com.ullo.api.response.AppUser
 import com.ullo.api.response.BaseResponse
+import com.ullo.api.response.CmsData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -99,6 +100,26 @@ class UlloService(private val ulloApi: UlloApi) {
                 .subscribeWith(object : ApiResponseCallbackWrapper<Response<BaseResponse<AppUser>>>() {
 
                     override fun onSuccess(response: Response<BaseResponse<AppUser>>) {
+                        listener.onSuccess(response)
+                    }
+
+                    override fun onInternetConnectionError() {
+                        listener.onInternetConnectionError()
+                    }
+
+                    override fun onFailure(error: String) {
+                        listener.onFailure(error)
+                    }
+                })
+    }
+
+    fun userCMS(listener: ResponseListener<Response<BaseResponse<CmsData>>, String>): Disposable {
+        return ulloApi.userCMS()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : ApiResponseCallbackWrapper<Response<BaseResponse<CmsData>>>() {
+
+                    override fun onSuccess(response: Response<BaseResponse<CmsData>>) {
                         listener.onSuccess(response)
                     }
 

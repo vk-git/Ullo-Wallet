@@ -51,6 +51,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
         super.onCreate(savedInstanceState)
         mActivityMainBinding = getViewDataBinding()
         viewModel.setNavigator(this)
+        viewModel.getCms()
 
         viewModel.getSession().getAppUser()?.run {
             mActivityMainBinding!!.txtUserEmail.text = userData.email

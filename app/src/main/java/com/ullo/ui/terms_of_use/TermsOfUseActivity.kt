@@ -4,11 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.webkit.WebViewClient
 import androidx.lifecycle.ViewModelProviders
 import com.ullo.BR
 import com.ullo.R
 import com.ullo.base.BaseActivity
-import com.ullo.databinding.ActivityContactBinding
 import com.ullo.databinding.ActivityTermsOfUseBinding
 import com.ullo.utils.ViewModelProviderFactory
 import javax.inject.Inject
@@ -21,7 +21,7 @@ class TermsOfUseActivity : BaseActivity<ActivityTermsOfUseBinding, TermsOfUseVie
         }
     }
 
-   @set:Inject
+    @set:Inject
     lateinit var factory: ViewModelProviderFactory
 
     override val viewModel: TermsOfUseViewModel
@@ -47,5 +47,13 @@ class TermsOfUseActivity : BaseActivity<ActivityTermsOfUseBinding, TermsOfUseVie
         mActivityTermsOfUseBinding!!.toolbar.setBackButtonListener(listener = View.OnClickListener {
             finish()
         })
+
+        viewModel.getSession().getAppCmsData()?.run {
+            with(mActivityTermsOfUseBinding!!.webview) {
+                settings.javaScriptEnabled = true
+                webViewClient = WebViewClient()
+                loadUrl(termsAndCondition)
+            }
+        }
     }
 }

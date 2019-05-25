@@ -1,6 +1,7 @@
 package com.ullo.ui.change_password
 
 import android.app.Application
+import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import com.ullo.App
@@ -30,8 +31,14 @@ class ChangePasswordViewModel(application: Application, ulloService: UlloService
                 if (response.isSuccessful) {
                     getNavigator()?.onChangePasswordSuccess()
                 } else {
-                    val errorResponse = SharedPreferenceHelper.getObjectFromString(response.errorBody()!!.string(), object : TypeToken<BaseResponse<String>>() {})
-                    getNavigator()?.handleError(errorResponse.data)
+                    try {
+                        response.errorBody()?.run {
+                            val errorResponse = SharedPreferenceHelper.getObjectFromString(string(), object : TypeToken<BaseResponse<JsonElement>>() {})
+                            getNavigator()?.handleError(errorResponse.error.asJsonArray[0].asString)
+                        }
+                    } catch (e: Exception) {
+                        getNavigator()?.handleError(e.message!!)
+                    }
                 }
             }
 

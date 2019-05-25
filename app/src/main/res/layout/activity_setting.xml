@@ -24,8 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Settings"
-            app:leftDrawable="@drawable/ic_back"
-            app:rightDrawable="@android:drawable/ic_dialog_info" />
+            app:leftDrawable="@drawable/ic_back" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"

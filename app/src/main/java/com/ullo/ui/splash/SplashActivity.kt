@@ -46,9 +46,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(), S
         mActivitySplashBinding = getViewDataBinding()
         viewModel.setNavigator(this)
 
-        val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID);
-        viewModel.getSession().setAppDeviceId(deviceId)
-
         viewModel.onTimeHandler()
     }
 

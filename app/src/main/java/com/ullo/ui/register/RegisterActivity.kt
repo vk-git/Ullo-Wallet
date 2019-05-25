@@ -3,6 +3,7 @@ package com.ullo.ui.register
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import androidx.lifecycle.ViewModelProviders
 import com.google.gson.JsonObject
 import com.ullo.BR
@@ -11,6 +12,8 @@ import com.ullo.R
 import com.ullo.api.response.AppUser
 import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivityRegisterBinding
+import com.ullo.extensions.gone
+import com.ullo.extensions.visible
 import com.ullo.ui.login.LoginActivity
 import com.ullo.ui.main.MainActivity
 import com.ullo.utils.Validation
@@ -46,6 +49,9 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
         super.onCreate(savedInstanceState)
         mActivityRegisterBinding = getViewDataBinding()
         viewModel.setNavigator(this)
+
+        val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID);
+        viewModel.getSession().setAppDeviceId(deviceId)
     }
 
     override fun onLoginScreen() {
@@ -59,7 +65,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
             loginReq.addProperty("full_name", mActivityRegisterBinding!!.etFullName.text.toString())
             loginReq.addProperty("email", mActivityRegisterBinding!!.etEmail.text.toString())
             loginReq.addProperty("password", mActivityRegisterBinding!!.etPassword.text.toString())
-            loginReq.addProperty("country_code", "+91")
+            loginReq.addProperty("country_code", mActivityRegisterBinding!!.etCountryCode.text.toString())
             loginReq.addProperty("phone_number", mActivityRegisterBinding!!.etMobileNo.text.toString())
             loginReq.addProperty("user_type", BuildConfig.USER_TYPE)
             loginReq.addProperty("device_id", viewModel.getSession().getAppDeviceId())
@@ -77,14 +83,16 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
         var bFullName = true
         var bEmail = true
         var bPassword = true
+        var bCountryCode = true
         val firstName = mActivityRegisterBinding!!.etFullName.text.toString()
         val email = mActivityRegisterBinding!!.etEmail.text.toString()
         val password = mActivityRegisterBinding!!.etPassword.text.toString()
         val mobileNo = mActivityRegisterBinding!!.etMobileNo.text.toString()
+        val countryCode = mActivityRegisterBinding!!.etCountryCode.text.toString()
 
         if (!Validation.isValidName(firstName)) {
             mActivityRegisterBinding!!.tIFullName.isErrorEnabled = true
-            mActivityRegisterBinding!!.tIFullName.error = "The entered Email is not correct."
+            mActivityRegisterBinding!!.tIFullName.error = "The entered name is not correct."
             bFullName = false
         } else {
             mActivityRegisterBinding!!.tIFullName.isErrorEnabled = false
@@ -106,14 +114,22 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
             mActivityRegisterBinding!!.tIPassword.isErrorEnabled = false
         }
 
-        if (!Validation.isNumberInput(mobileNo)) {
-            mActivityRegisterBinding!!.tIMobileNo.isErrorEnabled = true
-            mActivityRegisterBinding!!.tIMobileNo.error = "Mobile number must be at least 10 characters"
+        if (mobileNo.isEmpty() || !Validation.isValidMobile(mobileNo)) {
+            mActivityRegisterBinding!!.tIMobileNo.visible()
+            mActivityRegisterBinding!!.tIMobileNo.text = "Not Valid Number"
             bPassword = false
         } else {
-            mActivityRegisterBinding!!.tIMobileNo.isErrorEnabled = false
+            mActivityRegisterBinding!!.tIMobileNo.gone()
         }
 
-        return bFullName && bEmail && bPassword
+        if (countryCode.isEmpty() || mobileNo.isEmpty() || !Validation.isValidCountryCode(countryCode, mobileNo)) {
+            mActivityRegisterBinding!!.tIMobileNo.visible()
+            mActivityRegisterBinding!!.tIMobileNo.text = "Not Valid Country Code"
+            bCountryCode = false
+        } else {
+            mActivityRegisterBinding!!.tIMobileNo.gone()
+        }
+
+        return bFullName && bEmail && bPassword && bCountryCode
     }
 }

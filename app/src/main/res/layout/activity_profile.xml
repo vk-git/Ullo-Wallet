@@ -96,7 +96,7 @@
                         android:digits="0123456789+"
                         android:drawableRight="@drawable/baseline_country"
                         android:fontFamily="@font/quicksand_regular"
-                        android:hint="Country"
+                        android:hint="Country Code"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -114,7 +114,7 @@
                         android:drawableRight="@drawable/baseline_call"
                         android:fontFamily="@font/quicksand_regular"
                         android:hint="Mobile No."
-                        android:inputType="number"
+                        android:inputType="phone"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>

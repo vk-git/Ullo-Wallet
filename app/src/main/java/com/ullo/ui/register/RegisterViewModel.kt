@@ -1,8 +1,6 @@
 package com.ullo.ui.register
 
 import android.app.Application
-import android.util.Log
-import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
@@ -41,9 +39,13 @@ class RegisterViewModel(application: Application, ulloService: UlloService, sess
                         getNavigator()?.onRegisterSuccessful(it.data)
                     }
                 } else {
-                    response.errorBody()?.run {
-                        val errorResponse = SharedPreferenceHelper.getObjectFromString(string(), object : TypeToken<BaseResponse<JsonElement>>() {})
-                        getNavigator()?.handleError(errorResponse.error.asJsonArray[0].asString)
+                    try {
+                        response.errorBody()?.run {
+                            val errorResponse = SharedPreferenceHelper.getObjectFromString(string(), object : TypeToken<BaseResponse<JsonElement>>() {})
+                            getNavigator()?.handleError(errorResponse.error.asJsonArray[0].asString)
+                        }
+                    } catch (e: Exception) {
+                        getNavigator()?.handleError(e.message!!)
                     }
                 }
             }

@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.ullo.BR
 import com.ullo.R
 import com.ullo.base.BaseActivity
-import com.ullo.databinding.ActivityContactBinding
 import com.ullo.databinding.ActivityPrivacyPolicyBinding
 import com.ullo.utils.ViewModelProviderFactory
 import javax.inject.Inject
@@ -21,7 +20,7 @@ class PrivacyPolicyActivity : BaseActivity<ActivityPrivacyPolicyBinding, Privacy
         }
     }
 
-   @set:Inject
+    @set:Inject
     lateinit var factory: ViewModelProviderFactory
 
     override val viewModel: PrivacyPolicyViewModel
@@ -47,5 +46,13 @@ class PrivacyPolicyActivity : BaseActivity<ActivityPrivacyPolicyBinding, Privacy
         mActivityPrivacyPolicyBinding!!.toolbar.setBackButtonListener(listener = View.OnClickListener {
             finish()
         })
+
+        viewModel.getSession().getAppCmsData()?.run {
+            with(mActivityPrivacyPolicyBinding!!.webview) {
+                settings.javaScriptEnabled = true
+                webViewClient = android.webkit.WebViewClient()
+                loadUrl(privacy)
+            }
+        }
     }
 }

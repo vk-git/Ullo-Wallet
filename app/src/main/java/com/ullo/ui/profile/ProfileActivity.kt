@@ -51,6 +51,13 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding, ProfileViewModel>()
         mActivityProfileBinding!!.toolbar.setBackButtonListener(listener = View.OnClickListener {
             finish()
         })
+
+        viewModel.getSession().getAppUser()?.run {
+            mActivityProfileBinding!!.etFullName.setText(userData.fullName)
+            mActivityProfileBinding!!.etEmail.setText(userData.email)
+            mActivityProfileBinding!!.etCountry.setText(userData.countryCode)
+            mActivityProfileBinding!!.etMobileNo.setText(userData.phoneNumber)
+        }
     }
 
     override fun onUpdateHandle() {
@@ -79,7 +86,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding, ProfileViewModel>()
 
         if (!Validation.isValidName(firstName)) {
             mActivityProfileBinding!!.tIFullName.isErrorEnabled = true
-            mActivityProfileBinding!!.tIFullName.error = "The entered Email is not correct."
+            mActivityProfileBinding!!.tIFullName.error = "The entered Name is not correct."
             bFullName = false
         } else {
             mActivityProfileBinding!!.tIFullName.isErrorEnabled = false
@@ -95,18 +102,26 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding, ProfileViewModel>()
 
         if (!Validation.isValidName(country)) {
             mActivityProfileBinding!!.tICountry.isErrorEnabled = true
-            mActivityProfileBinding!!.tICountry.error = "Password must be at least 8 characters"
+            mActivityProfileBinding!!.tICountry.error = "Not Valid Country Code"
             bCountry = false
         } else {
             mActivityProfileBinding!!.tICountry.isErrorEnabled = false
         }
 
-        if (!Validation.isNumberInput(mobileNo)) {
+        if (mobileNo.isEmpty() || !Validation.isValidMobile(mobileNo)) {
             mActivityProfileBinding!!.tIMobileNo.isErrorEnabled = true
-            mActivityProfileBinding!!.tIMobileNo.error = "Mobile number must be at least 10 characters"
+            mActivityProfileBinding!!.tIMobileNo.error = "Not Valid Number"
             bMobile = false
         } else {
             mActivityProfileBinding!!.tIMobileNo.isErrorEnabled = false
+        }
+
+        if (country.isEmpty() || mobileNo.isEmpty() || !Validation.isValidCountryCode(country, mobileNo)) {
+            mActivityProfileBinding!!.tICountry.isErrorEnabled = true
+            mActivityProfileBinding!!.tICountry.error = "Not Valid Country Code"
+            bCountry = false
+        } else {
+            mActivityProfileBinding!!.tICountry.isErrorEnabled = false
         }
 
         return bFullName && bEmail && bCountry && bMobile

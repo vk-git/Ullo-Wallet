@@ -44,9 +44,13 @@ class LoginViewModel(application: Application, ulloService: UlloService, session
                     }
                     getNavigator()?.onMainScreen()
                 } else {
-                    response.errorBody()?.run {
-                        val errorResponse = SharedPreferenceHelper.getObjectFromString(string(), object : TypeToken<BaseResponse<JsonElement>>() {})
-                        getNavigator()?.handleError(errorResponse.error.asJsonArray[0].asString)
+                    try {
+                        response.errorBody()?.run {
+                            val errorResponse = SharedPreferenceHelper.getObjectFromString(string(), object : TypeToken<BaseResponse<JsonElement>>() {})
+                            getNavigator()?.handleError(errorResponse.error.asJsonArray[0].asString)
+                        }
+                    } catch (e: Exception) {
+                        getNavigator()?.handleError(e.message!!)
                     }
                 }
             }

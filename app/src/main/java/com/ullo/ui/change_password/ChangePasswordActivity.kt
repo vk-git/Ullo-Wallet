@@ -103,6 +103,6 @@ class ChangePasswordActivity : BaseActivity<ActivityChangePasswordBinding, Chang
     }
 
     override fun onChangePasswordSuccess() {
-
+        onShowAlert("Alert","Password successfully updated")
     }
 }

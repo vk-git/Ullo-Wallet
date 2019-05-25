@@ -3,6 +3,7 @@ package com.ullo.ui.landing
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import androidx.lifecycle.ViewModelProviders
 import com.ullo.BR
 import com.ullo.R
@@ -42,6 +43,9 @@ class LandingActivity : BaseActivity<ActivityLandingBinding, LandingViewModel>()
         super.onCreate(savedInstanceState)
         mActivityLandingBinding = getViewDataBinding()
         viewModel.setNavigator(this)
+
+        val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID);
+        viewModel.getSession().setAppDeviceId(deviceId)
     }
 
     override fun onLoginScreen() {

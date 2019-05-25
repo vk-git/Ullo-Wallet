@@ -31,8 +31,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerInParent="true"
                 android:layout_marginTop="20dp"
-                android:text="Sign Up"
                 android:fontFamily="@font/quicksand_regular"
+                android:text="Sign Up"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
@@ -68,7 +68,7 @@
                         android:fontFamily="@font/quicksand_regular"
                         android:hint="Full Name"
                         android:inputType="textEmailAddress"
-                        android:textSize="14sp" />
+                        android:textSize="15sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -88,7 +88,7 @@
                         android:fontFamily="@font/quicksand_regular"
                         android:hint="Email Address"
                         android:inputType="textEmailAddress"
-                        android:textSize="14sp" />
+                        android:textSize="15sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -108,29 +108,74 @@
                         android:fontFamily="@font/quicksand_regular"
                         android:hint="@string/password_hint"
                         android:inputType="textPassword"
-                        android:textSize="14sp" />
+                        android:textSize="15sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tIMobileNo"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="26dp"
                     android:layout_marginTop="22dp"
-                    android:layout_marginRight="26dp">
+                    android:layout_marginRight="26dp"
+                    android:text="Mobile No."
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="26dp"
+                    android:gravity="center">
+
+                    <EditText
+                        android:id="@+id/etCountryCode"
+                        android:layout_width="44dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/white"
+                        android:fontFamily="@font/quicksand_regular"
+                        android:hint="+91"
+                        android:inputType="phone"
+                        android:maxLength="4"
+                        android:textSize="15sp" />
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#979797" />
 
                     <EditText
                         android:id="@+id/etMobileNo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableRight="@drawable/baseline_security"
+                        android:background="@color/white"
+                        android:drawableRight="@drawable/right_arrow_with_bg"
                         android:fontFamily="@font/quicksand_regular"
                         android:hint="Mobile No."
-                        android:inputType="textPassword"
-                        android:textSize="14sp" />
+                        android:inputType="phone"
+                        android:textSize="15sp" />
+                </LinearLayout>
 
-                </com.google.android.material.textfield.TextInputLayout>
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="26dp"
+                    android:background="#979797" />
+
+                <TextView
+                    android:id="@+id/tIMobileNo"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="26dp"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/holo_red_light"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
                 <androidx.appcompat.widget.AppCompatCheckBox
                     android:layout_width="wrap_content"
@@ -154,9 +199,9 @@
                     android:layout_marginLeft="26dp"
                     android:layout_marginRight="26dp"
                     android:background="@drawable/login_button_gradient"
+                    android:fontFamily="@font/quicksand_bold"
                     android:onClick="@{()->viewModel.onRegisterButtonClick()}"
                     android:text="Sign Up"
-                    android:fontFamily="@font/quicksand_bold"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp" />

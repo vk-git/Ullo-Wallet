@@ -76,6 +76,6 @@ class ForgotPasswordActivity : BaseActivity<ActivityForgotPasswordBinding, Forgo
     }
 
     override fun onForgotPasswordSuccess() {
-
+        onShowAlert("Alert", "Check your email for reset password link")
     }
 }

@@ -3,6 +3,7 @@ package com.ullo.ui.login
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import androidx.lifecycle.ViewModelProviders
 import com.google.gson.JsonObject
 import com.ullo.BR
@@ -46,6 +47,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), Logi
         super.onCreate(savedInstanceState)
         mActivityLoginBinding = getViewDataBinding()
         viewModel.setNavigator(this)
+
+        val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID);
+        viewModel.getSession().setAppDeviceId(deviceId)
     }
 
     override fun onLoginHandle() {

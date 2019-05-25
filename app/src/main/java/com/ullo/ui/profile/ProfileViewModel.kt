@@ -35,9 +35,13 @@ class ProfileViewModel(application: Application, ulloService: UlloService, sessi
                         getNavigator()?.onUpdateSuccessful(it.data)
                     }
                 } else {
-                    response.errorBody()?.run {
-                        val errorResponse = SharedPreferenceHelper.getObjectFromString(string(), object : TypeToken<BaseResponse<JsonElement>>() {})
-                        getNavigator()?.handleError(errorResponse.error.asJsonArray[0].asString)
+                    try {
+                        response.errorBody()?.run {
+                            val errorResponse = SharedPreferenceHelper.getObjectFromString(string(), object : TypeToken<BaseResponse<JsonElement>>() {})
+                            getNavigator()?.handleError(errorResponse.error.asJsonArray[0].asString)
+                        }
+                    } catch (e: Exception) {
+                        getNavigator()?.handleError(e.message!!)
                     }
                 }
             }
