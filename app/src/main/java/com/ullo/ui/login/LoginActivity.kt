@@ -12,6 +12,7 @@ import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivityLoginBinding
 import com.ullo.ui.forgot_password.ForgotPasswordActivity
 import com.ullo.ui.main.MainActivity
+import com.ullo.ui.register.RegisterActivity
 import com.ullo.utils.Validation
 import com.ullo.utils.ViewModelProviderFactory
 import javax.inject.Inject
@@ -96,5 +97,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), Logi
             startActivity(intent)
             finish()
         }
+    }
+
+    override fun onSignUpHandle() {
+        val intent = RegisterActivity.newIntent(this)
+        startActivity(intent)
     }
 }

@@ -21,4 +21,7 @@ interface UlloApi {
 
     @POST("auth/change-password")
     fun userChangePassword(@Body changePasswordReq: JsonObject): Observable<Response<BaseResponse<AppUser>>>
+
+    @POST("auth/edit-profile")
+    fun userUpdateProfile(@Body changePasswordReq: JsonObject): Observable<Response<BaseResponse<AppUser>>>
 }

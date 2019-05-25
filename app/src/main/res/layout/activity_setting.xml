@@ -23,8 +23,9 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Setting"
-            app:leftDrawable="@drawable/ic_back" />
+            android:text="Settings"
+            app:leftDrawable="@drawable/ic_back"
+            app:rightDrawable="@android:drawable/ic_dialog_info" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -38,183 +39,275 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/quicksand_bold"
                     android:text="My Setting"
-                    android:fontFamily="@font/quicksand_bold"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
-                <com.ullo.view.SettingTextView
-                    android:layout_width="wrap_content"
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:onClick="@{()->viewModel.onMyProfileButtonClick()}"
-                    android:text="My Profile"
-                    android:textColor="@color/black"
-                    app:rightTDrawable="@drawable/arrow_right_small" />
+                    android:elevation="5dp">
 
-                <com.ullo.view.SettingTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{()->viewModel.onMyQRCodeButtonClick()}"
-                    android:text="My QR Code"
-                    android:textColor="@color/black"
-                    app:rightTDrawable="@drawable/arrow_right_small" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-                <com.ullo.view.SettingTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{()->viewModel.onAddCardButtonClick()}"
-                    android:text="Add Card"
-                    android:textColor="@color/black"
-                    app:rightTDrawable="@drawable/arrow_right_small" />
+                        <com.ullo.view.SettingTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="@{()->viewModel.onMyProfileButtonClick()}"
+                            android:text="My Profile"
+                            android:textColor="@color/black"
+                            app:rightTDrawable="@drawable/arrow_right_small" />
+
+                        <com.ullo.view.SettingTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="@{()->viewModel.onMyQRCodeButtonClick()}"
+                            android:text="My QR Code"
+                            android:textColor="@color/black"
+                            app:rightTDrawable="@drawable/arrow_right_small" />
+
+                        <com.ullo.view.SettingTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="@{()->viewModel.onAddCardButtonClick()}"
+                            android:text="Add Card"
+                            android:textColor="@color/black"
+                            app:rightTDrawable="@drawable/arrow_right_small" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/quicksand_bold"
                     android:text="Account"
-                    android:fontFamily="@font/quicksand_bold"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
-                <RelativeLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/drawable_text_view"
-                    android:orientation="vertical">
+                    android:elevation="5dp">
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/left_icon"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:src="@drawable/ic_launcher" />
-
-                    <androidx.appcompat.widget.SwitchCompat
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="15dp"
-                        android:layout_toRightOf="@id/left_icon"
-                        android:paddingStart="21dp"
-                        android:paddingTop="18dp"
-                        android:fontFamily="@font/quicksand_bold"
-                        android:paddingBottom="18dp"
-                        android:text="Sync Contact"
-                        android:textColor="@color/black" />
-                </RelativeLayout>
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/drawable_text_view"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/left_icon"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginEnd="16dp"
+                                android:src="@drawable/sync_contact" />
+
+                            <androidx.appcompat.widget.SwitchCompat
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="15dp"
+                                android:layout_toRightOf="@id/left_icon"
+                                android:fontFamily="@font/quicksand_bold"
+                                android:paddingTop="18dp"
+                                android:paddingBottom="18dp"
+                                android:text="Sync Contact"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+                        </RelativeLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/quicksand_bold"
                     android:text="Notification"
-                    android:fontFamily="@font/quicksand_bold"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
-                <RelativeLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/drawable_text_view"
-                    android:orientation="vertical">
+                    android:elevation="5dp">
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/left_icon2"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:src="@drawable/ic_launcher" />
-
-                    <androidx.appcompat.widget.SwitchCompat
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="15dp"
-                        android:layout_toRightOf="@id/left_icon2"
-                        android:paddingStart="21dp"
-                        android:paddingTop="18dp"
-                        android:fontFamily="@font/quicksand_bold"
-                        android:paddingBottom="18dp"
-                        android:text="Push Notification"
-                        android:textColor="@color/black" />
-                </RelativeLayout>
+                        android:orientation="vertical">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/drawable_text_view"
-                    android:orientation="vertical">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/drawable_text_view"
+                            android:orientation="vertical">
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/left_icon1"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:src="@drawable/ic_launcher" />
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/left_icon2"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginEnd="16dp"
+                                android:background="@drawable/setting_icon_bg"
+                                android:padding="5dp"
+                                android:src="@drawable/baseline_notifications" />
 
-                    <androidx.appcompat.widget.SwitchCompat
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="15dp"
-                        android:layout_toRightOf="@id/left_icon1"
-                        android:paddingStart="21dp"
-                        android:paddingTop="18dp"
-                        android:paddingBottom="18dp"
-                        android:fontFamily="@font/quicksand_bold"
-                        android:text="Email Notification"
-                        android:textColor="@color/black" />
-                </RelativeLayout>
+                            <androidx.appcompat.widget.SwitchCompat
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="15dp"
+                                android:layout_toRightOf="@id/left_icon2"
+                                android:fontFamily="@font/quicksand_bold"
+                                android:paddingTop="18dp"
+                                android:paddingBottom="18dp"
+                                android:text="Push Notification"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/drawable_text_view"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/left_icon1"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginEnd="16dp"
+                                android:background="@drawable/setting_icon_bg"
+                                android:backgroundTint="#E61394"
+                                android:padding="5dp"
+                                android:src="@drawable/baseline_email" />
+
+                            <androidx.appcompat.widget.SwitchCompat
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="15dp"
+                                android:layout_toRightOf="@id/left_icon1"
+                                android:fontFamily="@font/quicksand_bold"
+                                android:paddingTop="18dp"
+                                android:paddingBottom="18dp"
+                                android:text="Email Notification"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+                        </RelativeLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:text="Other Settings"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
                     android:fontFamily="@font/quicksand_bold"
+                    android:text="Other Settings"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
-                <com.ullo.view.SettingTextView
-                    android:layout_width="wrap_content"
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:onClick="@{()->viewModel.onChangePasswordButtonClick()}"
-                    android:text="Change Password"
-                    android:textColor="@color/black"
-                    app:rightTDrawable="@drawable/arrow_right_small" />
+                    android:elevation="5dp">
 
-                <com.ullo.view.SettingTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{()->viewModel.onTermsConditionButtonClick()}"
-                    android:text="Terms &amp; Conditions"
-                    android:textColor="@color/black"
-                    app:rightTDrawable="@drawable/arrow_right_small" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-                <com.ullo.view.SettingTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{()->viewModel.onPrivacyPolicesButtonClick()}"
-                    android:text="Privacy Polices"
-                    android:textColor="@color/black"
-                    app:rightTDrawable="@drawable/arrow_right_small" />
+                        <com.ullo.view.SettingTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="@{()->viewModel.onChangePasswordButtonClick()}"
+                            android:text="Change Password"
+                            android:textColor="@color/black"
+                            app:rightTDrawable="@drawable/arrow_right_small" />
 
-                <com.ullo.view.SettingTextView
-                    android:layout_width="wrap_content"
+                        <com.ullo.view.SettingTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="@{()->viewModel.onTermsConditionButtonClick()}"
+                            android:text="Terms &amp; Conditions"
+                            android:textColor="@color/black"
+                            app:rightTDrawable="@drawable/arrow_right_small" />
+
+                        <com.ullo.view.SettingTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="@{()->viewModel.onPrivacyPolicesButtonClick()}"
+                            android:text="Privacy Polices"
+                            android:textColor="@color/black"
+                            app:rightTDrawable="@drawable/arrow_right_small" />
+
+                        <com.ullo.view.SettingTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="@{()->viewModel.onContactUsButtonClick()}"
+                            android:text="Contact Us"
+                            android:textColor="@color/black"
+                            app:rightTDrawable="@drawable/arrow_right_small" />
+
+                        <com.ullo.view.SettingTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="@{()->viewModel.onAboutUsButtonClick()}"
+                            android:text="About Us"
+                            android:textColor="@color/black"
+                            app:rightTDrawable="@drawable/arrow_right_small" />
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
-                    android:onClick="@{()->viewModel.onSignOutButtonClick()}"
-                    android:text="Sign Out"
-                    android:textColor="@color/black"
-                    app:rightTDrawable="@drawable/arrow_right_small" />
+                    android:elevation="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <com.ullo.view.SettingTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="@{()->viewModel.onSignOutButtonClick()}"
+                            android:text="Sign Out"
+                            android:textColor="@color/black"
+                            app:rightTDrawable="@drawable/arrow_right_small" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

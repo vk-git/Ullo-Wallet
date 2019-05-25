@@ -1,6 +1,9 @@
 package com.ullo.ui.forgot_password
 
 import android.app.Application
+import android.util.Log
+import com.google.gson.Gson
+import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import com.ullo.App
@@ -22,6 +25,10 @@ class ForgotPasswordViewModel(application: Application, ulloService: UlloService
         getNavigator()?.onForgotPasswordHandle()
     }
 
+    fun onLoginButtonClick() {
+        getNavigator()?.onLoginHandle()
+    }
+
     fun forgotPassword(loginReq: JsonObject) {
         App.instance.showLoadingOverlayDialog(App.instance.getString(R.string.loading))
         getCompositeDisposable()?.add(getLinderaService().userForgotPassword(loginReq, object : ResponseListener<Response<BaseResponse<AppUser>>, String> {
@@ -30,8 +37,10 @@ class ForgotPasswordViewModel(application: Application, ulloService: UlloService
                 if (response.isSuccessful) {
                     getNavigator()?.onForgotPasswordSuccess()
                 } else {
-                    val errorResponse = SharedPreferenceHelper.getObjectFromString(response.errorBody()!!.string(), object : TypeToken<BaseResponse<String>>() {})
-                    getNavigator()?.handleError(errorResponse.data)
+                    response.errorBody()?.run {
+                        val errorResponse = SharedPreferenceHelper.getObjectFromString(string(), object : TypeToken<BaseResponse<JsonElement>>() {})
+                        getNavigator()?.handleError(errorResponse.error.asJsonArray[0].asString)
+                    }
                 }
             }
 

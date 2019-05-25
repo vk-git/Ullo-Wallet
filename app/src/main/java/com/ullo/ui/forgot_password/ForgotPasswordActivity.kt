@@ -45,11 +45,17 @@ class ForgotPasswordActivity : BaseActivity<ActivityForgotPasswordBinding, Forgo
         viewModel.setNavigator(this)
     }
 
+    override fun onLoginHandle() {
+        finish()
+    }
+
     override fun onForgotPasswordHandle() {
         if (isValid()) {
             val loginReq = JsonObject()
             loginReq.addProperty("email", mActivityForgotPasswordBinding!!.etEmail.text.toString())
             loginReq.addProperty("user_type", BuildConfig.USER_TYPE)
+            loginReq.addProperty("device_type", BuildConfig.DEVICE_TYPE)
+            loginReq.addProperty("device_id", viewModel.getSession().getAppDeviceId())
             viewModel.forgotPassword(loginReq)
         }
     }

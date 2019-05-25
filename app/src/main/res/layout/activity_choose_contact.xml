@@ -85,6 +85,7 @@
                         android:layout_marginTop="14dp"
                         android:gravity="center"
                         android:text="@string/scan_qa_code"
+                        android:fontFamily="@font/quicksand_bold"
                         android:textColor="#712CE2"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -102,6 +103,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="30dp"
                         android:text="YayPay Contacts"
+                        android:fontFamily="@font/quicksand_bold"
                         android:textColor="#4A4956"
                         android:textSize="16sp" />
 

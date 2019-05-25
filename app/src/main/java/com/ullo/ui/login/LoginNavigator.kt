@@ -7,4 +7,5 @@ interface LoginNavigator : BaseNavigator {
     fun onLoginHandle()
     fun onMainScreen()
     fun onForgotPasswordHandle()
+    fun onSignUpHandle()
 }

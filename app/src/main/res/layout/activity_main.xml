@@ -43,7 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="21dp"
-                    android:src="@drawable/ic_launcher" />
+                    android:src="@drawable/user_icon" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -52,6 +52,7 @@
                     android:orientation="vertical">
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtUserFullName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -60,6 +61,7 @@
                         android:textSize="16sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtUserEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -81,7 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="16dp"
-                    android:src="@drawable/ic_notification" />
+                    android:src="@drawable/baseline_notifications" />
 
             </LinearLayout>
 
@@ -112,6 +114,7 @@
                             android:layout_marginStart="13dp"
                             android:layout_marginTop="9dp"
                             android:text="Current Balance"
+                            android:fontFamily="@font/quicksand_regular"
                             android:textColor="#787786"
                             android:textSize="16sp" />
 
@@ -121,6 +124,7 @@
                             android:layout_marginStart="13dp"
                             android:layout_marginTop="11dp"
                             android:text="$121,700"
+                            android:fontFamily="@font/quicksand_regular"
                             android:textColor="#4A4956"
                             android:textSize="28sp" />
 
@@ -136,6 +140,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="13dp"
                                 android:text="View Statement"
+                                android:fontFamily="@font/quicksand_bold"
                                 android:textColor="#712CE2"
                                 android:textSize="16sp" />
 
@@ -169,6 +174,7 @@
                             android:layout_marginStart="13dp"
                             android:layout_marginTop="9dp"
                             android:text="Credit Total"
+                            android:fontFamily="@font/quicksand_regular"
                             android:textColor="#787786"
                             android:textSize="16sp" />
 
@@ -178,6 +184,7 @@
                             android:layout_marginStart="13dp"
                             android:layout_marginTop="11dp"
                             android:text="$221,700"
+                            android:fontFamily="@font/quicksand_regular"
                             android:textColor="#4A4956"
                             android:textSize="28sp" />
 
@@ -188,6 +195,7 @@
                             android:layout_marginTop="42dp"
                             android:layout_marginBottom="20dp"
                             android:text="View Statement"
+                            android:fontFamily="@font/quicksand_bold"
                             android:textColor="#712CE2"
                             android:textSize="16sp" />
 

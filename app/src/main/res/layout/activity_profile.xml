@@ -41,71 +41,32 @@
                 android:orientation="vertical">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="115dp"
+                    android:layout_height="130dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="22dp"
                     android:layout_marginBottom="9dp"
-                    android:src="@drawable/ic_launcher" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="20dp"
-                    android:fontFamily="@font/quicksand_bold"
-                    android:text="@string/profile_change_picture"
-                    android:textColor="@color/red"
-                    android:textStyle="bold" />
+                    android:src="@drawable/user_icon" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tIFullName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/medium_grey">
 
                     <EditText
-                        android:id="@+id/etTitle"
+                        android:id="@+id/etFullName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableRight="@drawable/baseline_person"
                         android:fontFamily="@font/quicksand_regular"
-                        android:hint="First Name"
+                        android:hint="Full Name"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColorHint="@color/medium_grey">
-
-                    <EditText
-                        android:id="@+id/etUsername"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawableRight="@drawable/baseline_email"
-                        android:fontFamily="@font/quicksand_regular"
-                        android:hint="Email Address"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColorHint="@color/medium_grey">
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawableRight="@drawable/baseline_country"
-                        android:fontFamily="@font/quicksand_regular"
-                        android:hint="Country"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tIEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/medium_grey">
@@ -114,9 +75,46 @@
                         android:id="@+id/etEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:drawableRight="@drawable/baseline_email"
+                        android:fontFamily="@font/quicksand_regular"
+                        android:hint="Email Address"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tICountry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/medium_grey">
+
+                    <EditText
+                        android:id="@+id/etCountry"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:digits="0123456789+"
+                        android:drawableRight="@drawable/baseline_country"
+                        android:fontFamily="@font/quicksand_regular"
+                        android:hint="Country"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tIMobileNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/medium_grey">
+
+                    <EditText
+                        android:id="@+id/etMobileNo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:drawableRight="@drawable/baseline_call"
                         android:fontFamily="@font/quicksand_regular"
                         android:hint="Mobile No."
+                        android:inputType="number"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -136,6 +134,7 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/login_button_gradient"
             android:fontFamily="@font/quicksand_bold"
+            android:onClick="@{()->viewModel.onUpdateButtonClick()}"
             android:text="Update"
             android:textAllCaps="false"
             android:textColor="@color/white" />

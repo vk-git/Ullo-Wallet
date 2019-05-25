@@ -10,7 +10,9 @@ import com.ullo.R
 import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivitySettingBinding
 import com.ullo.ui.change_password.ChangePasswordActivity
+import com.ullo.ui.contact.ContactActivity
 import com.ullo.ui.landing.LandingActivity
+import com.ullo.ui.my_qr_code.MyQrCodeActivity
 import com.ullo.ui.privacy_policy.PrivacyPolicyActivity
 import com.ullo.ui.profile.ProfileActivity
 import com.ullo.ui.terms_of_use.TermsOfUseActivity
@@ -18,7 +20,6 @@ import com.ullo.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
 class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>(), SettingNavigator {
-
 
     companion object {
         fun newIntent(context: Context): Intent {
@@ -61,7 +62,8 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>()
     }
 
     override fun onMyQRCodeHandle() {
-
+        val intent = MyQrCodeActivity.newIntent(this)
+        startActivity(intent)
     }
 
     override fun onAddCardHandle() {
@@ -83,9 +85,19 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>()
         startActivity(intent)
     }
 
+    override fun onContactUsHandle() {
+        val intent = ContactActivity.newIntent(this)
+        startActivity(intent)
+    }
+
+    override fun onAboutUsHandle() {
+        /*val intent = AboutActivity.newIntent(this)
+        startActivity(intent)*/
+    }
+
     override fun onSignOutHandle() {
         val intent = LandingActivity.newIntent(this)
-        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)
         finish()
     }

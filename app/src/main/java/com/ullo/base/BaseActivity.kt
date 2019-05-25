@@ -116,6 +116,16 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<*>> : AppComp
                 .show()
     }
 
+    fun onShowAlert(title: String, msg: String) {
+        AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(msg)
+                .setPositiveButton(android.R.string.yes) { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
+    }
+
     private fun registerRxBus() {
         compositeDisposable.add(App.instance.rxBus().toObservable().subscribe { any ->
             if (any is String) {

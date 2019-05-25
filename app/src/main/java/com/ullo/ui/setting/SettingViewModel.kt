@@ -33,6 +33,14 @@ class SettingViewModel(application: Application, ulloService: UlloService, sessi
         getNavigator()?.onPrivacyPolicesHandle()
     }
 
+    fun onContactUsButtonClick() {
+        getNavigator()?.onContactUsHandle()
+    }
+
+    fun onAboutUsButtonClick() {
+        getNavigator()?.onAboutUsHandle()
+    }
+
     fun onSignOutButtonClick() {
         getSession().logout()
         getNavigator()?.onSignOutHandle()

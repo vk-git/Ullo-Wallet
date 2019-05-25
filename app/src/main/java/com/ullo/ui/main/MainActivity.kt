@@ -52,6 +52,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
         mActivityMainBinding = getViewDataBinding()
         viewModel.setNavigator(this)
 
+        viewModel.getSession().getAppUser()?.run {
+            mActivityMainBinding!!.txtUserEmail.text = userData.email
+            mActivityMainBinding!!.txtUserFullName.text = userData.fullName
+        }
+
         fetchContacts()
     }
 

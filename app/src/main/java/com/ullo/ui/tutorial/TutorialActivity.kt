@@ -62,7 +62,7 @@ class TutorialActivity : BaseActivity<ActivityTutorialBinding, TutorialViewModel
                 }
 
                 override fun onPageSelected(position: Int) {
-                    if (position == mCustomPagerAdapter!!.count) {
+                    if (position == (mCustomPagerAdapter!!.count - 1)) {
                         mActivityTutorialBinding!!.btnGetStarted.visible()
                         mActivityTutorialBinding!!.btnNext.gone()
                     } else {
@@ -80,12 +80,14 @@ class TutorialActivity : BaseActivity<ActivityTutorialBinding, TutorialViewModel
     }
 
     override fun onNextHandle() {
-        val intent = LandingActivity.newIntent(this)
-        startActivity(intent)
-        finish()
+        with(mActivityTutorialBinding!!.viewpager) {
+            currentItem += 1
+        }
     }
 
     override fun onGetStartedHandle() {
-
+        val intent = LandingActivity.newIntent(this)
+        startActivity(intent)
+        finish()
     }
 }

@@ -122,6 +122,22 @@
                     android:textColor="#FFFFFF"
                     android:textSize="16sp" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@color/white"
+                    android:fontFamily="@font/quicksand_regular"
+                    android:onClick="@{()->viewModel.onSignUpButtonClick()}"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:text="New to Ullo? Sign up now"
+                    android:textAllCaps="false"
+                    android:textColor="#0A39F5"
+                    android:textSize="14sp" />
+
             </LinearLayout>
         </RelativeLayout>
 

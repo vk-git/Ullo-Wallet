@@ -8,6 +8,7 @@ import com.ullo.ui.forgot_password.ForgotPasswordActivity
 import com.ullo.ui.landing.LandingActivity
 import com.ullo.ui.login.LoginActivity
 import com.ullo.ui.main.MainActivity
+import com.ullo.ui.my_qr_code.MyQrCodeActivity
 import com.ullo.ui.privacy_policy.PrivacyPolicyActivity
 import com.ullo.ui.profile.ProfileActivity
 import com.ullo.ui.register.RegisterActivity
@@ -63,4 +64,7 @@ abstract class ActivityBuilder {
 
     @ContributesAndroidInjector
     internal abstract fun bindSettingActivity(): SettingActivity
+
+    @ContributesAndroidInjector
+    internal abstract fun bindMyQrCodeActivity(): MyQrCodeActivity
 }

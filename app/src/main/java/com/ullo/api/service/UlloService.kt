@@ -91,4 +91,24 @@ class UlloService(private val ulloApi: UlloApi) {
                     }
                 })
     }
+
+    fun userUpdateProfile(registerReq: JsonObject, listener: ResponseListener<Response<BaseResponse<AppUser>>, String>): Disposable {
+        return ulloApi.userUpdateProfile(registerReq)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : ApiResponseCallbackWrapper<Response<BaseResponse<AppUser>>>() {
+
+                    override fun onSuccess(response: Response<BaseResponse<AppUser>>) {
+                        listener.onSuccess(response)
+                    }
+
+                    override fun onInternetConnectionError() {
+                        listener.onInternetConnectionError()
+                    }
+
+                    override fun onFailure(error: String) {
+                        listener.onFailure(error)
+                    }
+                })
+    }
 }

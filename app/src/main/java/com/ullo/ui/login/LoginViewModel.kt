@@ -3,7 +3,9 @@ package com.ullo.ui.login
 import android.app.Application
 import android.util.Log
 import com.google.gson.Gson
+import com.google.gson.JsonElement
 import com.google.gson.JsonObject
+import com.google.gson.reflect.TypeToken
 import com.ullo.App
 import com.ullo.R
 import com.ullo.api.ResponseListener
@@ -13,9 +15,14 @@ import com.ullo.api.service.UlloService
 import com.ullo.base.BaseViewModel
 import com.ullo.db.DataManager
 import com.ullo.utils.Session
+import com.ullo.utils.SharedPreferenceHelper
 import retrofit2.Response
 
 class LoginViewModel(application: Application, ulloService: UlloService, session: Session, dataManager: DataManager) : BaseViewModel<LoginNavigator>(application, ulloService, session, dataManager) {
+
+    fun onSignUpButtonClick() {
+        getNavigator()?.onSignUpHandle()
+    }
 
     fun onLoginButtonClick() {
         getNavigator()?.onLoginHandle()
@@ -37,14 +44,10 @@ class LoginViewModel(application: Application, ulloService: UlloService, session
                     }
                     getNavigator()?.onMainScreen()
                 } else {
-                    response.body()?.run {
-                        Log.d("mytag", "Response ::" + Gson().toJson(this))
-                    }
                     response.errorBody()?.run {
-                        Log.d("mytag", "Error ::" + Gson().toJson(this))
+                        val errorResponse = SharedPreferenceHelper.getObjectFromString(string(), object : TypeToken<BaseResponse<JsonElement>>() {})
+                        getNavigator()?.handleError(errorResponse.error.asJsonArray[0].asString)
                     }
-                    /*val errorResponse = SharedPreferenceHelper.getObjectFromString(response.errorBody()!!.string(), object : TypeToken<BaseResponse<String>>() {})
-                    getNavigator()?.handleError(errorResponse.data)*/
                 }
             }
 

@@ -11,4 +11,6 @@ interface SettingNavigator : BaseNavigator {
     fun onTermsConditionHandle()
     fun onPrivacyPolicesHandle()
     fun onSignOutHandle()
+    fun onContactUsHandle()
+    fun onAboutUsHandle()
 }

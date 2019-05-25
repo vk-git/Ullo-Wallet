@@ -7,12 +7,16 @@ import android.view.View
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.tamir7.contacts.Contact
+import com.github.tamir7.contacts.Contacts
 import com.ullo.BR
 import com.ullo.R
 import com.ullo.adapter.ContactAdapter
 import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivityChooseContactBinding
 import com.ullo.utils.ViewModelProviderFactory
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class ChooseContactActivity : BaseActivity<ActivityChooseContactBinding, ChooseContactViewModel>(), ChooseContactNavigator {
@@ -53,7 +57,7 @@ class ChooseContactActivity : BaseActivity<ActivityChooseContactBinding, ChooseC
             finish()
         })
 
-        /*viewModel.run {
+        viewModel.run {
             val q = Contacts.getQuery()
             q.hasPhoneNumber()
             getCompositeDisposable()?.run {
@@ -63,7 +67,7 @@ class ChooseContactActivity : BaseActivity<ActivityChooseContactBinding, ChooseC
                         })
             }
             // getDataManager().allPatients.observeForever { patientList -> setPatientData(patientList) }
-        }*/
+        }
     }
 
     private fun setContactData(patientList: List<Contact>) {
