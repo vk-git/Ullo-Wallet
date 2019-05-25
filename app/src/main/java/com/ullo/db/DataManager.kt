@@ -1,19 +1,19 @@
 package com.ullo.db
 
 import androidx.lifecycle.LiveData
-import com.ullo.api.response.patient.Patient
+import com.ullo.api.response.contact.Contact
 import io.reactivex.Observable
 
 class DataManager(private var appDbHelper: AppDbHelper) {
 
-    val allPatients: LiveData<List<Patient>>
+    val allPatients: LiveData<List<Contact>>
         get() = appDbHelper.allPatients
 
-    fun savePatientList(patientList: List<Patient>): Observable<Boolean> {
-        return appDbHelper.savePatientList(patientList)
+    fun savePatientList(contactList: List<Contact>): Observable<Boolean> {
+        return appDbHelper.savePatientList(contactList)
     }
 
-    fun savePatient(item: Patient) {
+    fun savePatient(item: Contact) {
         return appDbHelper.savePatient(item)
     }
 

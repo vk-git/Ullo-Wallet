@@ -3,6 +3,7 @@ package com.ullo.ui.splash
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import androidx.lifecycle.ViewModelProviders
 import com.ullo.BR
 import com.ullo.R
@@ -15,6 +16,7 @@ import com.ullo.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
 class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(), SplashNavigator {
+
 
     companion object {
         fun newIntent(context: Context): Intent {
@@ -44,17 +46,26 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(), S
         mActivitySplashBinding = getViewDataBinding()
         viewModel.setNavigator(this)
 
+        val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID);
+        viewModel.getSession().setAppDeviceId(deviceId)
+
         viewModel.onTimeHandler()
     }
 
     override fun onLandingScreen() {
-        val intent = TutorialActivity.newIntent(this)
+        val intent = LandingActivity.newIntent(this)
         startActivity(intent)
         finish()
     }
 
     override fun onMainScreen() {
         val intent = MainActivity.newIntent(this)
+        startActivity(intent)
+        finish()
+    }
+
+    override fun onTutorialScreen() {
+        val intent = TutorialActivity.newIntent(this)
         startActivity(intent)
         finish()
     }

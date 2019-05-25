@@ -51,4 +51,44 @@ class UlloService(private val ulloApi: UlloApi) {
                     }
                 })
     }
+
+    fun userForgotPassword(loginReq: JsonObject, listener: ResponseListener<Response<BaseResponse<AppUser>>, String>): Disposable {
+        return ulloApi.userForgotPassword(loginReq)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : ApiResponseCallbackWrapper<Response<BaseResponse<AppUser>>>() {
+
+                    override fun onSuccess(response: Response<BaseResponse<AppUser>>) {
+                        listener.onSuccess(response)
+                    }
+
+                    override fun onInternetConnectionError() {
+                        listener.onInternetConnectionError()
+                    }
+
+                    override fun onFailure(error: String) {
+                        listener.onFailure(error)
+                    }
+                })
+    }
+
+    fun userChangePassword(changePasswordReq: JsonObject, listener: ResponseListener<Response<BaseResponse<AppUser>>, String>): Disposable {
+        return ulloApi.userChangePassword(changePasswordReq)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : ApiResponseCallbackWrapper<Response<BaseResponse<AppUser>>>() {
+
+                    override fun onSuccess(response: Response<BaseResponse<AppUser>>) {
+                        listener.onSuccess(response)
+                    }
+
+                    override fun onInternetConnectionError() {
+                        listener.onInternetConnectionError()
+                    }
+
+                    override fun onFailure(error: String) {
+                        listener.onFailure(error)
+                    }
+                })
+    }
 }

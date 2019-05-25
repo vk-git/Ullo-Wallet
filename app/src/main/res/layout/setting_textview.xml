@@ -24,6 +24,7 @@
         android:paddingStart="21dp"
         android:paddingTop="18dp"
         android:paddingEnd="5dp"
+        android:fontFamily="@font/quicksand_bold"
         android:paddingBottom="21dp" />
 
     <androidx.appcompat.widget.AppCompatImageView

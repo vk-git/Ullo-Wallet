@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import com.ullo.api.response.patient.Patient
+import com.ullo.api.response.contact.Contact
 import com.ullo.api.service.UlloService
 import com.ullo.db.DataManager
 import com.ullo.utils.Session
@@ -27,7 +27,7 @@ abstract class BaseViewModel<N> : AndroidViewModel {
     private val mIsLoading = ObservableBoolean(false)
     private val mIsEmptyView = ObservableBoolean(false)
 
-    val allPatients: LiveData<List<Patient>>
+    val allPatients: LiveData<List<Contact>>
         get() =  getDataManager().allPatients
 
     constructor(application: Application, ulloService: UlloService, session: Session, mDataManager: DataManager) : super(application) {

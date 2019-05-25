@@ -5,4 +5,5 @@ import com.ullo.base.BaseNavigator
 
 interface TutorialNavigator : BaseNavigator {
     fun onNextHandle()
+    fun onGetStartedHandle()
 }

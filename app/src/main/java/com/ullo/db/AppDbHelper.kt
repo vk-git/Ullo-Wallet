@@ -1,16 +1,16 @@
 package com.ullo.db
 
 import androidx.lifecycle.LiveData
-import com.ullo.api.response.patient.Patient
+import com.ullo.api.response.contact.Contact
 import io.reactivex.Observable
 
 class AppDbHelper(private val mAppDatabase: AppDatabase) {
 
-    val allPatients: LiveData<List<Patient>>
-        get() =  mAppDatabase.patientDao().loadAll()
+    val allPatients: LiveData<List<Contact>>
+        get() = mAppDatabase.contactDao().loadAll()
 
-    fun savePatientList(patientList: List<Patient>): Observable<Boolean> {
-        val newList: List<Patient> = ArrayList<Patient>(patientList)
+    fun savePatientList(contactList: List<Contact>): Observable<Boolean> {
+        val newList: List<Contact> = ArrayList<Contact>(contactList)
         return Observable.fromCallable {
             newList.map {
                 insertOrUpdate(it)
@@ -19,20 +19,20 @@ class AppDbHelper(private val mAppDatabase: AppDatabase) {
         }
     }
 
-    private fun insertOrUpdate(item: Patient) {
-        val id = mAppDatabase.patientDao().getItemId(item.id)
+    private fun insertOrUpdate(item: Contact) {
+        val id = mAppDatabase.contactDao().getItemId(item.id)
         if (id == null) {
-            mAppDatabase.patientDao().insert(item)
+            mAppDatabase.contactDao().insert(item)
         } else {
-            mAppDatabase.patientDao().update(item)
+            mAppDatabase.contactDao().update(item)
         }
     }
 
-    fun savePatient(item: Patient) {
+    fun savePatient(item: Contact) {
         insertOrUpdate(item)
     }
 
     fun deletePatientById(patientId: String) {
-        mAppDatabase.patientDao().deletePatientById(patientId)
+        mAppDatabase.contactDao().deletePatientById(patientId)
     }
 }

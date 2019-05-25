@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.github.tamir7.contacts.Contact
 import com.ullo.R
-import com.ullo.databinding.PatientListItemBinding
+import com.ullo.databinding.ContactListItemBinding
 
 class ContactAdapter(var context: Context) : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
 
@@ -19,7 +19,7 @@ class ContactAdapter(var context: Context) : RecyclerView.Adapter<ContactAdapter
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val contactListItemBinding = DataBindingUtil.inflate<PatientListItemBinding>(LayoutInflater.from(parent!!.context), R.layout.patient_list_item, parent, false)
+        val contactListItemBinding = DataBindingUtil.inflate<ContactListItemBinding>(LayoutInflater.from(parent!!.context), R.layout.contact_list_item, parent, false)
         return ViewHolder(contactListItemBinding)
     }
 
@@ -32,7 +32,7 @@ class ContactAdapter(var context: Context) : RecyclerView.Adapter<ContactAdapter
         return contactList.size
     }
 
-    inner class ViewHolder internal constructor(private val contactListItemBinding: PatientListItemBinding) : RecyclerView.ViewHolder(contactListItemBinding.root) {
+    inner class ViewHolder internal constructor(private val contactListItemBinding: ContactListItemBinding) : RecyclerView.ViewHolder(contactListItemBinding.root) {
 
         fun bind(contact: Contact) {
             contactListItemBinding.contact = contact

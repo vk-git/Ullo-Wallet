@@ -5,10 +5,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProviders
+import com.google.gson.JsonObject
 import com.ullo.BR
+import com.ullo.BuildConfig
 import com.ullo.R
 import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivityChangePasswordBinding
+import com.ullo.utils.Validation
 import com.ullo.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
@@ -21,7 +24,7 @@ class ChangePasswordActivity : BaseActivity<ActivityChangePasswordBinding, Chang
         }
     }
 
-   @set:Inject
+    @set:Inject
     lateinit var factory: ViewModelProviderFactory
 
     override val viewModel: ChangePasswordViewModel
@@ -47,8 +50,59 @@ class ChangePasswordActivity : BaseActivity<ActivityChangePasswordBinding, Chang
         mActivityChangePasswordBinding!!.toolbar.setBackButtonListener(listener = View.OnClickListener {
             finish()
         })
-        mActivityChangePasswordBinding!!.toolbar.setRightButtonListener(listener = View.OnClickListener {
+    }
 
-        })
+    override fun onChangePasswordHandle() {
+        if (isValid()) {
+            val changePasswordReq = JsonObject()
+            changePasswordReq.addProperty("old_password", mActivityChangePasswordBinding!!.etConfirmPassword.text.toString())
+            changePasswordReq.addProperty("confirm_password", BuildConfig.USER_TYPE)
+            viewModel.changePassword(changePasswordReq)
+        }
+    }
+
+    private fun isValid(): Boolean {
+        var bOldPassword = true
+        var bNewPassword = true
+        var bConfirmPassword = true
+        val oldPassword = mActivityChangePasswordBinding!!.etOldPassword.text.toString()
+        val newPassword = mActivityChangePasswordBinding!!.etNewPassword.text.toString()
+        val confirmPassword = mActivityChangePasswordBinding!!.etConfirmPassword.text.toString()
+
+        if (!Validation.isValidPassword(oldPassword)) {
+            mActivityChangePasswordBinding!!.tIOldPassword.isErrorEnabled = true
+            mActivityChangePasswordBinding!!.tIOldPassword.error = "Password must be at least 8 characters"
+            bOldPassword = false
+        } else {
+            mActivityChangePasswordBinding!!.tIOldPassword.isErrorEnabled = false
+        }
+
+        if (!Validation.isValidPassword(newPassword)) {
+            mActivityChangePasswordBinding!!.tINewPassword.isErrorEnabled = true
+            mActivityChangePasswordBinding!!.tINewPassword.error = "Password must be at least 8 characters"
+            bNewPassword = false
+        } else {
+            mActivityChangePasswordBinding!!.tINewPassword.isErrorEnabled = false
+        }
+
+        if (!Validation.isValidPassword(confirmPassword)) {
+            mActivityChangePasswordBinding!!.tIConfirmPassword.isErrorEnabled = true
+            mActivityChangePasswordBinding!!.tIConfirmPassword.error = "Password must be at least 8 characters"
+            bConfirmPassword = false
+        } else {
+            if (!Validation.isMatchPassword(newPassword, confirmPassword)) {
+                mActivityChangePasswordBinding!!.tIConfirmPassword.isErrorEnabled = true
+                mActivityChangePasswordBinding!!.tIConfirmPassword.error = "Password not match"
+                bConfirmPassword = false
+            } else {
+                mActivityChangePasswordBinding!!.tIConfirmPassword.isErrorEnabled = false
+            }
+        }
+
+        return bOldPassword && bNewPassword && bConfirmPassword
+    }
+
+    override fun onChangePasswordSuccess() {
+
     }
 }

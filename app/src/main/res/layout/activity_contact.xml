@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Contact Us"
-            app:leftDrawable="@drawable/baseline_navigate_right" />
+            app:leftDrawable="@drawable/ic_back" />
 
         <LinearLayout
             android:id="@+id/loginRegisterLayout"
@@ -45,7 +45,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/quicksand_regular"
                     android:hint="Name" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -58,7 +58,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/quicksand_regular"
                     android:hint="Email" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -71,7 +71,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
+                    android:fontFamily="@font/quicksand_regular"
                     android:hint="Subject" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -80,14 +80,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:fontFamily="@font/roboto_medium"
+                android:fontFamily="@font/quicksand_regular"
                 android:text="Message" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/roboto_medium"
+                android:fontFamily="@font/quicksand_regular"
                 android:gravity="top"
                 android:hint="message"
                 android:lines="6"
@@ -100,7 +100,7 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/login_button_gradient"
-                android:fontFamily="@font/roboto_bold"
+                android:fontFamily="@font/quicksand_bold"
                 android:text="Send"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />

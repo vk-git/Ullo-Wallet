@@ -11,8 +11,7 @@
         android:layout_alignParentLeft="true"
         android:layout_centerInParent="true"
         android:padding="16dp"
-        android:rotation="180"
-        android:src="@drawable/baseline_navigate_right" />
+        android:src="@drawable/ic_back" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/toolbar_title"
@@ -20,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_gravity="center"
-        android:fontFamily="@font/roboto_bold"
+        android:fontFamily="@font/quicksand_bold"
         android:gravity="center"
         android:lines="1"
         android:text="Home"

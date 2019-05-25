@@ -12,7 +12,7 @@ import com.ullo.BR
 import com.ullo.R
 import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivityMainBinding
-import com.ullo.ui.choose_patient.ChoosePatientActivity
+import com.ullo.ui.choose_contact.ChooseContactActivity
 import com.ullo.ui.setting.SettingActivity
 import com.ullo.utils.ViewModelProviderFactory
 import javax.inject.Inject
@@ -80,7 +80,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
     }
 
     override fun onSendMoneyHandle() {
-        val intent = ChoosePatientActivity.newIntent(this)
+        val intent = ChooseContactActivity.newIntent(this)
         startActivity(intent)
     }
 }

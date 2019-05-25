@@ -34,10 +34,10 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:gravity="center|left"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_weight="1.1"
+                android:gravity="center|start">
 
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tab_layout"
@@ -52,7 +52,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0.3"
                 android:gravity="center">
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -65,8 +65,8 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right">
+                android:layout_weight="1.1"
+                android:gravity="end">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/btnNext"
@@ -74,8 +74,22 @@
                     android:layout_height="wrap_content"
                     android:onClick="@{()->viewModel.onNextButtonClick()}"
                     android:padding="10dp"
+                    android:layout_marginEnd="6dp"
                     android:src="@drawable/right_arrow_circular_button" />
 
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnGetStarted"
+                    android:layout_width="142dp"
+                    android:layout_height="54dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="#3B5998"
+                    android:fontFamily="@font/quicksand_bold"
+                    android:onClick="@{()->viewModel.onGetStartedButtonClick()}"
+                    android:text="Get Started"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
             </LinearLayout>
 
         </LinearLayout>

@@ -4,4 +4,6 @@ import com.ullo.base.BaseNavigator
 
 
 interface ForgotPasswordNavigator : BaseNavigator {
+    fun onForgotPasswordHandle()
+    fun onForgotPasswordSuccess()
 }

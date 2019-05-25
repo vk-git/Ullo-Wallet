@@ -32,21 +32,23 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="28dp"
+            android:paddingStart="28dp"
             android:layout_marginTop="44dp"
             android:text="One touch and send money"
             android:textColor="#FFFFFF"
-            android:textSize="23dp"
+            android:textSize="23sp"
+            android:fontFamily="@font/quicksand_regular"
             android:textStyle="italic" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="28dp"
+            android:paddingStart="28dp"
             android:layout_marginTop="9dp"
             android:text="send money to every one by on step and organize your wallet easier."
             android:textColor="#FFFFFF"
-            android:textSize="16dp" />
+            android:fontFamily="@font/quicksand_regular"
+            android:textSize="16sp" />
 
     </LinearLayout>
 

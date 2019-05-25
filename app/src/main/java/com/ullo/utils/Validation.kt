@@ -53,7 +53,7 @@ class Validation(private val mEdittextview: EditText, private val valType: Valid
 
     private fun setTick(isValid: Boolean) {
         if (isValid) {
-            mEdittextview.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.check_ok, 0)
+            mEdittextview.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_launcher, 0)
         } else {
             mEdittextview.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
         }

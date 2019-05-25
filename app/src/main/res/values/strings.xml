@@ -42,7 +42,7 @@
     <string name="dashboard_start">Start analysis</string>
     <string name="dashboard_nursing_home">Nursing home Berlin</string>
     <string name="dashboard_start_new_analysis">Start new analysis</string>
-    <string name="dashboard_new_analysis">Select a patient\nand start new analysis</string>
+    <string name="dashboard_new_analysis">Select a contact\nand start new analysis</string>
     <string name="dashboard_search">Search</string>
 
     <!--setting-->
@@ -97,7 +97,7 @@
     <string name="facility_address">Billing Address</string>
     <string name="facility_save">Save</string>
 
-    <!--create patient-->
+    <!--create contact-->
     <string name="create_patient_profile_picture">Change Profile Picture</string>
     <string name="create_patient_name">Name</string>
     <string name="create_patient_alter">Age</string>
@@ -188,7 +188,7 @@
     <string name="height">Height</string>
     <string name="weight">Weight</string>
     <string name="patient_living_condition">Patient living condition</string>
-    <string name="does_patient_suffer_from_dementia">Does patient suffer from dementia?</string>
+    <string name="does_patient_suffer_from_dementia">Does contact suffer from dementia?</string>
     <string name="edit_patient_title">Patient</string>
     <string name="edit_patient_edit_title">Edit Patient</string>
     <string name="patient_edit">Edit</string>
@@ -198,4 +198,5 @@
 
     <!--Ullo Application-->
     <string name="scan_qa_code">Scan\nQA Code</string>
+    <string name="loading">Loading...</string>
 </resources>

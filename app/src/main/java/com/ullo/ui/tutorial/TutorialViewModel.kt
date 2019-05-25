@@ -12,4 +12,8 @@ class TutorialViewModel(application: Application, ulloService: UlloService, sess
     fun onNextButtonClick() {
         getNavigator()?.onNextHandle()
     }
+
+    fun onGetStartedButtonClick(){
+        getNavigator()?.onGetStartedHandle()
+    }
 }

@@ -71,7 +71,7 @@ class ToolBar : LinearLayout {
     }
 
     fun setBackButton(isBackButtonEnable: Boolean) {
-        toolbarLeftButton.setImageResource(if (isBackButtonEnable) R.drawable.baseline_navigate_right else R.drawable.ic_launcher)
+        toolbarLeftButton.setImageResource(if (isBackButtonEnable) R.drawable.ic_back else R.drawable.ic_launcher)
     }
 
     fun setBackButtonListener(listener: View.OnClickListener?) {

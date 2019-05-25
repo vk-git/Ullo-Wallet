@@ -12,8 +12,8 @@ class BaseInterceptor(internal var session: Session, internal var application: A
     override fun intercept(chain: Interceptor.Chain): Response {
         val builder = chain.request().newBuilder()
         builder.addHeader("Accept", "application/json")
-        if (!session.getAppUserToken().isEmpty()) {
-            builder.addHeader("token", session.getAppUserToken())
+        if (session.getAppUserToken().isNotEmpty()) {
+            builder.addHeader("Authorization", "Bearer " + session.getAppUserToken())
         }
         return chain.proceed(builder.build())
     }

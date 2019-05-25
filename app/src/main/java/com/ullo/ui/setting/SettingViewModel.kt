@@ -34,6 +34,7 @@ class SettingViewModel(application: Application, ulloService: UlloService, sessi
     }
 
     fun onSignOutButtonClick() {
+        getSession().logout()
         getNavigator()?.onSignOutHandle()
     }
 }

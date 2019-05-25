@@ -4,14 +4,10 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.reflect.TypeToken
 import com.ullo.api.response.AppUser
-import com.ullo.api.response.UserHome
-import com.ullo.api.response.patient.Patient
+import com.ullo.utils.Session.Key.APP_DEVICE_ID
 import com.ullo.utils.Session.Key.APP_USER
-import com.ullo.utils.Session.Key.APP_USER_ARCHIVE_LIST
-import com.ullo.utils.Session.Key.APP_USER_HOME
-import com.ullo.utils.Session.Key.APP_USER_PROGRESS_LIST
 import com.ullo.utils.Session.Key.APP_USER_TOKEN
-import java.util.ArrayList
+import com.ullo.utils.Session.Key.APP_SHOW_TUTORIAL
 
 class Session(context: Context) {
 
@@ -37,39 +33,6 @@ class Session(context: Context) {
         })
     }
 
-    fun setArchiveList(patientList: ArrayList<Patient>) {
-        editor.putString(APP_USER_ARCHIVE_LIST, SharedPreferenceHelper.getStringFromObject(patientList))
-        editor.apply()
-    }
-
-    fun getArchiveList(): ArrayList<Patient> {
-        return SharedPreferenceHelper.getObjectFromString(pref.getString(APP_USER_ARCHIVE_LIST, ""), object :
-                TypeToken<ArrayList<Patient>>() {
-        })
-    }
-
-    fun setProgressList(patientList: ArrayList<Patient>) {
-        editor.putString(APP_USER_PROGRESS_LIST, SharedPreferenceHelper.getStringFromObject(patientList))
-        editor.apply()
-    }
-
-    fun getProgressList(): ArrayList<Patient> {
-        return SharedPreferenceHelper.getObjectFromString(pref.getString(APP_USER_PROGRESS_LIST, ""), object :
-                TypeToken<ArrayList<Patient>>() {
-        })
-    }
-
-    fun setAppUserHome(userHome: UserHome) {
-        editor.putString(APP_USER_HOME, SharedPreferenceHelper.getStringFromObject(userHome))
-        editor.apply()
-    }
-
-    fun getAppUserHome(): UserHome {
-        return SharedPreferenceHelper.getObjectFromString(pref.getString(APP_USER_HOME, ""), object :
-                TypeToken<UserHome>() {
-        })
-    }
-
     fun setAppUserToken(token: String) {
         editor.putString(APP_USER_TOKEN, token)
         editor.apply()
@@ -79,6 +42,24 @@ class Session(context: Context) {
         return pref.getString(APP_USER_TOKEN, "")
     }
 
+    fun setAppDeviceId(token: String) {
+        editor.putString(APP_DEVICE_ID, token)
+        editor.apply()
+    }
+
+    fun getAppDeviceId(): String {
+        return pref.getString(APP_DEVICE_ID, "")
+    }
+
+    fun setShowTutorial(b: Boolean) {
+        editor.putBoolean(APP_SHOW_TUTORIAL, b)
+        editor.apply()
+    }
+
+    fun getShowTutorial(): Boolean {
+        return pref.getBoolean(APP_SHOW_TUTORIAL, false)
+    }
+
     fun logout() {
         editor.clear()
         editor.commit()
@@ -86,10 +67,8 @@ class Session(context: Context) {
 
     object Key {
         internal const val APP_USER = "app_user"
-        internal const val APP_USER_HOME = "app_user_home"
         internal const val APP_USER_TOKEN = "app_user_token"
-        internal const val APP_USER_PATIENT_LIST = "app_user_patient_list"
-        internal const val APP_USER_ARCHIVE_LIST = "app_user_archive_list"
-        internal const val APP_USER_PROGRESS_LIST = "app_user_progress_list"
+        internal const val APP_DEVICE_ID = "app_device_id"
+        internal const val APP_SHOW_TUTORIAL = "app_show_tutorial"
     }
 }

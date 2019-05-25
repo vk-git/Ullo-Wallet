@@ -1,7 +1,9 @@
 package com.ullo.base
 
+import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
+import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.LayoutRes
@@ -10,12 +12,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
+import com.ullo.App
 import com.ullo.R
 import com.ullo.utils.ConnectionLiveData
+import com.ullo.utils.ShowLoadingOverlayDialog
 import dagger.android.AndroidInjection
-import android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-import android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-import android.view.View
+import io.reactivex.disposables.CompositeDisposable
 
 
 abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<*>> : AppCompatActivity(), BaseNavigator {
@@ -46,6 +48,9 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<*>> : AppComp
     abstract val isFullScreen: Boolean
     var isConnected: Boolean = false
 
+    var compositeDisposable: CompositeDisposable = CompositeDisposable()
+    private var loadingOverlayDialog: ProgressDialog? = null
+
     fun getViewDataBinding(): T {
         return viewDataBinding!!
     }
@@ -60,6 +65,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<*>> : AppComp
 
         super.onCreate(savedInstanceState)
         performDataBinding()
+        registerRxBus()
 
         val connectionLiveData = ConnectionLiveData(this)
         connectionLiveData.observe(this, Observer { isConnected ->
@@ -108,5 +114,55 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<*>> : AppComp
                     dialog.dismiss()
                 }
                 .show()
+    }
+
+    private fun registerRxBus() {
+        compositeDisposable.add(App.instance.rxBus().toObservable().subscribe { any ->
+            if (any is String) {
+                if (any == HIDE_LOADING_OVERLAY_DIALOG) {
+                    hideLoadingOverlayDialog()
+                }
+            }
+            if (any is ShowLoadingOverlayDialog) {
+                showLoadingOverlayDialog(any.loadingMessage)
+            }
+        })
+    }
+
+    private fun hideLoadingOverlayDialog() {
+        if (loadingOverlayDialog != null) {
+            if (loadingOverlayDialog!!.isShowing) {
+                loadingOverlayDialog!!.dismiss()
+            }
+            loadingOverlayDialog = null
+        }
+    }
+
+    @Synchronized
+    private fun showLoadingOverlayDialog(msg: String) {
+        if (loadingOverlayDialog != null && loadingOverlayDialog!!.isShowing) {  // making sure we have only one instance.
+            return
+        }
+        try {
+            // call when you press back while dialog is visible
+            loadingOverlayDialog = ProgressDialog(this)
+            loadingOverlayDialog!!.setMessage(msg)
+            loadingOverlayDialog!!.show()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (compositeDisposable != null) {
+            compositeDisposable.dispose()
+        }
+        hideLoadingOverlayDialog()
+    }
+
+    companion object {
+        const val HIDE_LOADING_OVERLAY_DIALOG = "hideLoadingOverlayDialog"
     }
 }

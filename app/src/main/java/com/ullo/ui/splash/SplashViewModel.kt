@@ -12,10 +12,14 @@ class SplashViewModel(application: Application, ulloService: UlloService, sessio
 
     fun onTimeHandler() {
         Handler().postDelayed({
-            if (getSession().getAppUserToken().isEmpty()) {
-                getNavigator()!!.onLandingScreen()
+            if (getSession().getShowTutorial()) {
+                if (getSession().getAppUserToken().isEmpty()) {
+                    getNavigator()?.onLandingScreen()
+                } else {
+                    getNavigator()?.onMainScreen()
+                }
             } else {
-                getNavigator()!!.onMainScreen()
+                getNavigator()?.onTutorialScreen()
             }
         }, 3000)
     }

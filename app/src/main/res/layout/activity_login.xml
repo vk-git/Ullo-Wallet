@@ -32,6 +32,7 @@
                 android:layout_centerInParent="true"
                 android:layout_marginTop="20dp"
                 android:text="Sing In"
+                android:fontFamily="@font/quicksand_regular"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
@@ -64,7 +65,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableRight="@drawable/baseline_email"
-                        android:fontFamily="@font/roboto_medium"
+                        android:fontFamily="@font/quicksand_regular"
                         android:hint="Email Address"
                         android:inputType="textEmailAddress"
                         android:textSize="14sp" />
@@ -84,7 +85,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableRight="@drawable/baseline_security"
-                        android:fontFamily="@font/roboto_medium"
+                        android:fontFamily="@font/quicksand_regular"
                         android:hint="@string/password_hint"
                         android:inputType="textPassword"
                         android:textSize="14sp" />
@@ -99,7 +100,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:background="@color/white"
-                    android:fontFamily="@font/roboto_regular"
+                    android:fontFamily="@font/quicksand_regular"
                     android:onClick="@{()->viewModel.onForgotPasswordButtonClick()}"
                     android:paddingTop="16dp"
                     android:paddingBottom="16dp"
@@ -114,6 +115,7 @@
                     android:layout_marginLeft="26dp"
                     android:layout_marginRight="26dp"
                     android:background="@drawable/login_button_gradient"
+                    android:fontFamily="@font/quicksand_bold"
                     android:onClick="@{()->viewModel.onLoginButtonClick()}"
                     android:text="Sign In"
                     android:textAllCaps="false"

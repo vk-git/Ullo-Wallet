@@ -12,7 +12,9 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField("String", "SERVICE_ENDPOINT", '"https://v2-api.lindera.de/v2/"')
+        buildConfigField("String", "SERVICE_ENDPOINT", '"https://wallet.atithiinfosoft.com/api/"')
+        buildConfigField("String", "USER_TYPE", '"2"')
+        buildConfigField("String", "DEVICE_TYPE", '"a"')
     }
     dataBinding {
         enabled = true

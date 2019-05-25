@@ -3,12 +3,14 @@ package com.ullo.ui.forgot_password
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.lifecycle.ViewModelProviders
+import com.google.gson.JsonObject
 import com.ullo.BR
+import com.ullo.BuildConfig
 import com.ullo.R
 import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivityForgotPasswordBinding
+import com.ullo.utils.Validation
 import com.ullo.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
@@ -20,7 +22,7 @@ class ForgotPasswordActivity : BaseActivity<ActivityForgotPasswordBinding, Forgo
         }
     }
 
-   @set:Inject
+    @set:Inject
     lateinit var factory: ViewModelProviderFactory
 
     override val viewModel: ForgotPasswordViewModel
@@ -41,5 +43,33 @@ class ForgotPasswordActivity : BaseActivity<ActivityForgotPasswordBinding, Forgo
         super.onCreate(savedInstanceState)
         mActivityForgotPasswordBinding = getViewDataBinding()
         viewModel.setNavigator(this)
+    }
+
+    override fun onForgotPasswordHandle() {
+        if (isValid()) {
+            val loginReq = JsonObject()
+            loginReq.addProperty("email", mActivityForgotPasswordBinding!!.etEmail.text.toString())
+            loginReq.addProperty("user_type", BuildConfig.USER_TYPE)
+            viewModel.forgotPassword(loginReq)
+        }
+    }
+
+    private fun isValid(): Boolean {
+        var bEmail = true
+        val email = mActivityForgotPasswordBinding!!.etEmail.text.toString()
+
+        if (!Validation.isValidEmail(email)) {
+            mActivityForgotPasswordBinding!!.tIEmail.isErrorEnabled = true
+            mActivityForgotPasswordBinding!!.tIEmail.error = "The entered Email is not correct."
+            bEmail = false
+        } else {
+            mActivityForgotPasswordBinding!!.tIEmail.isErrorEnabled = false
+        }
+
+        return bEmail
+    }
+
+    override fun onForgotPasswordSuccess() {
+
     }
 }

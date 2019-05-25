@@ -3,6 +3,8 @@ package com.ullo.ui.register
 import android.app.Application
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
+import com.ullo.App
+import com.ullo.R
 import com.ullo.api.ResponseListener
 import com.ullo.api.response.AppUser
 import com.ullo.api.response.BaseResponse
@@ -25,12 +27,14 @@ class RegisterViewModel(application: Application, ulloService: UlloService, sess
     }
 
     fun register(registerReq: JsonObject) {
+        App.instance.showLoadingOverlayDialog(App.instance.getString(R.string.loading))
         getCompositeDisposable()?.add(getLinderaService().userRegister(registerReq, object : ResponseListener<Response<BaseResponse<AppUser>>, String> {
             override fun onSuccess(response: Response<BaseResponse<AppUser>>) {
+                App.instance.hideLoadingOverlayDialog()
                 if (response.isSuccessful) {
                     response.body()?.let {
                         getSession().setAppUser(it.data)
-                        getSession().setAppUserToken(it.token)
+                        getSession().setAppUserToken(it.data.token.accessToken)
                         getNavigator()?.onRegisterSuccessful(it.data)
                     }
                 } else {
@@ -40,10 +44,12 @@ class RegisterViewModel(application: Application, ulloService: UlloService, sess
             }
 
             override fun onInternetConnectionError() {
+                App.instance.hideLoadingOverlayDialog()
                 getNavigator()?.onInternetConnectionError()
             }
 
             override fun onFailure(error: String) {
+                App.instance.hideLoadingOverlayDialog()
                 getNavigator()?.handleError(error)
             }
         }))

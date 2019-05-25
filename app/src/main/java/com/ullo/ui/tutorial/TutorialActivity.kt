@@ -4,11 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProviders
+import androidx.viewpager.widget.ViewPager
 import com.linderaredux.adapter.CustomPagerAdapter
 import com.ullo.BR
 import com.ullo.R
 import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivityTutorialBinding
+import com.ullo.extensions.gone
+import com.ullo.extensions.visible
 import com.ullo.ui.landing.LandingActivity
 import com.ullo.utils.ViewModelProviderFactory
 import javax.inject.Inject
@@ -46,8 +49,29 @@ class TutorialActivity : BaseActivity<ActivityTutorialBinding, TutorialViewModel
         mActivityTutorialBinding = getViewDataBinding()
         viewModel.setNavigator(this)
 
+        viewModel.getSession().setShowTutorial(true)
+
         mActivityTutorialBinding!!.viewpager.apply {
             adapter = mCustomPagerAdapter
+            addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+                override fun onPageScrollStateChanged(state: Int) {
+
+                }
+
+                override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                }
+
+                override fun onPageSelected(position: Int) {
+                    if (position == mCustomPagerAdapter!!.count) {
+                        mActivityTutorialBinding!!.btnGetStarted.visible()
+                        mActivityTutorialBinding!!.btnNext.gone()
+                    } else {
+                        mActivityTutorialBinding!!.btnGetStarted.gone()
+                        mActivityTutorialBinding!!.btnNext.visible()
+                    }
+                }
+
+            })
         }
 
         mActivityTutorialBinding!!.tabLayout.apply {
@@ -59,5 +83,9 @@ class TutorialActivity : BaseActivity<ActivityTutorialBinding, TutorialViewModel
         val intent = LandingActivity.newIntent(this)
         startActivity(intent)
         finish()
+    }
+
+    override fun onGetStartedHandle() {
+
     }
 }

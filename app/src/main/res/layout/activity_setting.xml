@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Setting"
-            app:leftDrawable="@drawable/baseline_navigate_right" />
+            app:leftDrawable="@drawable/ic_back" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -40,6 +40,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:text="My Setting"
+                    android:fontFamily="@font/quicksand_bold"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -72,6 +73,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:text="Account"
+                    android:fontFamily="@font/quicksand_bold"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -98,6 +100,7 @@
                         android:layout_toRightOf="@id/left_icon"
                         android:paddingStart="21dp"
                         android:paddingTop="18dp"
+                        android:fontFamily="@font/quicksand_bold"
                         android:paddingBottom="18dp"
                         android:text="Sync Contact"
                         android:textColor="@color/black" />
@@ -108,6 +111,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:text="Notification"
+                    android:fontFamily="@font/quicksand_bold"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -134,6 +138,7 @@
                         android:layout_toRightOf="@id/left_icon2"
                         android:paddingStart="21dp"
                         android:paddingTop="18dp"
+                        android:fontFamily="@font/quicksand_bold"
                         android:paddingBottom="18dp"
                         android:text="Push Notification"
                         android:textColor="@color/black" />
@@ -163,20 +168,17 @@
                         android:paddingStart="21dp"
                         android:paddingTop="18dp"
                         android:paddingBottom="18dp"
+                        android:fontFamily="@font/quicksand_bold"
                         android:text="Email Notification"
                         android:textColor="@color/black" />
                 </RelativeLayout>
-
-                <com.ullo.view.SettingTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Email Notification" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:text="Other Settings"
+                    android:fontFamily="@font/quicksand_bold"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 

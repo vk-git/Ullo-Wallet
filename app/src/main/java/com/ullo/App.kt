@@ -5,7 +5,10 @@ import android.app.Application
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.github.tamir7.contacts.Contacts
+import com.ullo.base.BaseActivity
 import com.ullo.dagger.DaggerAppComponent
+import com.ullo.utils.RxBus
+import com.ullo.utils.ShowLoadingOverlayDialog
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import javax.inject.Inject
@@ -16,6 +19,8 @@ class App : Application(), HasActivityInjector, Application.ActivityLifecycleCal
     lateinit var activityDispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
 
     lateinit var currentActivity: AppCompatActivity
+
+    private var bus: RxBus? = null
 
     init {
         instance = this
@@ -36,6 +41,21 @@ class App : Application(), HasActivityInjector, Application.ActivityLifecycleCal
                 .inject(this)
 
         registerActivityLifecycleCallbacks(this)
+    }
+
+    fun rxBus(): RxBus {
+        if (bus == null) {
+            bus = RxBus()
+        }
+        return bus!!
+    }
+
+    fun showLoadingOverlayDialog(msg: String) {
+        rxBus().send(ShowLoadingOverlayDialog(msg))
+    }
+
+    fun hideLoadingOverlayDialog() {
+        rxBus().send(BaseActivity.HIDE_LOADING_OVERLAY_DIALOG)
     }
 
     override fun activityInjector(): DispatchingAndroidInjector<Activity> {

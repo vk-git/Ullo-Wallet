@@ -4,20 +4,19 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProviders
+import com.google.gson.JsonObject
 import com.ullo.BR
+import com.ullo.BuildConfig
 import com.ullo.R
 import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivityLoginBinding
 import com.ullo.ui.forgot_password.ForgotPasswordActivity
 import com.ullo.ui.main.MainActivity
 import com.ullo.utils.Validation
-import com.ullo.utils.Validation.ValidationType
 import com.ullo.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
-
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), LoginNavigator {
-
 
     companion object {
         fun newIntent(context: Context): Intent {
@@ -46,43 +45,43 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), Logi
         super.onCreate(savedInstanceState)
         mActivityLoginBinding = getViewDataBinding()
         viewModel.setNavigator(this)
-
-        mActivityLoginBinding!!.txtUserName.addTextChangedListener(Validation(mActivityLoginBinding!!.txtUserName, ValidationType.Email))
-        mActivityLoginBinding!!.txtUserPassword.addTextChangedListener(Validation(mActivityLoginBinding!!.txtUserPassword, ValidationType.Password))
     }
 
     override fun onLoginHandle() {
-        onMainScreen()
-        /*if (isValid()) {
+        if (isValid()) {
             val loginReq = JsonObject()
             loginReq.addProperty("email", mActivityLoginBinding!!.txtUserName.text.toString())
             loginReq.addProperty("password", mActivityLoginBinding!!.txtUserPassword.text.toString())
+            loginReq.addProperty("user_type", BuildConfig.USER_TYPE)
+            loginReq.addProperty("device_id", viewModel.getSession().getAppDeviceId())
+            loginReq.addProperty("device_type", BuildConfig.DEVICE_TYPE)
             viewModel?.login(loginReq)
-        }*/
+        }
     }
 
     private fun isValid(): Boolean {
-        var validInput = true
+        var bEmail = true
+        var bPassword = true
         val email = mActivityLoginBinding!!.txtUserName.text.toString()
         val password = mActivityLoginBinding!!.txtUserPassword.text.toString()
 
         if (!Validation.isValidEmail(email)) {
-            validInput = false
             mActivityLoginBinding!!.tIEmail.isErrorEnabled = true
             mActivityLoginBinding!!.tIEmail.error = "The entered Email is not correct."
+            bEmail = false
         } else {
             mActivityLoginBinding!!.tIEmail.isErrorEnabled = false
         }
 
         if (!Validation.isValidPassword(password)) {
-            validInput = false
             mActivityLoginBinding!!.tIPassword.isErrorEnabled = true
             mActivityLoginBinding!!.tIPassword.error = "Password must be at least 8 characters"
+            bPassword = false
         } else {
             mActivityLoginBinding!!.tIPassword.isErrorEnabled = false
         }
 
-        return validInput
+        return bEmail && bPassword
     }
 
     override fun onForgotPasswordHandle() {

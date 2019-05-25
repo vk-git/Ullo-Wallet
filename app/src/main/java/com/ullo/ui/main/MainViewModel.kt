@@ -3,7 +3,7 @@ package com.ullo.ui.main
 import android.app.Application
 import android.util.Log
 import com.github.tamir7.contacts.Contacts
-import com.ullo.api.response.patient.Patient
+import com.ullo.api.response.contact.Contact
 import com.ullo.api.service.UlloService
 import com.ullo.base.BaseViewModel
 import com.ullo.db.DataManager
@@ -24,7 +24,7 @@ class MainViewModel(application: Application, ulloService: UlloService, session:
         getNavigator()?.onSendMoneyHandle()
     }
 
-    fun definePatientLists(list: List<Patient>) {
+    fun definePatientLists(list: List<Contact>) {
         /* getCompositeDisposable()?.run {
              add(getDataManager().savePatientList(list)
                      .subscribeOn(Schedulers.io())

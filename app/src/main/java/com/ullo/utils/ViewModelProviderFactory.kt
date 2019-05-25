@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.ullo.api.service.UlloService
 import com.ullo.db.DataManager
 import com.ullo.ui.change_password.ChangePasswordViewModel
-import com.ullo.ui.choose_patient.ChoosePatientViewModel
+import com.ullo.ui.choose_contact.ChooseContactViewModel
 import com.ullo.ui.contact.ContactViewModel
 import com.ullo.ui.forgot_password.ForgotPasswordViewModel
 import com.ullo.ui.landing.LandingViewModel
@@ -44,7 +44,7 @@ class ViewModelProviderFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
             modelClass.isAssignableFrom(ChangePasswordViewModel::class.java) -> ChangePasswordViewModel(mApplication, mUlloService, mSession, mDataManager) as T
-            modelClass.isAssignableFrom(ChoosePatientViewModel::class.java) -> ChoosePatientViewModel(mApplication, mUlloService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(ChooseContactViewModel::class.java) -> ChooseContactViewModel(mApplication, mUlloService, mSession, mDataManager) as T
             modelClass.isAssignableFrom(ContactViewModel::class.java) -> ContactViewModel(mApplication, mUlloService, mSession, mDataManager) as T
             modelClass.isAssignableFrom(LandingViewModel::class.java) -> LandingViewModel(mApplication, mUlloService, mSession, mDataManager) as T
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> LoginViewModel(mApplication, mUlloService, mSession, mDataManager) as T

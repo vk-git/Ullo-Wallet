@@ -1,8 +1,8 @@
 package com.ullo.dagger
 
 import com.ullo.ui.change_password.ChangePasswordActivity
-import com.ullo.ui.choose_patient.ChoosePatientActivity
-import com.ullo.ui.choose_patient.ChoosePatientActivityModule
+import com.ullo.ui.choose_contact.ChooseContactActivity
+import com.ullo.ui.choose_contact.ChooseContactActivityModule
 import com.ullo.ui.contact.ContactActivity
 import com.ullo.ui.forgot_password.ForgotPasswordActivity
 import com.ullo.ui.landing.LandingActivity
@@ -12,7 +12,6 @@ import com.ullo.ui.privacy_policy.PrivacyPolicyActivity
 import com.ullo.ui.profile.ProfileActivity
 import com.ullo.ui.register.RegisterActivity
 import com.ullo.ui.setting.SettingActivity
-import com.ullo.ui.setting.SettingViewModel
 import com.ullo.ui.splash.SplashActivity
 import com.ullo.ui.terms_of_use.TermsOfUseActivity
 import com.ullo.ui.tutorial.TutorialActivity
@@ -53,8 +52,8 @@ abstract class ActivityBuilder {
     @ContributesAndroidInjector
     internal abstract fun bindChangePasswordActivity(): ChangePasswordActivity
 
-    @ContributesAndroidInjector(modules = [ChoosePatientActivityModule::class])
-    internal abstract fun bindChoosePatientActivity(): ChoosePatientActivity
+    @ContributesAndroidInjector(modules = [ChooseContactActivityModule::class])
+    internal abstract fun bindChooseContactActivity(): ChooseContactActivity
 
     @ContributesAndroidInjector
     internal abstract fun bindForgotPasswordActivity(): ForgotPasswordActivity

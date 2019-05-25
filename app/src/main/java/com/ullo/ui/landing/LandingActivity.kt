@@ -41,7 +41,7 @@ class LandingActivity : BaseActivity<ActivityLandingBinding, LandingViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mActivityLandingBinding = getViewDataBinding()
-        viewModel?.setNavigator(this)
+        viewModel.setNavigator(this)
     }
 
     override fun onLoginScreen() {
