@@ -13,9 +13,9 @@ import com.ullo.ui.change_password.ChangePasswordActivity
 import com.ullo.ui.contact.ContactActivity
 import com.ullo.ui.landing.LandingActivity
 import com.ullo.ui.my_qr_code.MyQrCodeActivity
-import com.ullo.ui.privacy_policy.PrivacyPolicyActivity
 import com.ullo.ui.profile.ProfileActivity
-import com.ullo.ui.terms_of_use.TermsOfUseActivity
+import com.ullo.ui.webview.WebviewActivity
+import com.ullo.utils.Constant
 import com.ullo.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
@@ -76,13 +76,23 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>()
     }
 
     override fun onTermsConditionHandle() {
-        val intent = TermsOfUseActivity.newIntent(this)
-        startActivity(intent)
+        viewModel.getSession().getAppCmsData()?.run {
+            val intent = WebviewActivity.newIntent(this@SettingActivity).apply {
+                putExtra(Constant.PARAM_WEBVIEW_TITLE, "Terms & Conditions")
+                putExtra(Constant.PARAM_WEBVIEW_URL, termsAndCondition)
+            }
+            startActivity(intent)
+        }
     }
 
     override fun onPrivacyPolicesHandle() {
-        val intent = PrivacyPolicyActivity.newIntent(this)
-        startActivity(intent)
+        viewModel.getSession().getAppCmsData()?.run {
+            val intent = WebviewActivity.newIntent(this@SettingActivity).apply {
+                putExtra(Constant.PARAM_WEBVIEW_TITLE, "Privacy Policy")
+                putExtra(Constant.PARAM_WEBVIEW_URL, privacy)
+            }
+            startActivity(intent)
+        }
     }
 
     override fun onContactUsHandle() {
@@ -91,8 +101,13 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>()
     }
 
     override fun onAboutUsHandle() {
-        /*val intent = AboutActivity.newIntent(this)
-        startActivity(intent)*/
+        viewModel.getSession().getAppCmsData()?.run {
+            val intent = WebviewActivity.newIntent(this@SettingActivity).apply {
+                putExtra(Constant.PARAM_WEBVIEW_TITLE, "About Us")
+                putExtra(Constant.PARAM_WEBVIEW_URL, aboutUs)
+            }
+            startActivity(intent)
+        }
     }
 
     override fun onSignOutHandle() {

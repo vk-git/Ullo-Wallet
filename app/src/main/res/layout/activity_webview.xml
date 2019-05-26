@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.privacy_policy.PrivacyPolicyActivity">
+    tools:context=".ui.webview.WebviewActivity">
 
     <data>
 
@@ -10,7 +10,7 @@
 
         <variable
             name="viewModel"
-            type="com.ullo.ui.privacy_policy.PrivacyPolicyViewModel" />
+            type="com.ullo.ui.webview.WebviewViewModel" />
 
     </data>
 
@@ -23,13 +23,12 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Privacy Policy"
+            android:text="Webview"
             app:leftDrawable="@drawable/ic_back" />
 
         <WebView
             android:id="@+id/webview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"/>
     </LinearLayout>
-
 </layout>

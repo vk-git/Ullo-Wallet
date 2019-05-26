@@ -13,13 +13,12 @@ import com.ullo.ui.landing.LandingViewModel
 import com.ullo.ui.login.LoginViewModel
 import com.ullo.ui.main.MainViewModel
 import com.ullo.ui.my_qr_code.MyQrCodeViewModel
-import com.ullo.ui.privacy_policy.PrivacyPolicyViewModel
 import com.ullo.ui.profile.ProfileViewModel
 import com.ullo.ui.register.RegisterViewModel
 import com.ullo.ui.setting.SettingViewModel
 import com.ullo.ui.splash.SplashViewModel
-import com.ullo.ui.terms_of_use.TermsOfUseViewModel
 import com.ullo.ui.tutorial.TutorialViewModel
+import com.ullo.ui.webview.WebviewViewModel
 import io.reactivex.disposables.CompositeDisposable
 
 class ViewModelProviderFactory : ViewModelProvider.Factory {
@@ -50,11 +49,10 @@ class ViewModelProviderFactory : ViewModelProvider.Factory {
             modelClass.isAssignableFrom(LandingViewModel::class.java) -> LandingViewModel(mApplication, mUlloService, mSession, mDataManager) as T
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> LoginViewModel(mApplication, mUlloService, mSession, mDataManager) as T
             modelClass.isAssignableFrom(MainViewModel::class.java) -> MainViewModel(mApplication, mUlloService, mSession, mDataManager) as T
-            modelClass.isAssignableFrom(PrivacyPolicyViewModel::class.java) -> PrivacyPolicyViewModel(mApplication, mUlloService, mSession, mDataManager) as T
             modelClass.isAssignableFrom(ProfileViewModel::class.java) -> ProfileViewModel(mApplication, mUlloService, mSession, mDataManager) as T
             modelClass.isAssignableFrom(RegisterViewModel::class.java) -> RegisterViewModel(mApplication, mUlloService, mSession, mDataManager) as T
             modelClass.isAssignableFrom(SplashViewModel::class.java) -> SplashViewModel(mApplication, mUlloService, mSession, mDataManager) as T
-            modelClass.isAssignableFrom(TermsOfUseViewModel::class.java) -> TermsOfUseViewModel(mApplication, mUlloService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(WebviewViewModel::class.java) -> WebviewViewModel(mApplication, mUlloService, mSession, mDataManager) as T
             modelClass.isAssignableFrom(ForgotPasswordViewModel::class.java) -> ForgotPasswordViewModel(mApplication, mUlloService, mSession, mDataManager) as T
             modelClass.isAssignableFrom(TutorialViewModel::class.java) -> TutorialViewModel(mApplication, mUlloService, mSession, mDataManager) as T
             modelClass.isAssignableFrom(SettingViewModel::class.java) -> SettingViewModel(mApplication, mUlloService, mSession, mDataManager) as T

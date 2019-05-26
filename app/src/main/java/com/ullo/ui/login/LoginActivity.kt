@@ -60,7 +60,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), Logi
             loginReq.addProperty("user_type", BuildConfig.USER_TYPE)
             loginReq.addProperty("device_id", viewModel.getSession().getAppDeviceId())
             loginReq.addProperty("device_type", BuildConfig.DEVICE_TYPE)
-            viewModel?.login(loginReq)
+            viewModel.login(loginReq)
         }
     }
 
