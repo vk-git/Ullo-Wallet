@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ullo.api.service.UlloService
 import com.ullo.db.DataManager
+import com.ullo.ui.balance_history.BalanceHistoryViewModel
 import com.ullo.ui.change_password.ChangePasswordViewModel
 import com.ullo.ui.choose_contact.ChooseContactViewModel
 import com.ullo.ui.contact.ContactViewModel
@@ -59,6 +60,7 @@ class ViewModelProviderFactory : ViewModelProvider.Factory {
             modelClass.isAssignableFrom(SettingViewModel::class.java) -> SettingViewModel(mApplication, mUlloService, mSession, mDataManager) as T
             modelClass.isAssignableFrom(MyQrCodeViewModel::class.java) -> MyQrCodeViewModel(mApplication, mUlloService, mSession, mDataManager) as T
             modelClass.isAssignableFrom(SendMoneyViewModel::class.java) -> SendMoneyViewModel(mApplication, mUlloService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(BalanceHistoryViewModel::class.java) -> BalanceHistoryViewModel(mApplication, mUlloService, mSession, mDataManager) as T
             else -> throw IllegalArgumentException("Unknown class name")
         }
     }
