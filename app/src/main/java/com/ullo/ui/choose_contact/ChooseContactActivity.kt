@@ -7,19 +7,16 @@ import android.view.View
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.tamir7.contacts.Contact
-import com.github.tamir7.contacts.Contacts
 import com.ullo.BR
 import com.ullo.R
 import com.ullo.adapter.ContactAdapter
 import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivityChooseContactBinding
 import com.ullo.utils.ViewModelProviderFactory
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class ChooseContactActivity : BaseActivity<ActivityChooseContactBinding, ChooseContactViewModel>(), ChooseContactNavigator {
+
 
     companion object {
         fun newIntent(context: Context): Intent {
@@ -57,17 +54,23 @@ class ChooseContactActivity : BaseActivity<ActivityChooseContactBinding, ChooseC
             finish()
         })
 
-        viewModel.run {
+        viewModel.fetchContactAndUpload()
+        /*viewModel.run {
             val q = Contacts.getQuery()
             q.hasPhoneNumber()
             getCompositeDisposable()?.run {
                 add(Observable.just(q.find()).subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread()).subscribe {
-                            setContactData(it)
+                            //setContactData(it)
+                            viewModel.uploadContact(it)
                         })
             }
             // getDataManager().allPatients.observeForever { patientList -> setPatientData(patientList) }
-        }
+        }*/
+    }
+
+    override fun onContactSuccessfully() {
+
     }
 
     private fun setContactData(patientList: List<Contact>) {

@@ -4,5 +4,6 @@ import com.ullo.base.BaseNavigator
 
 
 interface ChooseContactNavigator : BaseNavigator {
+    fun onContactSuccessfully()
 
 }

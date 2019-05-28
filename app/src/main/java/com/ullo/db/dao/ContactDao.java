@@ -14,8 +14,8 @@ import java.util.List;
 @Dao
 public interface ContactDao {
 
-    @Query("SELECT id FROM contact WHERE id = :id LIMIT 1")
-    String getItemId(String id);
+    @Query("SELECT pid FROM contact WHERE pid = :id LIMIT 1")
+    Integer getItemId(Integer id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insert(Contact contact);
@@ -23,8 +23,8 @@ public interface ContactDao {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     int update(Contact contact);
 
-    @Query("DELETE FROM contact WHERE id = :contactId")
-    int deletePatientById(String contactId);
+    @Query("DELETE FROM contact WHERE pid = :contactId")
+    int deletePatientById(Integer contactId);
 
     @Query("SELECT * FROM contact")
     LiveData<List<Contact>> loadAll();

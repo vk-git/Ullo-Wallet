@@ -14,12 +14,14 @@ public class Contact implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     public Integer pid;
 
-    @SerializedName("_id")
-    public String id;
-    @SerializedName("fullName")
+    @SerializedName("full_name")
     public String fullName;
-    @SerializedName("mobileNo")
-    public String mobileNo;
+    @SerializedName("image")
+    public String image;
+    @SerializedName("country_code")
+    public String countryCode;
+    @SerializedName("phone_number")
+    public String phoneNumber;
 
 
     public final static Parcelable.Creator<Contact> CREATOR = new Creator<Contact>() {
@@ -39,18 +41,20 @@ public class Contact implements Parcelable {
     };
 
     protected Contact(Parcel in) {
-        this.id = ((String) in.readValue((String.class.getClassLoader())));
         this.fullName = ((String) in.readValue((String.class.getClassLoader())));
-        this.mobileNo = ((String) in.readValue((String.class.getClassLoader())));
+        this.image = ((String) in.readValue((String.class.getClassLoader())));
+        this.countryCode = ((String) in.readValue((String.class.getClassLoader())));
+        this.phoneNumber = ((String) in.readValue((String.class.getClassLoader())));
     }
 
     public Contact() {
     }
 
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(id);
         dest.writeValue(fullName);
-        dest.writeValue(mobileNo);
+        dest.writeValue(image);
+        dest.writeValue(countryCode);
+        dest.writeValue(phoneNumber);
     }
 
     public int describeContents() {

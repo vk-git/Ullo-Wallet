@@ -1,9 +1,11 @@
 package com.ullo.api.service
 
+import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.ullo.api.response.AppUser
 import com.ullo.api.response.BaseResponse
 import com.ullo.api.response.CmsData
+import com.ullo.api.response.contact.ContactData
 import io.reactivex.Observable
 import retrofit2.Response
 import retrofit2.http.Body
@@ -29,4 +31,10 @@ interface UlloApi {
 
     @GET("cms/2/")
     fun userCMS(): Observable<Response<BaseResponse<CmsData>>>
+
+    @POST("contactus")
+    fun userContactUs(@Body registerReq: JsonObject): Observable<Response<BaseResponse<JsonElement>>>
+
+    @POST("contactlist")
+    fun userContactlist(@Body registerReq: JsonObject): Observable<Response<BaseResponse<ContactData>>>
 }

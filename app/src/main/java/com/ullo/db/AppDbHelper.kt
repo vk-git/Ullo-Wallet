@@ -20,7 +20,7 @@ class AppDbHelper(private val mAppDatabase: AppDatabase) {
     }
 
     private fun insertOrUpdate(item: Contact) {
-        val id = mAppDatabase.contactDao().getItemId(item.id)
+        val id = mAppDatabase.contactDao().getItemId(item.pid)
         if (id == null) {
             mAppDatabase.contactDao().insert(item)
         } else {
@@ -32,7 +32,7 @@ class AppDbHelper(private val mAppDatabase: AppDatabase) {
         insertOrUpdate(item)
     }
 
-    fun deletePatientById(patientId: String) {
+    fun deletePatientById(patientId: Int) {
         mAppDatabase.contactDao().deletePatientById(patientId)
     }
 }

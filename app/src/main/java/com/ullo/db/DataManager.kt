@@ -17,7 +17,7 @@ class DataManager(private var appDbHelper: AppDbHelper) {
         return appDbHelper.savePatient(item)
     }
 
-    fun deletePatientById(patientId: String) {
+    fun deletePatientById(patientId: Int) {
         return appDbHelper.deletePatientById(patientId)
     }
 }
