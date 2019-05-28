@@ -90,7 +90,7 @@ class Validation(private val mEdittextview: EditText, private val valType: Valid
         }
 
         fun isValidPassword(str: String): Boolean {
-            return str.length > 7
+            return str.length > 5
         }
 
         fun isValidCountryCode(countryCode: String, phNumber: String): Boolean {
@@ -104,13 +104,7 @@ class Validation(private val mEdittextview: EditText, private val valType: Valid
                 System.err.println(e)
             }
 
-            val isValid = phoneNumberUtil.isValidNumber(phoneNumber)
-            if (isValid) {
-                val internationalFormat = phoneNumberUtil.format(phoneNumber, PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL)
-                return true
-            } else {
-                return false
-            }
+            return phoneNumberUtil.isValidNumber(phoneNumber)
         }
 
         fun isLetterInput(str: String): Boolean {

@@ -100,14 +100,6 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding, ProfileViewModel>()
             mActivityProfileBinding!!.tIEmail.isErrorEnabled = false
         }
 
-        if (!Validation.isValidName(country)) {
-            mActivityProfileBinding!!.tICountry.isErrorEnabled = true
-            mActivityProfileBinding!!.tICountry.error = "Not Valid Country Code"
-            bCountry = false
-        } else {
-            mActivityProfileBinding!!.tICountry.isErrorEnabled = false
-        }
-
         if (mobileNo.isEmpty() || !Validation.isValidMobile(mobileNo)) {
             mActivityProfileBinding!!.tIMobileNo.isErrorEnabled = true
             mActivityProfileBinding!!.tIMobileNo.error = "Not Valid Number"

@@ -93,10 +93,10 @@
                         android:id="@+id/etCountry"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:digits="0123456789+"
                         android:drawableRight="@drawable/baseline_country"
                         android:fontFamily="@font/quicksand_regular"
                         android:hint="Country Code"
+                        android:inputType="phone"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>

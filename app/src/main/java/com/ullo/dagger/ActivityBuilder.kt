@@ -1,6 +1,7 @@
 package com.ullo.dagger
 
 import com.ullo.ui.balance_history.BalanceHistoryActivity
+import com.ullo.ui.balance_history.BalanceHistoryActivityModule
 import com.ullo.ui.change_password.ChangePasswordActivity
 import com.ullo.ui.choose_contact.ChooseContactActivity
 import com.ullo.ui.choose_contact.ChooseContactActivityModule
@@ -69,6 +70,6 @@ abstract class ActivityBuilder {
     @ContributesAndroidInjector
     internal abstract fun bindSendMoneyActivity(): SendMoneyActivity
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [BalanceHistoryActivityModule::class])
     internal abstract fun bindBalanceHistoryActivity(): BalanceHistoryActivity
 }

@@ -37,10 +37,10 @@ class ChooseContactViewModel(application: Application, ulloService: UlloService,
         }
     }
 
-    fun uploadContact(contactList: List<Contact>) {
+    private fun uploadContact(contactList: List<Contact>) {
         var phoneNumber = ""
         for (i in 0..contactList.size) {
-            val contact = contactList[i];
+            val contact = contactList[i]
             for (i1 in 0..contact.phoneNumbers.size) {
                 phoneNumber += "," + contact.phoneNumbers[i1]
             }
