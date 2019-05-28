@@ -11,6 +11,7 @@ import com.ullo.ui.main.MainActivity
 import com.ullo.ui.my_qr_code.MyQrCodeActivity
 import com.ullo.ui.profile.ProfileActivity
 import com.ullo.ui.register.RegisterActivity
+import com.ullo.ui.send_money.SendMoneyActivity
 import com.ullo.ui.setting.SettingActivity
 import com.ullo.ui.splash.SplashActivity
 import com.ullo.ui.tutorial.TutorialActivity
@@ -63,4 +64,7 @@ abstract class ActivityBuilder {
 
     @ContributesAndroidInjector
     internal abstract fun bindMyQrCodeActivity(): MyQrCodeActivity
+
+    @ContributesAndroidInjector
+    internal abstract fun bindSendMoneyActivity(): SendMoneyActivity
 }
