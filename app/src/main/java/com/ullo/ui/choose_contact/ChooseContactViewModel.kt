@@ -31,31 +31,34 @@ class ChooseContactViewModel(application: Application, ulloService: UlloService,
         getCompositeDisposable()?.run {
             add(Observable.just(q.find()).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread()).subscribe {
-                        Log.d("mytag", "contacts::" + it.size)
                         uploadContact(it)
                     })
         }
     }
 
     private fun uploadContact(contactList: List<Contact>) {
-        var phoneNumber = ""
-        for (i in 0..contactList.size) {
-            val contact = contactList[i]
-            for (i1 in 0..contact.phoneNumbers.size) {
-                phoneNumber += "," + contact.phoneNumbers[i1]
+        var phoneNumberStr = ""
+        contactList.forEach { contact ->
+            contact.phoneNumbers.forEach { phoneNumber ->
+                if (phoneNumber.normalizedNumber != null) {
+                    phoneNumberStr += "," + removeCountryCodeFromPhoneNumber(phoneNumber.normalizedNumber)
+                }
             }
         }
         val contactReq = JsonObject()
-        contactReq.addProperty("phone_numbers", phoneNumber)
-        Log.d("mytag", "Json:$contactReq")
+        contactReq.addProperty("phone_numbers", phoneNumberStr)
+        userContactlist(contactReq)
     }
 
-    fun userContactlist(registerReq: JsonObject) {
+    private fun userContactlist(registerReq: JsonObject) {
         App.instance.showLoadingOverlayDialog(App.instance.getString(R.string.loading))
         getCompositeDisposable()?.add(getLinderaService().userContactlist(registerReq, object : ResponseListener<Response<BaseResponse<ContactData>>, String> {
             override fun onSuccess(response: Response<BaseResponse<ContactData>>) {
                 App.instance.hideLoadingOverlayDialog()
                 if (response.isSuccessful) {
+                    response.body()?.run {
+                        definePatientLists(data.contactList)
+                    }
                     getNavigator()?.onContactSuccessfully()
                 } else {
                     try {
@@ -79,5 +82,44 @@ class ChooseContactViewModel(application: Application, ulloService: UlloService,
                 getNavigator()?.handleError(error)
             }
         }))
+    }
+
+    fun definePatientLists(list: List<com.ullo.api.response.contact.Contact>) {
+         getCompositeDisposable()?.run {
+             add(getDataManager().savePatientList(list)
+                     .subscribeOn(Schedulers.io())
+                     .observeOn(AndroidSchedulers.mainThread())
+                     .subscribe {
+                         if (it) {
+                             Log.d("mytatg", "Successfully added")
+                         }
+                     })
+         }
+    }
+
+    private fun removeCountryCodeFromPhoneNumber(number: String): String {
+        return if (number.startsWith("+")) {
+            return when {
+                number.length == 13 -> number.substring(3)
+                number.length == 14 -> number.substring(4)
+                else -> number
+            }
+        } else {
+            number
+        }
+    }
+
+    fun filter(dataList: List<com.ullo.api.response.contact.Contact>, newText: String) {
+        var ftext: String
+        var ltext: String
+        val filteredDataList = ArrayList<com.ullo.api.response.contact.Contact>()
+        for (dataFromDataList in dataList) {
+            ftext = dataFromDataList.fullName.toLowerCase()
+            ltext = dataFromDataList.phoneNumber.toLowerCase()
+            if (ftext.contains(newText.toLowerCase()) || ltext.contains(newText.toLowerCase())) {
+                filteredDataList.add(dataFromDataList)
+            }
+        }
+        getNavigator()?.setFilterPatientList(filteredDataList)
     }
 }

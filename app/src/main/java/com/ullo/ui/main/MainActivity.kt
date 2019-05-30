@@ -12,6 +12,7 @@ import com.ullo.BR
 import com.ullo.R
 import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivityMainBinding
+import com.ullo.ui.balance_history.BalanceHistoryActivity
 import com.ullo.ui.choose_contact.ChooseContactActivity
 import com.ullo.ui.setting.SettingActivity
 import com.ullo.utils.ViewModelProviderFactory
@@ -87,6 +88,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
 
     override fun onSendMoneyHandle() {
         val intent = ChooseContactActivity.newIntent(this)
+        startActivity(intent)
+    }
+
+    override fun onReceiveMoneyHandle() {
+        val intent = BalanceHistoryActivity.newIntent(this)
         startActivity(intent)
     }
 }

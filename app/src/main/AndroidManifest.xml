@@ -41,5 +41,6 @@
         <activity android:name=".ui.tutorial.TutorialActivity" />
         <activity android:name=".ui.setting.SettingActivity" />
         <activity android:name=".ui.my_qr_code.MyQrCodeActivity" />
+        <activity android:name=".ui.balance_history.BalanceHistoryActivity" />
     </application>
 </manifest>

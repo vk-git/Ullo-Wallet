@@ -120,6 +120,6 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding, ProfileViewModel>()
     }
 
     override fun onUpdateSuccessful(data: AppUser) {
-        onShowAlert("Alert", "Profile Successfully Updated")
+        handleError("Profile Successfully Updated")
     }
 }

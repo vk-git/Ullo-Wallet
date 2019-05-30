@@ -28,6 +28,10 @@ class MainViewModel(application: Application, ulloService: UlloService, session:
         getNavigator()?.onSendMoneyHandle()
     }
 
+    fun onReceiveMoneyButtonClick() {
+        getNavigator()?.onReceiveMoneyHandle()
+    }
+
     fun getCms() {
         getCompositeDisposable()?.add(getLinderaService().userCMS(object : ResponseListener<Response<BaseResponse<CmsData>>, String> {
             override fun onSuccess(response: Response<BaseResponse<CmsData>>) {

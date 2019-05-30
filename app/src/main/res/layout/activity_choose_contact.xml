@@ -54,7 +54,7 @@
                         android:textColorHint="@color/medium_grey">
 
                         <EditText
-                            android:id="@+id/etTitle"
+                            android:id="@+id/etSearch"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawableLeft="@drawable/ic_search"

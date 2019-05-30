@@ -6,7 +6,7 @@ import io.reactivex.Observable
 
 class AppDbHelper(private val mAppDatabase: AppDatabase) {
 
-    val allPatients: LiveData<List<Contact>>
+    val allContacts: LiveData<List<Contact>>
         get() = mAppDatabase.contactDao().loadAll()
 
     fun savePatientList(contactList: List<Contact>): Observable<Boolean> {
@@ -20,11 +20,11 @@ class AppDbHelper(private val mAppDatabase: AppDatabase) {
     }
 
     private fun insertOrUpdate(item: Contact) {
-        val id = mAppDatabase.contactDao().getItemId(item.pid)
+        val id = mAppDatabase.contactDao().getItemId(item.phoneNumber)
         if (id == null) {
             mAppDatabase.contactDao().insert(item)
         } else {
-            mAppDatabase.contactDao().update(item)
+            mAppDatabase.contactDao().update(item.userId, item.fullName, item.image, item.countryCode, item.phoneNumber)
         }
     }
 

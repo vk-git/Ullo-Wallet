@@ -5,7 +5,7 @@
 
         <variable
             name="contact"
-            type="com.github.tamir7.contacts.Contact"></variable>
+            type="com.ullo.api.response.contact.Contact"></variable>
     </data>
 
     <LinearLayout
@@ -39,7 +39,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/quicksand_bold"
-                    android:text="@{contact.displayName}"
+                    android:text="@{contact.fullName}"
                     android:textColor="#4A4956"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -50,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:fontFamily="@font/quicksand_regular"
-                    android:text="@{contact.phoneNumbers[0].number}"
+                    android:text="@{contact.phoneNumber}"
                     android:textColor="#787786"
                     android:textSize="16sp" />
 

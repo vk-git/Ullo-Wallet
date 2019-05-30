@@ -5,4 +5,5 @@ import com.ullo.base.BaseNavigator
 interface MainNavigator : BaseNavigator {
     fun onMenuHandle()
     fun onSendMoneyHandle()
+    fun onReceiveMoneyHandle()
 }

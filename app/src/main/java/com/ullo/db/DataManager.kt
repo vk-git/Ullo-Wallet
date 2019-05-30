@@ -6,8 +6,8 @@ import io.reactivex.Observable
 
 class DataManager(private var appDbHelper: AppDbHelper) {
 
-    val allPatients: LiveData<List<Contact>>
-        get() = appDbHelper.allPatients
+    val allContacts: LiveData<List<Contact>>
+        get() = appDbHelper.allContacts
 
     fun savePatientList(contactList: List<Contact>): Observable<Boolean> {
         return appDbHelper.savePatientList(contactList)

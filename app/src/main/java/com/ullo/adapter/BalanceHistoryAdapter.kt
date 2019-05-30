@@ -9,7 +9,7 @@ import com.ullo.R
 import com.ullo.api.response.contact.Contact
 import com.ullo.databinding.ContactListItemBinding
 
-class ContactAdapter(var context: Context) : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
+class BalanceHistoryAdapter(var context: Context) : RecyclerView.Adapter<BalanceHistoryAdapter.ViewHolder>() {
 
     var contactList: ArrayList<Contact> = ArrayList()
 
@@ -19,7 +19,7 @@ class ContactAdapter(var context: Context) : RecyclerView.Adapter<ContactAdapter
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val contactListItemBinding = DataBindingUtil.inflate<ContactListItemBinding>(LayoutInflater.from(parent!!.context), R.layout.contact_list_item, parent, false)
+        val contactListItemBinding = DataBindingUtil.inflate<ContactListItemBinding>(LayoutInflater.from(context), R.layout.balance_list_item, parent, false)
         return ViewHolder(contactListItemBinding)
     }
 
@@ -35,7 +35,6 @@ class ContactAdapter(var context: Context) : RecyclerView.Adapter<ContactAdapter
     inner class ViewHolder internal constructor(private val contactListItemBinding: ContactListItemBinding) : RecyclerView.ViewHolder(contactListItemBinding.root) {
 
         fun bind(contact: Contact) {
-            contactListItemBinding.contact = contact
             contactListItemBinding.executePendingBindings()
         }
     }

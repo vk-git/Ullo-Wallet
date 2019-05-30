@@ -27,8 +27,8 @@ abstract class BaseViewModel<N> : AndroidViewModel {
     private val mIsLoading = ObservableBoolean(false)
     private val mIsEmptyView = ObservableBoolean(false)
 
-    val allPatients: LiveData<List<Contact>>
-        get() =  getDataManager().allPatients
+    val allContacts: LiveData<List<Contact>>
+        get() =  getDataManager().allContacts
 
     constructor(application: Application, ulloService: UlloService, session: Session, mDataManager: DataManager) : super(application) {
         this.mUlloService = ulloService

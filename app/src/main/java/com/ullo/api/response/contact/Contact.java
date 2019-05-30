@@ -14,6 +14,9 @@ public class Contact implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     public Integer pid;
 
+
+    @SerializedName("user_id")
+    public String userId;
     @SerializedName("full_name")
     public String fullName;
     @SerializedName("image")
@@ -41,6 +44,7 @@ public class Contact implements Parcelable {
     };
 
     protected Contact(Parcel in) {
+        this.userId = ((String) in.readValue((String.class.getClassLoader())));
         this.fullName = ((String) in.readValue((String.class.getClassLoader())));
         this.image = ((String) in.readValue((String.class.getClassLoader())));
         this.countryCode = ((String) in.readValue((String.class.getClassLoader())));
@@ -51,6 +55,7 @@ public class Contact implements Parcelable {
     }
 
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(userId);
         dest.writeValue(fullName);
         dest.writeValue(image);
         dest.writeValue(countryCode);

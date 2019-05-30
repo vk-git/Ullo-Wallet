@@ -6,13 +6,17 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.tamir7.contacts.Contact
 import com.ullo.BR
 import com.ullo.R
 import com.ullo.adapter.ContactAdapter
+import com.ullo.api.response.contact.Contact
 import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivityChooseContactBinding
+import com.ullo.utils.RxSearch
 import com.ullo.utils.ViewModelProviderFactory
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class ChooseContactActivity : BaseActivity<ActivityChooseContactBinding, ChooseContactViewModel>(), ChooseContactNavigator {
@@ -35,6 +39,8 @@ class ChooseContactActivity : BaseActivity<ActivityChooseContactBinding, ChooseC
 
     private var mActivityChooseContactBinding: ActivityChooseContactBinding? = null
 
+    lateinit var contactList: List<Contact>
+
     override val bindingVariable: Int
         get() = BR.viewModel
 
@@ -55,30 +61,45 @@ class ChooseContactActivity : BaseActivity<ActivityChooseContactBinding, ChooseC
         })
 
         viewModel.fetchContactAndUpload()
-        /*viewModel.run {
-            val q = Contacts.getQuery()
-            q.hasPhoneNumber()
-            getCompositeDisposable()?.run {
-                add(Observable.just(q.find()).subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread()).subscribe {
-                            //setContactData(it)
-                            viewModel.uploadContact(it)
-                        })
+        viewModel.run {
+            allContacts.observeForever {
+                setContactData(it)
             }
-            // getDataManager().allPatients.observeForever { patientList -> setPatientData(patientList) }
-        }*/
+        }
+
+        with(mActivityChooseContactBinding!!.etSearch) {
+            RxSearch.fromView(this)
+                    .debounce(300, TimeUnit.MILLISECONDS)
+                    .distinctUntilChanged()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe { result ->
+                        if (result.isNotEmpty()) {
+                            viewModel.filter(contactList, result)
+                        } else {
+                            setContactData(contactList)
+                        }
+                    }
+        }
     }
 
     override fun onContactSuccessfully() {
 
     }
 
-    private fun setContactData(patientList: List<Contact>) {
+    private fun setContactData(contactList: List<Contact>) {
+        this.contactList = contactList
         with(mActivityChooseContactBinding!!.recyclerView) {
             layoutManager = LinearLayoutManager(this@ChooseContactActivity)
             adapter = contactAdapter
         }
 
-        contactAdapter?.run { setContactListData(patientList as ArrayList<Contact>) }
+        contactAdapter?.run { setContactListData(contactList as ArrayList<Contact>) }
+    }
+
+    override fun setFilterPatientList(filteredDataList: ArrayList<Contact>) {
+        contactAdapter?.run {
+            setContactListData(filteredDataList)
+        }
     }
 }

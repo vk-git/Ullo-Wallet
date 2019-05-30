@@ -106,6 +106,6 @@ class ContactActivity : BaseActivity<ActivityContactBinding, ContactViewModel>()
     }
 
     override fun onContactUsSuccessfully() {
-        onShowAlert("Success","Message sent to contact us.")
+        handleError("Message sent to contact us.")
     }
 }
