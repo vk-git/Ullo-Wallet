@@ -5,6 +5,8 @@ import com.ullo.api.service.UlloService
 import com.ullo.base.BaseViewModel
 import com.ullo.db.DataManager
 import com.ullo.utils.Session
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 
 class SettingViewModel(application: Application, ulloService: UlloService, session: Session, dataManager: DataManager) : BaseViewModel<SettingNavigator>(application, ulloService, session, dataManager) {
@@ -42,7 +44,14 @@ class SettingViewModel(application: Application, ulloService: UlloService, sessi
     }
 
     fun onSignOutButtonClick() {
-        getSession().logout()
-        getNavigator()?.onSignOutHandle()
+        getCompositeDisposable()?.add(getDataManager().deleteAllTables()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    if (it) {
+                        getSession().logout()
+                        getNavigator()?.onSignOutHandle()
+                    }
+                })
     }
 }

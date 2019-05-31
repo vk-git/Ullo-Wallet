@@ -7,10 +7,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ullo.R
 import com.ullo.api.response.contact.Contact
-import com.ullo.databinding.BalanceListItemBinding
 import com.ullo.databinding.ContactListItemBinding
+import com.ullo.databinding.NotificationListItemBinding
 
-class BalanceHistoryAdapter(var context: Context) : RecyclerView.Adapter<BalanceHistoryAdapter.ViewHolder>() {
+class NotificationAdapter(var context: Context) : RecyclerView.Adapter<NotificationAdapter.ViewHolder>() {
 
     var contactList: ArrayList<Contact> = ArrayList()
 
@@ -20,8 +20,8 @@ class BalanceHistoryAdapter(var context: Context) : RecyclerView.Adapter<Balance
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val balanceListItemBinding = DataBindingUtil.inflate<BalanceListItemBinding>(LayoutInflater.from(context), R.layout.balance_list_item, parent, false)
-        return ViewHolder(balanceListItemBinding)
+        val notificationListItemBinding = DataBindingUtil.inflate<NotificationListItemBinding>(LayoutInflater.from(context), R.layout.notification_list_item, parent, false)
+        return ViewHolder(notificationListItemBinding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -33,10 +33,10 @@ class BalanceHistoryAdapter(var context: Context) : RecyclerView.Adapter<Balance
         return contactList.size
     }
 
-    inner class ViewHolder internal constructor(private val balanceListItemBinding: BalanceListItemBinding) : RecyclerView.ViewHolder(balanceListItemBinding.root) {
+    inner class ViewHolder internal constructor(private val notificationListItemBinding: NotificationListItemBinding) : RecyclerView.ViewHolder(notificationListItemBinding.root) {
 
         fun bind(contact: Contact) {
-            balanceListItemBinding.executePendingBindings()
+            notificationListItemBinding.executePendingBindings()
         }
     }
 }

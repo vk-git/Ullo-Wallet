@@ -1,9 +1,10 @@
 package com.ullo.ui.splash
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings
+import android.view.animation.DecelerateInterpolator
 import androidx.lifecycle.ViewModelProviders
 import com.ullo.BR
 import com.ullo.R
@@ -47,23 +48,33 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(), S
         viewModel.setNavigator(this)
 
         viewModel.onTimeHandler()
+
+        runOnUiThread {
+            val animation = ObjectAnimator.ofInt(mActivitySplashBinding!!.progress, "progress", 100)
+            animation.duration = 3000
+            animation.interpolator = DecelerateInterpolator()
+            animation.start()
+        }
     }
 
     override fun onLandingScreen() {
-        val intent = LandingActivity.newIntent(this)
-        startActivity(intent)
+        LandingActivity.newIntent(this).apply {
+            startActivity(this)
+        }
         finish()
     }
 
     override fun onMainScreen() {
-        val intent = MainActivity.newIntent(this)
-        startActivity(intent)
+        MainActivity.newIntent(this).apply {
+            startActivity(this)
+        }
         finish()
     }
 
     override fun onTutorialScreen() {
-        val intent = TutorialActivity.newIntent(this)
-        startActivity(intent)
+        TutorialActivity.newIntent(this).apply {
+            startActivity(this)
+        }
         finish()
     }
 }

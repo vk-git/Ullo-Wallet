@@ -6,4 +6,5 @@ interface MainNavigator : BaseNavigator {
     fun onMenuHandle()
     fun onSendMoneyHandle()
     fun onReceiveMoneyHandle()
+    fun onNotificationHandle()
 }

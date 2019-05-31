@@ -14,12 +14,14 @@ import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivityMainBinding
 import com.ullo.ui.balance_history.BalanceHistoryActivity
 import com.ullo.ui.choose_contact.ChooseContactActivity
+import com.ullo.ui.notification.NotificationActivity
 import com.ullo.ui.setting.SettingActivity
 import com.ullo.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNavigator {
+
 
 
     companion object {
@@ -82,17 +84,26 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
     }
 
     override fun onMenuHandle() {
-        val intent = SettingActivity.newIntent(this)
-        startActivity(intent)
+        SettingActivity.newIntent(this).apply {
+            startActivity(this)
+        }
+    }
+
+    override fun onNotificationHandle() {
+        NotificationActivity.newIntent(this).apply {
+            startActivity(this)
+        }
     }
 
     override fun onSendMoneyHandle() {
-        val intent = ChooseContactActivity.newIntent(this)
-        startActivity(intent)
+       ChooseContactActivity.newIntent(this).apply {
+           startActivity(this)
+       }
     }
 
     override fun onReceiveMoneyHandle() {
-        val intent = BalanceHistoryActivity.newIntent(this)
-        startActivity(intent)
+        BalanceHistoryActivity.newIntent(this).apply {
+            startActivity(this)
+        }
     }
 }

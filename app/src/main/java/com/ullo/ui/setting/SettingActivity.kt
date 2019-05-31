@@ -57,13 +57,15 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>()
     }
 
     override fun onMyProfileHandle() {
-        val intent = ProfileActivity.newIntent(this)
-        startActivity(intent)
+        ProfileActivity.newIntent(this).apply {
+            startActivity(this)
+        }
     }
 
     override fun onMyQRCodeHandle() {
-        val intent = MyQrCodeActivity.newIntent(this)
-        startActivity(intent)
+        MyQrCodeActivity.newIntent(this).apply {
+            startActivity(this)
+        }
     }
 
     override fun onAddCardHandle() {
@@ -71,49 +73,53 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>()
     }
 
     override fun onChangePasswordHandle() {
-        val intent = ChangePasswordActivity.newIntent(this)
-        startActivity(intent)
+        ChangePasswordActivity.newIntent(this).apply {
+            startActivity(this)
+        }
     }
 
     override fun onTermsConditionHandle() {
         viewModel.getSession().getAppCmsData()?.run {
-            val intent = WebviewActivity.newIntent(this@SettingActivity).apply {
+            WebviewActivity.newIntent(this@SettingActivity).apply {
                 putExtra(Constant.PARAM_WEBVIEW_TITLE, "Terms & Conditions")
                 putExtra(Constant.PARAM_WEBVIEW_URL, termsAndCondition)
+                startActivity(this)
             }
-            startActivity(intent)
         }
     }
 
     override fun onPrivacyPolicesHandle() {
         viewModel.getSession().getAppCmsData()?.run {
-            val intent = WebviewActivity.newIntent(this@SettingActivity).apply {
+            WebviewActivity.newIntent(this@SettingActivity).apply {
                 putExtra(Constant.PARAM_WEBVIEW_TITLE, "Privacy Policy")
                 putExtra(Constant.PARAM_WEBVIEW_URL, privacy)
+                startActivity(this)
             }
-            startActivity(intent)
+
         }
     }
 
     override fun onContactUsHandle() {
-        val intent = ContactActivity.newIntent(this)
-        startActivity(intent)
+        ContactActivity.newIntent(this).apply {
+            startActivity(this)
+        }
     }
 
     override fun onAboutUsHandle() {
         viewModel.getSession().getAppCmsData()?.run {
-            val intent = WebviewActivity.newIntent(this@SettingActivity).apply {
+            WebviewActivity.newIntent(this@SettingActivity).apply {
                 putExtra(Constant.PARAM_WEBVIEW_TITLE, "About Us")
                 putExtra(Constant.PARAM_WEBVIEW_URL, aboutUs)
+                startActivity(this)
             }
-            startActivity(intent)
         }
     }
 
     override fun onSignOutHandle() {
-        val intent = LandingActivity.newIntent(this)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        startActivity(intent)
+        LandingActivity.newIntent(this).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(this)
+        }
         finish()
     }
 }

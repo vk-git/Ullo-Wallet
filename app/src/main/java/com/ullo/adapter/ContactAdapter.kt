@@ -13,9 +13,15 @@ class ContactAdapter(var context: Context) : RecyclerView.Adapter<ContactAdapter
 
     var contactList: ArrayList<Contact> = ArrayList()
 
+    private lateinit var onContactItemListener: OnContactItemListener
+
     fun setContactListData(contactList: ArrayList<Contact>) {
         this.contactList = contactList
         notifyDataSetChanged()
+    }
+
+    fun setOnContactItemListener(onContactItemListener: OnContactItemListener) {
+        this.onContactItemListener = onContactItemListener
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -36,7 +42,16 @@ class ContactAdapter(var context: Context) : RecyclerView.Adapter<ContactAdapter
 
         fun bind(contact: Contact) {
             contactListItemBinding.contact = contact
+            contactListItemBinding.itemView.setOnClickListener {
+                if (onContactItemListener != null) {
+                    onContactItemListener.onItemClick(contact)
+                }
+            }
             contactListItemBinding.executePendingBindings()
         }
+    }
+
+    interface OnContactItemListener {
+        fun onItemClick(contact: Contact)
     }
 }

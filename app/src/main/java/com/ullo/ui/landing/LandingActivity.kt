@@ -49,12 +49,14 @@ class LandingActivity : BaseActivity<ActivityLandingBinding, LandingViewModel>()
     }
 
     override fun onLoginScreen() {
-        val intent = LoginActivity.newIntent(this)
-        startActivity(intent)
+        LoginActivity.newIntent(this).apply {
+            startActivity(this)
+        }
     }
 
     override fun onRegisterScreen() {
-        val intent = RegisterActivity.newIntent(this)
-        startActivity(intent)
+        RegisterActivity.newIntent(this).apply {
+            startActivity(this)
+        }
     }
 }

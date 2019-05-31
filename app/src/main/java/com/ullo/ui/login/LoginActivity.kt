@@ -90,21 +90,24 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), Logi
     }
 
     override fun onForgotPasswordHandle() {
-        val intent = ForgotPasswordActivity.newIntent(this)
-        startActivity(intent)
+       ForgotPasswordActivity.newIntent(this).apply {
+           startActivity(this)
+       }
     }
 
     override fun onMainScreen() {
         viewModel.let {
-            val intent = MainActivity.newIntent(this)
-            intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(intent)
+            MainActivity.newIntent(this).apply {
+                flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(this)
+            }
             finish()
         }
     }
 
     override fun onSignUpHandle() {
-        val intent = RegisterActivity.newIntent(this)
-        startActivity(intent)
+        RegisterActivity.newIntent(this).apply {
+            startActivity(this)
+        }
     }
 }

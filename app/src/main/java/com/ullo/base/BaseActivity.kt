@@ -18,7 +18,11 @@ import com.ullo.utils.ConnectionLiveData
 import com.ullo.utils.ShowLoadingOverlayDialog
 import dagger.android.AndroidInjection
 import io.reactivex.disposables.CompositeDisposable
-
+import android.graphics.drawable.ColorDrawable
+import android.view.Window
+import android.app.Dialog
+import android.view.LayoutInflater
+import android.widget.TextView
 
 abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<*>> : AppCompatActivity(), BaseNavigator {
 
@@ -49,7 +53,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<*>> : AppComp
     var isConnected: Boolean = false
 
     var compositeDisposable: CompositeDisposable = CompositeDisposable()
-    private var loadingOverlayDialog: ProgressDialog? = null
+    private var loadingOverlayDialog: Dialog? = null
 
     fun getViewDataBinding(): T {
         return viewDataBinding!!
@@ -155,13 +159,16 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<*>> : AppComp
         }
         try {
             // call when you press back while dialog is visible
-            loadingOverlayDialog = ProgressDialog(this)
-            loadingOverlayDialog!!.setMessage(msg)
+            loadingOverlayDialog = Dialog(this)
+            loadingOverlayDialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            val view = LayoutInflater.from(this).inflate(R.layout.custom_progress_dialog,null)
+            view.findViewById<TextView>(R.id.message).text = msg
+            loadingOverlayDialog!!.setContentView(view)
+            loadingOverlayDialog!!.window!!.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
             loadingOverlayDialog!!.show()
         } catch (e: Exception) {
             e.printStackTrace()
         }
-
     }
 
     override fun onDestroy() {

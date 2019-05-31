@@ -19,7 +19,11 @@ class SplashViewModel(application: Application, ulloService: UlloService, sessio
                     getNavigator()?.onMainScreen()
                 }
             } else {
-                getNavigator()?.onTutorialScreen()
+                if (getSession().getAppUserToken().isEmpty()) {
+                    getNavigator()?.onTutorialScreen()
+                } else {
+                    getNavigator()?.onMainScreen()
+                }
             }
         }, 3000)
     }

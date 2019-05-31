@@ -55,8 +55,9 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
     }
 
     override fun onLoginScreen() {
-        val intent = LoginActivity.newIntent(this)
-        startActivity(intent)
+        LoginActivity.newIntent(this).apply {
+            startActivity(this)
+        }
     }
 
     override fun onCheckValidation() {
@@ -75,8 +76,9 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
     }
 
     override fun onRegisterSuccessful(appUser: AppUser) {
-        val intent = MainActivity.newIntent(this)
-        startActivity(intent)
+       MainActivity.newIntent(this).apply {
+           startActivity(this)
+       }
     }
 
     private fun isValid(): Boolean {

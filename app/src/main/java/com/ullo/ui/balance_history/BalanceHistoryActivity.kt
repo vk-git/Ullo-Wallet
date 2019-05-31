@@ -12,6 +12,7 @@ import com.ullo.adapter.BalanceHistoryAdapter
 import com.ullo.api.response.contact.Contact
 import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivityBalanceHistoryBinding
+import com.ullo.ui.setting.SettingActivity
 import com.ullo.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
@@ -41,7 +42,7 @@ class BalanceHistoryActivity : BaseActivity<ActivityBalanceHistoryBinding, Balan
         get() = false
 
     override val layoutId: Int
-        get() = R.layout.activity_choose_contact
+        get() = R.layout.activity_balance_history
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +52,11 @@ class BalanceHistoryActivity : BaseActivity<ActivityBalanceHistoryBinding, Balan
         mActivityBalanceHistoryBinding!!.toolbar.setBackButton(true)
         mActivityBalanceHistoryBinding!!.toolbar.setBackButtonListener(listener = View.OnClickListener {
             finish()
+        })
+        mActivityBalanceHistoryBinding!!.toolbar.setRightButtonListener(listener = View.OnClickListener {
+            SettingActivity.newIntent(this).apply {
+                startActivity(this)
+            }
         })
 
         viewModel.run {

@@ -5,11 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProviders
-import com.bumptech.glide.Glide
 import com.ullo.BR
 import com.ullo.R
 import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivitySendMoneyBinding
+import com.ullo.extensions.visible
+import com.ullo.ui.setting.SettingActivity
 import com.ullo.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
@@ -48,5 +49,19 @@ class SendMoneyActivity : BaseActivity<ActivitySendMoneyBinding, SendMoneyViewMo
             finish()
         })
 
+        mActivitySendMoneyBinding!!.toolbar.setRightButtonListener(listener = View.OnClickListener {
+            SettingActivity.newIntent(this).apply {
+                startActivity(this)
+            }
+        })
+
+        mActivitySendMoneyBinding!!.btnUpdate.setOnClickListener {
+            if (mActivitySendMoneyBinding!!.btnUpdate.text.toString() == "Send") {
+                mActivitySendMoneyBinding!!.imgSuccess.visible()
+                mActivitySendMoneyBinding!!.btnUpdate.text = "Close"
+            } else {
+                finish()
+            }
+        }
     }
 }

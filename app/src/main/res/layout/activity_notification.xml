@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.balance_history.BalanceHistoryActivity">
+    tools:context=".ui.notification.NotificationActivity">
 
     <data>
 
@@ -10,7 +10,7 @@
 
         <variable
             name="viewModel"
-            type="com.ullo.ui.balance_history.BalanceHistoryViewModel" />
+            type="com.ullo.ui.notification.NotificationViewModel" />
 
     </data>
 
@@ -24,7 +24,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Balance History"
+            android:text="Notification"
             app:rightDrawable="@drawable/menu_icon"
             app:leftDrawable="@drawable/ic_back" />
 

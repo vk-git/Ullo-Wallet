@@ -12,6 +12,9 @@ import com.ullo.adapter.ContactAdapter
 import com.ullo.api.response.contact.Contact
 import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivityChooseContactBinding
+import com.ullo.ui.send_money.SendMoneyActivity
+import com.ullo.ui.setting.SettingActivity
+import com.ullo.utils.Constant
 import com.ullo.utils.RxSearch
 import com.ullo.utils.ViewModelProviderFactory
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -95,6 +98,15 @@ class ChooseContactActivity : BaseActivity<ActivityChooseContactBinding, ChooseC
         }
 
         contactAdapter?.run { setContactListData(contactList as ArrayList<Contact>) }
+
+        contactAdapter?.setOnContactItemListener(object : ContactAdapter.OnContactItemListener {
+            override fun onItemClick(contact: Contact) {
+                SendMoneyActivity.newIntent(this@ChooseContactActivity).apply {
+                    putExtra(Constant.PARAM_PATIENT, contact)
+                    startActivity(this)
+                }
+            }
+        })
     }
 
     override fun setFilterPatientList(filteredDataList: ArrayList<Contact>) {

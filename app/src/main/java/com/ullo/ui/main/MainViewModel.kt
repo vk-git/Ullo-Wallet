@@ -24,6 +24,10 @@ class MainViewModel(application: Application, ulloService: UlloService, session:
         getNavigator()?.onMenuHandle()
     }
 
+    fun onNotificationButtonClick() {
+        getNavigator()?.onNotificationHandle()
+    }
+
     fun onSendMoneyButtonClick() {
         getNavigator()?.onSendMoneyHandle()
     }
@@ -50,19 +54,6 @@ class MainViewModel(application: Application, ulloService: UlloService, session:
                 //BackGround Call
             }
         }))
-    }
-
-    fun definePatientLists(list: List<Contact>) {
-        /* getCompositeDisposable()?.run {
-             add(getDataManager().savePatientList(list)
-                     .subscribeOn(Schedulers.io())
-                     .observeOn(AndroidSchedulers.mainThread())
-                     .subscribe {
-                         if (it) {
-                             Log.d("mytatg", "Successfully added")
-                         }
-                     })
-         }*/
     }
 
     fun fetchContactAndUpload() {

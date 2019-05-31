@@ -76,7 +76,8 @@
                 android:layout_marginTop="26dp"
                 android:background="@android:color/transparent"
                 android:gravity="center"
-                android:text="$11"
+                android:hint="$11"
+                android:inputType="number"
                 android:textColor="#0A39F5"
                 android:textSize="40sp" />
 
@@ -90,6 +91,7 @@
                 android:textSize="14sp" />
 
             <ImageView
+                android:id="@+id/imgSuccess"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="31dp"

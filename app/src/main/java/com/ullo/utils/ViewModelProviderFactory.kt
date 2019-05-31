@@ -14,6 +14,7 @@ import com.ullo.ui.landing.LandingViewModel
 import com.ullo.ui.login.LoginViewModel
 import com.ullo.ui.main.MainViewModel
 import com.ullo.ui.my_qr_code.MyQrCodeViewModel
+import com.ullo.ui.notification.NotificationViewModel
 import com.ullo.ui.profile.ProfileViewModel
 import com.ullo.ui.register.RegisterViewModel
 import com.ullo.ui.send_money.SendMoneyViewModel
@@ -61,6 +62,7 @@ class ViewModelProviderFactory : ViewModelProvider.Factory {
             modelClass.isAssignableFrom(MyQrCodeViewModel::class.java) -> MyQrCodeViewModel(mApplication, mUlloService, mSession, mDataManager) as T
             modelClass.isAssignableFrom(SendMoneyViewModel::class.java) -> SendMoneyViewModel(mApplication, mUlloService, mSession, mDataManager) as T
             modelClass.isAssignableFrom(BalanceHistoryViewModel::class.java) -> BalanceHistoryViewModel(mApplication, mUlloService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(NotificationViewModel::class.java) -> NotificationViewModel(mApplication, mUlloService, mSession, mDataManager) as T
             else -> throw IllegalArgumentException("Unknown class name")
         }
     }

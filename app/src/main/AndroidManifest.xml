@@ -42,5 +42,7 @@
         <activity android:name=".ui.setting.SettingActivity" />
         <activity android:name=".ui.my_qr_code.MyQrCodeActivity" />
         <activity android:name=".ui.balance_history.BalanceHistoryActivity" />
+        <activity android:name=".ui.notification.NotificationActivity" />
+        <activity android:name=".ui.send_money.SendMoneyActivity" />
     </application>
 </manifest>

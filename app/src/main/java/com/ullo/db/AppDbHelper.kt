@@ -35,4 +35,11 @@ class AppDbHelper(private val mAppDatabase: AppDatabase) {
     fun deletePatientById(patientId: Int) {
         mAppDatabase.contactDao().deletePatientById(patientId)
     }
+
+    fun deleteAllTables(): Observable<Boolean> {
+        return Observable.fromCallable {
+            mAppDatabase.clearAllTables()
+            true
+        }
+    }
 }

@@ -11,6 +11,8 @@ import com.ullo.ui.landing.LandingActivity
 import com.ullo.ui.login.LoginActivity
 import com.ullo.ui.main.MainActivity
 import com.ullo.ui.my_qr_code.MyQrCodeActivity
+import com.ullo.ui.notification.NotificationActivity
+import com.ullo.ui.notification.NotificationActivityModule
 import com.ullo.ui.profile.ProfileActivity
 import com.ullo.ui.register.RegisterActivity
 import com.ullo.ui.send_money.SendMoneyActivity
@@ -72,4 +74,7 @@ abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = [BalanceHistoryActivityModule::class])
     internal abstract fun bindBalanceHistoryActivity(): BalanceHistoryActivity
+
+    @ContributesAndroidInjector(modules = [NotificationActivityModule::class])
+    internal abstract fun bindNotificationActivity(): NotificationActivity
 }

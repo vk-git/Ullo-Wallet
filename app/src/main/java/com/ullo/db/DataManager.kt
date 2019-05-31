@@ -20,4 +20,8 @@ class DataManager(private var appDbHelper: AppDbHelper) {
     fun deletePatientById(patientId: Int) {
         return appDbHelper.deletePatientById(patientId)
     }
+
+    fun deleteAllTables(): Observable<Boolean> {
+        return appDbHelper.deleteAllTables()
+    }
 }
