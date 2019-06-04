@@ -2,9 +2,11 @@ package com.ullo.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.google.gson.JsonElement
 import com.google.gson.reflect.TypeToken
 import com.ullo.api.response.AppUser
 import com.ullo.api.response.CmsData
+import com.ullo.utils.Session.Key.APP_ACCOUNT_INFO
 import com.ullo.utils.Session.Key.APP_CMS_DATA
 import com.ullo.utils.Session.Key.APP_DEVICE_ID
 import com.ullo.utils.Session.Key.APP_USER
@@ -46,6 +48,17 @@ class Session(context: Context) {
         })
     }
 
+    fun setAccountInfo(cmsData: JsonElement) {
+        editor.putString(APP_ACCOUNT_INFO, SharedPreferenceHelper.getStringFromObject(cmsData))
+        editor.apply()
+    }
+
+    fun getAccountInfo(): JsonElement {
+        return SharedPreferenceHelper.getObjectFromString(pref.getString(APP_ACCOUNT_INFO, ""), object :
+                TypeToken<JsonElement>() {
+        })
+    }
+
     fun setAppUserToken(token: String) {
         editor.putString(APP_USER_TOKEN, token)
         editor.apply()
@@ -84,5 +97,6 @@ class Session(context: Context) {
         internal const val APP_DEVICE_ID = "app_device_id"
         internal const val APP_SHOW_TUTORIAL = "app_show_tutorial"
         internal const val APP_CMS_DATA = "app_cms_data"
+        internal const val APP_ACCOUNT_INFO = "app_account_info"
     }
 }

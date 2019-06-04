@@ -7,7 +7,9 @@ import com.ullo.api.ResponseListener
 import com.ullo.api.response.AppUser
 import com.ullo.api.response.BaseResponse
 import com.ullo.api.response.CmsData
+import com.ullo.api.response.balance_history.BalanceHistoryData
 import com.ullo.api.response.contact.ContactData
+import com.ullo.api.response.notification.NotificationData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -162,6 +164,106 @@ class UlloService(private val ulloApi: UlloApi) {
                 .subscribeWith(object : ApiResponseCallbackWrapper<Response<BaseResponse<ContactData>>>() {
 
                     override fun onSuccess(response: Response<BaseResponse<ContactData>>) {
+                        listener.onSuccess(response)
+                    }
+
+                    override fun onInternetConnectionError() {
+                        listener.onInternetConnectionError()
+                    }
+
+                    override fun onFailure(error: String) {
+                        listener.onFailure(error)
+                    }
+                })
+    }
+
+    fun userNotificationlist(listener: ResponseListener<Response<BaseResponse<NotificationData>>, String>): Disposable {
+        return ulloApi.userNotificationlist()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : ApiResponseCallbackWrapper<Response<BaseResponse<NotificationData>>>() {
+
+                    override fun onSuccess(response: Response<BaseResponse<NotificationData>>) {
+                        listener.onSuccess(response)
+                    }
+
+                    override fun onInternetConnectionError() {
+                        listener.onInternetConnectionError()
+                    }
+
+                    override fun onFailure(error: String) {
+                        listener.onFailure(error)
+                    }
+                })
+    }
+
+    fun userBalanceHistorylist(listener: ResponseListener<Response<BaseResponse<BalanceHistoryData>>, String>): Disposable {
+        return ulloApi.userBalanceHistorylist()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : ApiResponseCallbackWrapper<Response<BaseResponse<BalanceHistoryData>>>() {
+
+                    override fun onSuccess(response: Response<BaseResponse<BalanceHistoryData>>) {
+                        listener.onSuccess(response)
+                    }
+
+                    override fun onInternetConnectionError() {
+                        listener.onInternetConnectionError()
+                    }
+
+                    override fun onFailure(error: String) {
+                        listener.onFailure(error)
+                    }
+                })
+    }
+
+    fun userAddMoney(registerReq: JsonObject, listener: ResponseListener<Response<BaseResponse<JsonElement>>, String>): Disposable {
+        return ulloApi.userAddMoney(registerReq)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : ApiResponseCallbackWrapper<Response<BaseResponse<JsonElement>>>() {
+
+                    override fun onSuccess(response: Response<BaseResponse<JsonElement>>) {
+                        listener.onSuccess(response)
+                    }
+
+                    override fun onInternetConnectionError() {
+                        listener.onInternetConnectionError()
+                    }
+
+                    override fun onFailure(error: String) {
+                        listener.onFailure(error)
+                    }
+                })
+    }
+
+    fun userSendMoney(registerReq: JsonObject, listener: ResponseListener<Response<BaseResponse<JsonElement>>, String>): Disposable {
+        return ulloApi.userSendMoney(registerReq)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : ApiResponseCallbackWrapper<Response<BaseResponse<JsonElement>>>() {
+
+                    override fun onSuccess(response: Response<BaseResponse<JsonElement>>) {
+                        listener.onSuccess(response)
+                    }
+
+                    override fun onInternetConnectionError() {
+                        listener.onInternetConnectionError()
+                    }
+
+                    override fun onFailure(error: String) {
+                        listener.onFailure(error)
+                    }
+                })
+    }
+
+    fun userAccountInfo(listener: ResponseListener<Response<BaseResponse<JsonElement>>, String>): Disposable {
+        return ulloApi.userAccountInfo()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : ApiResponseCallbackWrapper<Response<BaseResponse<JsonElement>>>() {
+
+                    override fun onSuccess(response: Response<BaseResponse<JsonElement>>) {
                         listener.onSuccess(response)
                     }
 

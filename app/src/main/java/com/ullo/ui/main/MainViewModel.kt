@@ -3,6 +3,7 @@ package com.ullo.ui.main
 import android.app.Application
 import android.util.Log
 import com.github.tamir7.contacts.Contacts
+import com.google.gson.JsonElement
 import com.ullo.api.ResponseListener
 import com.ullo.api.response.BaseResponse
 import com.ullo.api.response.CmsData
@@ -42,6 +43,27 @@ class MainViewModel(application: Application, ulloService: UlloService, session:
                 if (response.isSuccessful) {
                     response.body()?.run {
                         getSession()?.setAppCmsData(data)
+                    }
+                }
+            }
+
+            override fun onInternetConnectionError() {
+                //BackGround Call
+            }
+
+            override fun onFailure(error: String) {
+                //BackGround Call
+            }
+        }))
+    }
+
+    fun userAccountInfo() {
+        getCompositeDisposable()?.add(getLinderaService().userAccountInfo(object : ResponseListener<Response<BaseResponse<JsonElement>>, String> {
+            override fun onSuccess(response: Response<BaseResponse<JsonElement>>) {
+                if (response.isSuccessful) {
+                    response.body()?.run {
+                        getSession().setAccountInfo(data)
+                        getNavigator()?.onAccountInfoSuccess(data)
                     }
                 }
             }

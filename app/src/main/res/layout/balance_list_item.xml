@@ -4,8 +4,8 @@
     <data>
 
         <variable
-            name="contact"
-            type="com.github.tamir7.contacts.Contact"></variable>
+            name="history"
+            type="com.ullo.api.response.balance_history.History"></variable>
     </data>
 
     <LinearLayout
@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/quicksand_regular"
-                    android:text="23. Feb. 2019"
+                    android:text="@{history.timestamp}"
                     android:textColor="#3A3F43"
                     android:textSize="14sp" />
 
@@ -68,7 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/quicksand_regular"
-                    android:text="- $125"
+                    android:text="@{'$'+history.amount}"
                     android:textColor="#3A3F43"
                     android:textSize="24sp" />
 

@@ -61,16 +61,19 @@
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtContactInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="36dp"
                 android:fontFamily="@font/quicksand_bold"
-                android:text="Paying money to Sophia Fields"
+                android:text="@string/paying_money_to_sophia_fields"
                 android:textColor="#0A39F5"
+                android:gravity="center"
                 android:textSize="16sp" />
 
             <EditText
+                android:id="@+id/etAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="26dp"

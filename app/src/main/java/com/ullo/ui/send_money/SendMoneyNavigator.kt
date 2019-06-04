@@ -4,4 +4,5 @@ import com.ullo.base.BaseNavigator
 
 
 interface SendMoneyNavigator : BaseNavigator {
+    fun onSendMoneySuccess()
 }

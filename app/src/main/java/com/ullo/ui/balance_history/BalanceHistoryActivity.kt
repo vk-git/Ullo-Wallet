@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ullo.BR
 import com.ullo.R
 import com.ullo.adapter.BalanceHistoryAdapter
+import com.ullo.api.response.balance_history.BalanceHistoryData
+import com.ullo.api.response.balance_history.History
 import com.ullo.api.response.contact.Contact
 import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivityBalanceHistoryBinding
@@ -17,6 +19,7 @@ import com.ullo.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
 class BalanceHistoryActivity : BaseActivity<ActivityBalanceHistoryBinding, BalanceHistoryViewModel>(), BalanceHistoryNavigator {
+
 
     companion object {
         fun newIntent(context: Context): Intent {
@@ -59,19 +62,19 @@ class BalanceHistoryActivity : BaseActivity<ActivityBalanceHistoryBinding, Balan
             }
         })
 
-        viewModel.run {
-            allContacts.observeForever {
-                setContactData(it)
-            }
-        }
+        viewModel.run { userBalanceHistorylist() }
     }
 
-    private fun setContactData(patientList: List<Contact>) {
+    private fun setBalanceHistoryData(patientList: List<History>) {
         with(mActivityBalanceHistoryBinding!!.recyclerView) {
             layoutManager = LinearLayoutManager(this@BalanceHistoryActivity)
             adapter = balanceHistoryAdapter
         }
 
-        balanceHistoryAdapter?.run { setContactListData(patientList as ArrayList<Contact>) }
+        balanceHistoryAdapter?.run { setBalanceHistoryListData(patientList as ArrayList<History>) }
+    }
+
+    override fun onBalanceHistorySuccessfull(data: BalanceHistoryData) {
+        setBalanceHistoryData(data.history)
     }
 }

@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
+import com.google.gson.JsonElement
 import com.ullo.BR
 import com.ullo.R
 import com.ullo.base.BaseActivity
@@ -21,8 +22,6 @@ import javax.inject.Inject
 
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNavigator {
-
-
 
     companion object {
 
@@ -54,6 +53,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
         super.onCreate(savedInstanceState)
         mActivityMainBinding = getViewDataBinding()
         viewModel.setNavigator(this)
+        viewModel.userAccountInfo()
         viewModel.getCms()
 
         viewModel.getSession().getAppUser()?.run {
@@ -62,6 +62,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
         }
 
         fetchContacts()
+
+        viewModel.getSession().getAccountInfo()?.run {
+            onAccountInfoSuccess(this)
+        }
     }
 
     private fun fetchContacts() {
@@ -96,14 +100,19 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
     }
 
     override fun onSendMoneyHandle() {
-       ChooseContactActivity.newIntent(this).apply {
-           startActivity(this)
-       }
+        ChooseContactActivity.newIntent(this).apply {
+            startActivity(this)
+        }
     }
 
     override fun onReceiveMoneyHandle() {
         BalanceHistoryActivity.newIntent(this).apply {
             startActivity(this)
         }
+    }
+
+    override fun onAccountInfoSuccess(data: JsonElement) {
+        mActivityMainBinding!!.txtCurrentBalance.text = "$" + data.asJsonObject.get("current_balance").asInt
+        mActivityMainBinding!!.txtCreditTotal.text = "$" + data.asJsonObject.get("credit_balance").asInt
     }
 }

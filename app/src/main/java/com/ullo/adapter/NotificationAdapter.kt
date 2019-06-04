@@ -6,16 +6,15 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ullo.R
-import com.ullo.api.response.contact.Contact
-import com.ullo.databinding.ContactListItemBinding
+import com.ullo.api.response.notification.Notification
 import com.ullo.databinding.NotificationListItemBinding
 
 class NotificationAdapter(var context: Context) : RecyclerView.Adapter<NotificationAdapter.ViewHolder>() {
 
-    var contactList: ArrayList<Contact> = ArrayList()
+    var contact: ArrayList<Notification> = ArrayList()
 
-    fun setContactListData(contactList: ArrayList<Contact>) {
-        this.contactList = contactList
+    fun setNotificationListData(contact: ArrayList<Notification>) {
+        this.contact = contact
         notifyDataSetChanged()
     }
 
@@ -25,17 +24,18 @@ class NotificationAdapter(var context: Context) : RecyclerView.Adapter<Notificat
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val patient = contactList[position]
+        val patient = contact[position]
         holder.bind(patient)
     }
 
     override fun getItemCount(): Int {
-        return contactList.size
+        return contact.size
     }
 
     inner class ViewHolder internal constructor(private val notificationListItemBinding: NotificationListItemBinding) : RecyclerView.ViewHolder(notificationListItemBinding.root) {
 
-        fun bind(contact: Contact) {
+        fun bind(notification: Notification) {
+            notificationListItemBinding.notification = notification
             notificationListItemBinding.executePendingBindings()
         }
     }

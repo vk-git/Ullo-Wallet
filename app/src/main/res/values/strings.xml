@@ -199,4 +199,5 @@
     <!--Ullo Application-->
     <string name="scan_qa_code">Scan\nQA Code</string>
     <string name="loading">Loading...</string>
+    <string name="paying_money_to_sophia_fields">Paying money to %1$s\n(%2$s)</string>
 </resources>

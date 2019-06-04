@@ -6,15 +6,16 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ullo.R
+import com.ullo.api.response.balance_history.History
 import com.ullo.api.response.contact.Contact
 import com.ullo.databinding.BalanceListItemBinding
 import com.ullo.databinding.ContactListItemBinding
 
 class BalanceHistoryAdapter(var context: Context) : RecyclerView.Adapter<BalanceHistoryAdapter.ViewHolder>() {
 
-    var contactList: ArrayList<Contact> = ArrayList()
+    var contactList: ArrayList<History> = ArrayList()
 
-    fun setContactListData(contactList: ArrayList<Contact>) {
+    fun setBalanceHistoryListData(contactList: ArrayList<History>) {
         this.contactList = contactList
         notifyDataSetChanged()
     }
@@ -35,7 +36,8 @@ class BalanceHistoryAdapter(var context: Context) : RecyclerView.Adapter<Balance
 
     inner class ViewHolder internal constructor(private val balanceListItemBinding: BalanceListItemBinding) : RecyclerView.ViewHolder(balanceListItemBinding.root) {
 
-        fun bind(contact: Contact) {
+        fun bind(history: History) {
+            balanceListItemBinding.history = history
             balanceListItemBinding.executePendingBindings()
         }
     }

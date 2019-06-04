@@ -9,15 +9,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ullo.BR
 import com.ullo.R
 import com.ullo.adapter.NotificationAdapter
-import com.ullo.api.response.contact.Contact
+import com.ullo.api.response.notification.NotificationData
+import com.ullo.api.response.notification.Notification
 import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivityNotificationBinding
-import com.ullo.ui.balance_history.BalanceHistoryActivity
 import com.ullo.ui.setting.SettingActivity
 import com.ullo.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
 class NotificationActivity : BaseActivity<ActivityNotificationBinding, NotificationViewModel>(), NotificationNavigator {
+
 
     companion object {
         fun newIntent(context: Context): Intent {
@@ -60,19 +61,19 @@ class NotificationActivity : BaseActivity<ActivityNotificationBinding, Notificat
             }
         })
 
-        viewModel.run {
-            allContacts.observeForever {
-                setContactData(it)
-            }
-        }
+        viewModel.run { userNotificationlist() }
     }
 
-    private fun setContactData(patientList: List<Contact>) {
+    private fun setNotificationData(patient: List<Notification>) {
         with(mActivityNotificationBinding!!.recyclerView) {
             layoutManager = LinearLayoutManager(this@NotificationActivity)
             adapter = notificationAdapter
         }
 
-        notificationAdapter?.run { setContactListData(patientList as ArrayList<Contact>) }
+        notificationAdapter?.run { setNotificationListData(patient as ArrayList<Notification>) }
+    }
+
+    override fun onNotificationSuccessfully(data: NotificationData) {
+        setNotificationData(data.notification)
     }
 }

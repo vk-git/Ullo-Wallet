@@ -5,12 +5,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProviders
+import com.google.gson.JsonObject
 import com.ullo.BR
 import com.ullo.R
+import com.ullo.api.response.contact.Contact
 import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivitySendMoneyBinding
 import com.ullo.extensions.visible
 import com.ullo.ui.setting.SettingActivity
+import com.ullo.utils.Constant
+import com.ullo.utils.Validation
 import com.ullo.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
@@ -30,6 +34,8 @@ class SendMoneyActivity : BaseActivity<ActivitySendMoneyBinding, SendMoneyViewMo
 
     private var mActivitySendMoneyBinding: ActivitySendMoneyBinding? = null
 
+    private lateinit var contact: Contact
+
     override val bindingVariable: Int
         get() = BR.viewModel
 
@@ -44,6 +50,10 @@ class SendMoneyActivity : BaseActivity<ActivitySendMoneyBinding, SendMoneyViewMo
         mActivitySendMoneyBinding = getViewDataBinding()
         viewModel.setNavigator(this)
 
+        intent?.run {
+            contact = getParcelableExtra(Constant.PARAM_CONTACT) as Contact
+        }
+
         mActivitySendMoneyBinding!!.toolbar.setBackButton(true)
         mActivitySendMoneyBinding!!.toolbar.setBackButtonListener(listener = View.OnClickListener {
             finish()
@@ -55,13 +65,41 @@ class SendMoneyActivity : BaseActivity<ActivitySendMoneyBinding, SendMoneyViewMo
             }
         })
 
+        contact?.run {
+            mActivitySendMoneyBinding!!.txtContactInfo.text = getString(R.string.paying_money_to_sophia_fields, contact.fullName, contact.phoneNumber)
+        }
+
         mActivitySendMoneyBinding!!.btnUpdate.setOnClickListener {
             if (mActivitySendMoneyBinding!!.btnUpdate.text.toString() == "Send") {
-                mActivitySendMoneyBinding!!.imgSuccess.visible()
-                mActivitySendMoneyBinding!!.btnUpdate.text = "Close"
+                if (isValid()) {
+                    val req = JsonObject()
+                    req.addProperty("amount", mActivitySendMoneyBinding!!.etAmount.text.toString())
+                    req.addProperty("phone_number", contact.phoneNumber)
+                    viewModel.userSendMoney(req)
+                }
             } else {
                 finish()
             }
         }
+    }
+
+    private fun isValid(): Boolean {
+        var bAmount = true
+        val amount = mActivitySendMoneyBinding!!.etAmount.text.toString()
+
+        if (!Validation.isValidName(amount)) {
+            //  mActivitySendMoneyBinding!!.etAmount.isErrorEnabled = true
+            mActivitySendMoneyBinding!!.etAmount.error = "The entered name is not correct."
+            bAmount = false
+        } else {
+            //  mActivitySendMoneyBinding!!.etAmount.isErrorEnabled = false
+        }
+
+        return bAmount
+    }
+
+    override fun onSendMoneySuccess() {
+        mActivitySendMoneyBinding!!.imgSuccess.visible()
+        mActivitySendMoneyBinding!!.btnUpdate.text = "Close"
     }
 }
