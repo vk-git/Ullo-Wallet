@@ -1,8 +1,6 @@
 package com.ullo.ui.forgot_password
 
 import android.app.Application
-import android.util.Log
-import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
@@ -31,7 +29,7 @@ class ForgotPasswordViewModel(application: Application, ulloService: UlloService
 
     fun forgotPassword(loginReq: JsonObject) {
         App.instance.showLoadingOverlayDialog(App.instance.getString(R.string.loading))
-        getCompositeDisposable()?.add(getLinderaService().userForgotPassword(loginReq, object : ResponseListener<Response<BaseResponse<AppUser>>, String> {
+        getCompositeDisposable()?.add(getUlloService().userForgotPassword(loginReq, object : ResponseListener<Response<BaseResponse<AppUser>>, String> {
             override fun onSuccess(response: Response<BaseResponse<AppUser>>) {
                 App.instance.hideLoadingOverlayDialog()
                 if (response.isSuccessful) {

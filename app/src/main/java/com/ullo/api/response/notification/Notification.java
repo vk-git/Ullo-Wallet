@@ -9,9 +9,9 @@ public class Notification {
     @SerializedName("id")
     @Expose
     private Integer id;
-    @SerializedName("full_name")
+    @SerializedName("name")
     @Expose
-    private String fullName;
+    private String name;
     @SerializedName("notifiable_type")
     @Expose
     private String notifiableType;
@@ -30,12 +30,12 @@ public class Notification {
         this.id = id;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getName() {
+        return name;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getNotifiableType() {

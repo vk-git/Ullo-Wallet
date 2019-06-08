@@ -9,9 +9,12 @@ import com.ullo.api.response.CmsData
 import com.ullo.utils.Session.Key.APP_ACCOUNT_INFO
 import com.ullo.utils.Session.Key.APP_CMS_DATA
 import com.ullo.utils.Session.Key.APP_DEVICE_ID
+import com.ullo.utils.Session.Key.APP_EMAIL_NOTIFICATION
+import com.ullo.utils.Session.Key.APP_PUSH_NOTIFICATION
+import com.ullo.utils.Session.Key.APP_SHOW_TUTORIAL
+import com.ullo.utils.Session.Key.APP_SYNC_CONTACT
 import com.ullo.utils.Session.Key.APP_USER
 import com.ullo.utils.Session.Key.APP_USER_TOKEN
-import com.ullo.utils.Session.Key.APP_SHOW_TUTORIAL
 
 class Session(context: Context) {
 
@@ -86,6 +89,33 @@ class Session(context: Context) {
         return pref.getBoolean(APP_SHOW_TUTORIAL, false)
     }
 
+    fun setSyncContact(b: Boolean) {
+        editor.putBoolean(APP_SYNC_CONTACT, b)
+        editor.apply()
+    }
+
+    fun getSyncContact(): Boolean {
+        return pref.getBoolean(APP_SYNC_CONTACT, false)
+    }
+
+    fun setPushNotification(b: Boolean) {
+        editor.putBoolean(APP_PUSH_NOTIFICATION, b)
+        editor.apply()
+    }
+
+    fun getPushNotification(): Boolean {
+        return pref.getBoolean(APP_PUSH_NOTIFICATION, false)
+    }
+
+    fun setEmailNotification(b: Boolean) {
+        editor.putBoolean(APP_EMAIL_NOTIFICATION, b)
+        editor.apply()
+    }
+
+    fun getEmailNotification(): Boolean {
+        return pref.getBoolean(APP_EMAIL_NOTIFICATION, false)
+    }
+
     fun logout() {
         editor.clear()
         editor.commit()
@@ -98,5 +128,8 @@ class Session(context: Context) {
         internal const val APP_SHOW_TUTORIAL = "app_show_tutorial"
         internal const val APP_CMS_DATA = "app_cms_data"
         internal const val APP_ACCOUNT_INFO = "app_account_info"
+        internal const val APP_SYNC_CONTACT = "app_sync_contact"
+        internal const val APP_PUSH_NOTIFICATION = "app_push_notification"
+        internal const val APP_EMAIL_NOTIFICATION = "app_email_notification"
     }
 }

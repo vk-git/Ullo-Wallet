@@ -1,8 +1,6 @@
 package com.ullo.ui.login
 
 import android.app.Application
-import android.util.Log
-import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
@@ -34,7 +32,7 @@ class LoginViewModel(application: Application, ulloService: UlloService, session
 
     fun login(loginReq: JsonObject) {
         App.instance.showLoadingOverlayDialog(App.instance.getString(R.string.loading))
-        getCompositeDisposable()?.add(getLinderaService().userLogin(loginReq, object : ResponseListener<Response<BaseResponse<AppUser>>, String> {
+        getCompositeDisposable()?.add(getUlloService().userLogin(loginReq, object : ResponseListener<Response<BaseResponse<AppUser>>, String> {
             override fun onSuccess(response: Response<BaseResponse<AppUser>>) {
                 App.instance.hideLoadingOverlayDialog()
                 if (response.isSuccessful) {

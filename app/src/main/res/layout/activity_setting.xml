@@ -120,6 +120,7 @@
                                 android:src="@drawable/sync_contact" />
 
                             <androidx.appcompat.widget.SwitchCompat
+                                android:id="@+id/swSyncContact"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="15dp"
@@ -175,6 +176,7 @@
                                 android:src="@drawable/baseline_notifications" />
 
                             <androidx.appcompat.widget.SwitchCompat
+                                android:id="@+id/swPushNotification"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="15dp"
@@ -207,6 +209,7 @@
                                 android:src="@drawable/baseline_email" />
 
                             <androidx.appcompat.widget.SwitchCompat
+                                android:id="@+id/swEmailNotification"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="15dp"

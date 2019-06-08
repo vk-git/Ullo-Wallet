@@ -1,7 +1,6 @@
 package com.ullo.ui.choose_contact
 
 import android.app.Application
-import android.util.Log
 import com.github.tamir7.contacts.Contact
 import com.github.tamir7.contacts.Contacts
 import com.google.gson.JsonElement
@@ -56,7 +55,7 @@ class ChooseContactViewModel(application: Application, ulloService: UlloService,
 
     private fun userContactlist(registerReq: JsonObject) {
         App.instance.showLoadingOverlayDialog(App.instance.getString(R.string.loading))
-        getCompositeDisposable()?.add(getLinderaService().userContactlist(registerReq, object : ResponseListener<Response<BaseResponse<ContactData>>, String> {
+        getCompositeDisposable()?.add(getUlloService().userContactlist(registerReq, object : ResponseListener<Response<BaseResponse<ContactData>>, String> {
             override fun onSuccess(response: Response<BaseResponse<ContactData>>) {
                 App.instance.hideLoadingOverlayDialog()
                 if (response.isSuccessful) {
@@ -95,7 +94,7 @@ class ChooseContactViewModel(application: Application, ulloService: UlloService,
                      .observeOn(AndroidSchedulers.mainThread())
                      .subscribe {
                          if (it) {
-                             Log.d("mytatg", "Successfully added")
+                             getSession().setSyncContact(true)
                          }
                      })
          }

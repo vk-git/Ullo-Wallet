@@ -1,7 +1,6 @@
 package com.ullo.ui.main
 
 import android.app.Application
-import android.util.Log
 import com.github.tamir7.contacts.Contact
 import com.github.tamir7.contacts.Contacts
 import com.google.gson.JsonElement
@@ -26,7 +25,6 @@ import retrofit2.Response
 
 class MainViewModel(application: Application, ulloService: UlloService, session: Session, dataManager: DataManager) : BaseViewModel<MainNavigator>(application, ulloService, session, dataManager) {
 
-
     fun onMenuButtonClick() {
         getNavigator()?.onMenuHandle()
     }
@@ -43,8 +41,12 @@ class MainViewModel(application: Application, ulloService: UlloService, session:
         getNavigator()?.onReceiveMoneyHandle()
     }
 
+    fun onManageMoneyButtonClick() {
+        getNavigator()?.onMangeMoneyHandle()
+    }
+
     fun getCms() {
-        getCompositeDisposable()?.add(getLinderaService().userCMS(object : ResponseListener<Response<BaseResponse<CmsData>>, String> {
+        getCompositeDisposable()?.add(getUlloService().userCMS(object : ResponseListener<Response<BaseResponse<CmsData>>, String> {
             override fun onSuccess(response: Response<BaseResponse<CmsData>>) {
                 if (response.isSuccessful) {
                     response.body()?.run {
@@ -59,29 +61,6 @@ class MainViewModel(application: Application, ulloService: UlloService, session:
 
             override fun onFailure(error: String) {
                 //BackGround Call
-            }
-        }))
-    }
-
-    fun userAccountInfo() {
-        App.instance.showLoadingOverlayDialog(App.instance.getString(R.string.loading))
-        getCompositeDisposable()?.add(getLinderaService().userAccountInfo(object : ResponseListener<Response<BaseResponse<JsonElement>>, String> {
-            override fun onSuccess(response: Response<BaseResponse<JsonElement>>) {
-                App.instance.hideLoadingOverlayDialog()
-                if (response.isSuccessful) {
-                    response.body()?.run {
-                        getSession().setAccountInfo(data)
-                        getNavigator()?.onAccountInfoSuccess(data)
-                    }
-                }
-            }
-
-            override fun onInternetConnectionError() {
-                App.instance.hideLoadingOverlayDialog()
-            }
-
-            override fun onFailure(error: String) {
-                App.instance.hideLoadingOverlayDialog()
             }
         }))
     }
@@ -113,7 +92,7 @@ class MainViewModel(application: Application, ulloService: UlloService, session:
 
     private fun userContactlist(registerReq: JsonObject) {
         App.instance.showLoadingOverlayDialog(App.instance.getString(R.string.loading))
-        getCompositeDisposable()?.add(getLinderaService().userContactlist(registerReq, object : ResponseListener<Response<BaseResponse<ContactData>>, String> {
+        getCompositeDisposable()?.add(getUlloService().userContactlist(registerReq, object : ResponseListener<Response<BaseResponse<ContactData>>, String> {
             override fun onSuccess(response: Response<BaseResponse<ContactData>>) {
                 App.instance.hideLoadingOverlayDialog()
                 if (response.isSuccessful) {
@@ -151,7 +130,7 @@ class MainViewModel(application: Application, ulloService: UlloService, session:
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe {
                         if (it) {
-                            Log.d("mytatg", "Successfully added")
+                            getSession().setSyncContact(true)
                         }
                     })
         }

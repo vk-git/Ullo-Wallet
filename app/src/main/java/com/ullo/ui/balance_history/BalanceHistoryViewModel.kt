@@ -8,7 +8,6 @@ import com.ullo.R
 import com.ullo.api.ResponseListener
 import com.ullo.api.response.BaseResponse
 import com.ullo.api.response.balance_history.BalanceHistoryData
-import com.ullo.api.response.notification.NotificationData
 import com.ullo.api.service.UlloService
 import com.ullo.base.BaseViewModel
 import com.ullo.db.DataManager
@@ -21,7 +20,7 @@ class BalanceHistoryViewModel(application: Application, ulloService: UlloService
 
     fun userBalanceHistorylist() {
         App.instance.showLoadingOverlayDialog(App.instance.getString(R.string.loading))
-        getCompositeDisposable()?.add(getLinderaService().userBalanceHistorylist(object : ResponseListener<Response<BaseResponse<BalanceHistoryData>>, String> {
+        getCompositeDisposable()?.add(getUlloService().userBalanceHistorylist(object : ResponseListener<Response<BaseResponse<BalanceHistoryData>>, String> {
             override fun onSuccess(response: Response<BaseResponse<BalanceHistoryData>>) {
                 App.instance.hideLoadingOverlayDialog()
                 if (response.isSuccessful) {

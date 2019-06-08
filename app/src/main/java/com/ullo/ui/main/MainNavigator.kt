@@ -9,4 +9,5 @@ interface MainNavigator : BaseNavigator {
     fun onReceiveMoneyHandle()
     fun onNotificationHandle()
     fun onAccountInfoSuccess(data: JsonElement)
+    fun onMangeMoneyHandle()
 }

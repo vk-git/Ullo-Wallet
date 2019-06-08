@@ -24,7 +24,7 @@ class ContactViewModel(application: Application, ulloService: UlloService, sessi
 
     fun userContactUs(registerReq: JsonObject) {
         App.instance.showLoadingOverlayDialog(App.instance.getString(R.string.loading))
-        getCompositeDisposable()?.add(getLinderaService().userContactUs(registerReq, object : ResponseListener<Response<BaseResponse<JsonElement>>, String> {
+        getCompositeDisposable()?.add(getUlloService().userContactUs(registerReq, object : ResponseListener<Response<BaseResponse<JsonElement>>, String> {
             override fun onSuccess(response: Response<BaseResponse<JsonElement>>) {
                 App.instance.hideLoadingOverlayDialog()
                 if (response.isSuccessful) {

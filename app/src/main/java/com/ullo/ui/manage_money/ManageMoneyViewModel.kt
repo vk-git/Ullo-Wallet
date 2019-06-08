@@ -1,4 +1,4 @@
-package com.ullo.ui.send_money
+package com.ullo.ui.manage_money
 
 import android.app.Application
 import com.google.gson.JsonElement
@@ -14,16 +14,16 @@ import com.ullo.utils.Session
 import retrofit2.Response
 
 
-class SendMoneyViewModel(application: Application, ulloService: UlloService, session: Session, dataManager: DataManager) : BaseViewModel<SendMoneyNavigator>(application, ulloService, session, dataManager) {
+class ManageMoneyViewModel(application: Application, ulloService: UlloService, session: Session, dataManager: DataManager) : BaseViewModel<ManageMoneyNavigator>(application, ulloService, session, dataManager) {
 
-    fun userSendMoney(registerReq: JsonObject) {
-        App.instance.showLoadingOverlayDialog(App.instance.getString(R.string.sending_money))
-        getCompositeDisposable()?.add(getUlloService().userSendMoney(registerReq, object : ResponseListener<Response<BaseResponse<JsonElement>>, String> {
+    fun userAddMoney(registerReq: JsonObject) {
+        App.instance.showLoadingOverlayDialog(App.instance.getString(R.string.adding_money))
+        getCompositeDisposable()?.add(getUlloService().userAddMoney(registerReq, object : ResponseListener<Response<BaseResponse<JsonElement>>, String> {
             override fun onSuccess(response: Response<BaseResponse<JsonElement>>) {
                 App.instance.hideLoadingOverlayDialog()
                 if (response.isSuccessful) {
                     response.body()?.run {
-                        getNavigator()?.onSendMoneySuccess()
+                        getNavigator()?.onAddMoneySuccess()
                     }
                 }
             }

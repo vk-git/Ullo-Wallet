@@ -69,6 +69,7 @@ class SendMoneyActivity : BaseActivity<ActivitySendMoneyBinding, SendMoneyViewMo
             mActivitySendMoneyBinding!!.txtContactInfo.text = getString(R.string.paying_money_to_sophia_fields, contact.fullName, contact.phoneNumber)
         }
 
+        mActivitySendMoneyBinding!!.etAmount.requestFocus()
         mActivitySendMoneyBinding!!.btnUpdate.setOnClickListener {
             if (mActivitySendMoneyBinding!!.btnUpdate.text.toString() == "Send") {
                 if (isValid()) {

@@ -29,7 +29,7 @@ class RegisterViewModel(application: Application, ulloService: UlloService, sess
 
     fun register(registerReq: JsonObject) {
         App.instance.showLoadingOverlayDialog(App.instance.getString(R.string.loading))
-        getCompositeDisposable()?.add(getLinderaService().userRegister(registerReq, object : ResponseListener<Response<BaseResponse<AppUser>>, String> {
+        getCompositeDisposable()?.add(getUlloService().userRegister(registerReq, object : ResponseListener<Response<BaseResponse<AppUser>>, String> {
             override fun onSuccess(response: Response<BaseResponse<AppUser>>) {
                 App.instance.hideLoadingOverlayDialog()
                 if (response.isSuccessful) {

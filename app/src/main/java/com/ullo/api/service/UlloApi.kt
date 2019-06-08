@@ -9,10 +9,10 @@ import com.ullo.api.response.balance_history.BalanceHistoryData
 import com.ullo.api.response.contact.ContactData
 import com.ullo.api.response.notification.NotificationData
 import io.reactivex.Observable
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface UlloApi {
 
@@ -54,4 +54,11 @@ interface UlloApi {
 
     @GET("account-info")
     fun userAccountInfo(): Observable<Response<BaseResponse<JsonElement>>>
+
+    @POST("notification/setting")
+    fun userNotificationSetting(@Body registerReq: JsonObject): Observable<Response<BaseResponse<JsonElement>>>
+
+    @Multipart
+    @POST("auth/edit-profile")
+    fun userUploadImage(@Part image: MultipartBody.Part, @PartMap param: HashMap<String, RequestBody>): Observable<Response<BaseResponse<AppUser>>>
 }

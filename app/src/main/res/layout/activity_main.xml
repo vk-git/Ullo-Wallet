@@ -40,8 +40,9 @@
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/imgUser"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
                     android:layout_marginStart="21dp"
                     android:src="@drawable/user_icon" />
 
@@ -56,18 +57,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        tools:text="Augusta F"
                         android:textColor="#FFFFFF"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        tools:text="Augusta F" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txtUserEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        tools:text="augusta@yaypay"
                         android:textColor="#FFFFFF"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        tools:text="augusta@yaypay" />
 
                 </LinearLayout>
 
@@ -82,8 +83,8 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
                     android:onClick="@{()->viewModel.onNotificationButtonClick()}"
+                    android:padding="16dp"
                     android:src="@drawable/baseline_notifications" />
 
             </LinearLayout>
@@ -114,8 +115,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="13dp"
                             android:layout_marginTop="9dp"
-                            android:text="Current Balance"
                             android:fontFamily="@font/quicksand_regular"
+                            android:text="Current Balance"
                             android:textColor="#787786"
                             android:textSize="16sp" />
 
@@ -125,10 +126,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="13dp"
                             android:layout_marginTop="11dp"
-                            tools:text="$0.0"
                             android:fontFamily="@font/quicksand_regular"
                             android:textColor="#4A4956"
-                            android:textSize="28sp" />
+                            android:textSize="28sp"
+                            tools:text="$0.0" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -141,8 +142,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="13dp"
-                                android:text="View Statement"
                                 android:fontFamily="@font/quicksand_bold"
+                                android:text="View Statement"
                                 android:textColor="#712CE2"
                                 android:textSize="16sp" />
 
@@ -175,8 +176,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="13dp"
                             android:layout_marginTop="9dp"
-                            android:text="Credit Total"
                             android:fontFamily="@font/quicksand_regular"
+                            android:text="Credit Total"
                             android:textColor="#787786"
                             android:textSize="16sp" />
 
@@ -186,10 +187,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="13dp"
                             android:layout_marginTop="11dp"
-                            tools:text="$0.0"
                             android:fontFamily="@font/quicksand_regular"
                             android:textColor="#4A4956"
-                            android:textSize="28sp" />
+                            android:textSize="28sp"
+                            tools:text="$0.0" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
@@ -197,8 +198,8 @@
                             android:layout_marginStart="13dp"
                             android:layout_marginTop="42dp"
                             android:layout_marginBottom="20dp"
-                            android:text="View Statement"
                             android:fontFamily="@font/quicksand_bold"
+                            android:text="View Statement"
                             android:textColor="#712CE2"
                             android:textSize="16sp" />
 
@@ -262,12 +263,12 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:onClick="@{()->viewModel.onReceiveMoneyButtonClick()}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="15dp"
+                android:onClick="@{()->viewModel.onReceiveMoneyButtonClick()}">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="match_parent"
@@ -311,7 +312,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="15dp"
+                android:onClick="@{()->viewModel.onManageMoneyButtonClick()}">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="match_parent"

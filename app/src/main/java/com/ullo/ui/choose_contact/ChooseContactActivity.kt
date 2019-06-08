@@ -1,9 +1,13 @@
 package com.ullo.ui.choose_contact
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ullo.BR
@@ -12,6 +16,7 @@ import com.ullo.adapter.ContactAdapter
 import com.ullo.api.response.contact.Contact
 import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivityChooseContactBinding
+import com.ullo.ui.main.MainActivity
 import com.ullo.ui.scan_qr_code.ScanQrCodeActivity
 import com.ullo.ui.send_money.SendMoneyActivity
 import com.ullo.utils.Constant
@@ -25,6 +30,7 @@ import javax.inject.Inject
 class ChooseContactActivity : BaseActivity<ActivityChooseContactBinding, ChooseContactViewModel>(), ChooseContactNavigator {
 
     companion object {
+        private const val READ_CONTACT_PERMISSION_REQUEST_CODE = 76
         fun newIntent(context: Context): Intent {
             return Intent(context, ChooseContactActivity::class.java)
         }
@@ -62,9 +68,14 @@ class ChooseContactActivity : BaseActivity<ActivityChooseContactBinding, ChooseC
             finish()
         })
 
-        viewModel.fetchContactAndUpload()
+        if (viewModel.getSession().getSyncContact()) {
+            fetchContacts()
+        } else {
+            onShowAlert("Contact Sync", "Contact sync not enable please goto settings and enable contact sync.")
+        }
+
         viewModel.run {
-            allContacts.observeForever {
+            getAllContact().observeForever {
                 setContactData(it)
             }
         }
@@ -82,6 +93,18 @@ class ChooseContactActivity : BaseActivity<ActivityChooseContactBinding, ChooseC
                             setContactData(contactList)
                         }
                     }
+        }
+    }
+
+    private fun fetchContacts() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) ==
+                PackageManager.PERMISSION_GRANTED) {
+            viewModel.fetchContactAndUpload()
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(arrayOf(Manifest.permission.READ_CONTACTS),
+                        READ_CONTACT_PERMISSION_REQUEST_CODE)
+            }
         }
     }
 
@@ -117,6 +140,15 @@ class ChooseContactActivity : BaseActivity<ActivityChooseContactBinding, ChooseC
     override fun onScanQrCodeHandle() {
         ScanQrCodeActivity.newIntent(this).apply {
             startActivity(this)
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        if (requestCode == READ_CONTACT_PERMISSION_REQUEST_CODE
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            fetchContacts()
+        } else {
+            viewModel.getSession().setSyncContact(false)
         }
     }
 }

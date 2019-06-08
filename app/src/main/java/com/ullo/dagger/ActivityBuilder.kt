@@ -10,6 +10,7 @@ import com.ullo.ui.forgot_password.ForgotPasswordActivity
 import com.ullo.ui.landing.LandingActivity
 import com.ullo.ui.login.LoginActivity
 import com.ullo.ui.main.MainActivity
+import com.ullo.ui.manage_money.ManageMoneyActivity
 import com.ullo.ui.my_qr_code.MyQrCodeActivity
 import com.ullo.ui.notification.NotificationActivity
 import com.ullo.ui.notification.NotificationActivityModule
@@ -75,6 +76,9 @@ abstract class ActivityBuilder {
 
     @ContributesAndroidInjector
     internal abstract fun bindScanQrCodeActivity(): ScanQrCodeActivity
+
+    @ContributesAndroidInjector
+    internal abstract fun bindManageMoneyActivity(): ManageMoneyActivity
 
     @ContributesAndroidInjector(modules = [BalanceHistoryActivityModule::class])
     internal abstract fun bindBalanceHistoryActivity(): BalanceHistoryActivity

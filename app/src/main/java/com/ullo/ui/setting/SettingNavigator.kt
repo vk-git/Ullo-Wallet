@@ -13,4 +13,5 @@ interface SettingNavigator : BaseNavigator {
     fun onSignOutHandle()
     fun onContactUsHandle()
     fun onAboutUsHandle()
+    fun onNotificationSettingSuccess()
 }

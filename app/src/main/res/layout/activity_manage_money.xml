@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.send_money.SendMoneyActivity">
+    tools:context=".ui.manage_money.ManageMoneyActivity">
 
     <data>
 
@@ -10,7 +10,7 @@
 
         <variable
             name="viewModel"
-            type="com.ullo.ui.send_money.SendMoneyViewModel" />
+            type="com.ullo.ui.manage_money.ManageMoneyViewModel" />
 
     </data>
 
@@ -24,7 +24,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Send Money"
+            android:text="Manage Money"
             app:leftDrawable="@drawable/ic_back"
             app:rightDrawable="@drawable/menu_icon" />
 
@@ -34,32 +34,6 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/baseline_person" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="27dp"
-                    android:layout_marginEnd="27dp"
-                    android:src="@drawable/send_money" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/baseline_person" />
-
-            </LinearLayout>
-
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtContactInfo"
                 android:layout_width="wrap_content"
@@ -68,7 +42,7 @@
                 android:layout_marginTop="36dp"
                 android:fontFamily="@font/quicksand_bold"
                 android:gravity="center"
-                android:text="@string/paying_money_to_sophia_fields"
+                android:text="Add Money to your Ullo wallet\n(add money to your wallet)"
                 android:textColor="#0A39F5"
                 android:textSize="16sp" />
 
@@ -86,15 +60,6 @@
                 android:singleLine="true"
                 android:textColor="#0A39F5"
                 android:textSize="40sp" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="@font/quicksand_regular"
-                android:text="What’s this for?"
-                android:textColor="#0A39F5"
-                android:textSize="14sp" />
 
             <ImageView
                 android:id="@+id/imgSuccess"
@@ -116,7 +81,7 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/login_button_gradient"
             android:fontFamily="@font/quicksand_bold"
-            android:text="Send"
+            android:text="Add Money"
             android:textAllCaps="false"
             android:textColor="@color/white" />
 

@@ -43,7 +43,10 @@
         <activity android:name=".ui.my_qr_code.MyQrCodeActivity" />
         <activity android:name=".ui.balance_history.BalanceHistoryActivity" />
         <activity android:name=".ui.notification.NotificationActivity" />
-        <activity android:name=".ui.send_money.SendMoneyActivity" />
+        <activity android:name=".ui.send_money.SendMoneyActivity"
+            android:windowSoftInputMode="stateVisible"/>
         <activity android:name=".ui.scan_qr_code.ScanQrCodeActivity" />
+        <activity android:name=".ui.manage_money.ManageMoneyActivity"
+            android:windowSoftInputMode="stateVisible"/>
     </application>
 </manifest>

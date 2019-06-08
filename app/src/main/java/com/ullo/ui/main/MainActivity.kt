@@ -7,7 +7,10 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.gson.JsonElement
 import com.ullo.BR
 import com.ullo.R
@@ -15,6 +18,7 @@ import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivityMainBinding
 import com.ullo.ui.balance_history.BalanceHistoryActivity
 import com.ullo.ui.choose_contact.ChooseContactActivity
+import com.ullo.ui.manage_money.ManageMoneyActivity
 import com.ullo.ui.notification.NotificationActivity
 import com.ullo.ui.setting.SettingActivity
 import com.ullo.utils.ViewModelProviderFactory
@@ -24,7 +28,6 @@ import javax.inject.Inject
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNavigator {
 
     companion object {
-
         private const val READ_CONTACT_PERMISSION_REQUEST_CODE = 76
 
         fun newIntent(context: Context): Intent {
@@ -53,23 +56,32 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
         super.onCreate(savedInstanceState)
         mActivityMainBinding = getViewDataBinding()
         viewModel.setNavigator(this)
-        viewModel.userAccountInfo()
         viewModel.getCms()
 
         viewModel.getSession().getAppUser()?.run {
             mActivityMainBinding!!.txtUserEmail.text = userData.email
             mActivityMainBinding!!.txtUserFullName.text = userData.fullName
-        }
-        viewModel.run {
-            allContacts.observeForever {
-                if (it.isEmpty()) {
-                    fetchContacts()
-                }
-            }
+
+            Glide.with(this@MainActivity)
+                    .load(if (userData.image != null) userData.image else "")
+                    .centerCrop()
+                    .placeholder(R.drawable.user_icon)
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(mActivityMainBinding!!.imgUser)
         }
 
-        viewModel.getSession().getAccountInfo()?.run {
-            onAccountInfoSuccess(this)
+        viewModel.getAccountInfo().observe(this@MainActivity, Observer {
+            onAccountInfoSuccess(it)
+        })
+
+        viewModel.run {
+            if (!getSession().getSyncContact()) {
+                getAllContact().observeForever {
+                    if (it.isEmpty()) {
+                        fetchContacts()
+                    }
+                }
+            }
         }
     }
 
@@ -89,6 +101,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
         if (requestCode == READ_CONTACT_PERMISSION_REQUEST_CODE
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             fetchContacts()
+        } else {
+            viewModel.getSession().setSyncContact(false)
         }
     }
 
@@ -112,6 +126,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
 
     override fun onReceiveMoneyHandle() {
         BalanceHistoryActivity.newIntent(this).apply {
+            startActivity(this)
+        }
+    }
+
+    override fun onMangeMoneyHandle() {
+        ManageMoneyActivity.newIntent(this).apply {
             startActivity(this)
         }
     }

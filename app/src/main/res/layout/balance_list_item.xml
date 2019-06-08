@@ -41,7 +41,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/quicksand_regular"
-                    android:text="John Peter"
+                    android:text="@{history.name}"
                     android:textColor="#3A3F43"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/quicksand_regular"
-                    android:text="@{history.timestamp}"
+                    android:text="@{history.getTimestamp()}"
                     android:textColor="#3A3F43"
                     android:textSize="14sp" />
 
@@ -68,7 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/quicksand_regular"
-                    android:text="@{'$'+history.amount}"
+                    android:text="@{history.getAmount()}"
                     android:textColor="#3A3F43"
                     android:textSize="24sp" />
 

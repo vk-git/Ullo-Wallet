@@ -2,13 +2,11 @@ package com.ullo.ui.notification
 
 import android.app.Application
 import com.google.gson.JsonElement
-import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import com.ullo.App
 import com.ullo.R
 import com.ullo.api.ResponseListener
 import com.ullo.api.response.BaseResponse
-import com.ullo.api.response.contact.ContactData
 import com.ullo.api.response.notification.NotificationData
 import com.ullo.api.service.UlloService
 import com.ullo.base.BaseViewModel
@@ -23,7 +21,7 @@ class NotificationViewModel(application: Application, ulloService: UlloService, 
 
     fun userNotificationlist() {
         App.instance.showLoadingOverlayDialog(App.instance.getString(R.string.loading))
-        getCompositeDisposable()?.add(getLinderaService().userNotificationlist(object : ResponseListener<Response<BaseResponse<NotificationData>>, String> {
+        getCompositeDisposable()?.add(getUlloService().userNotificationlist(object : ResponseListener<Response<BaseResponse<NotificationData>>, String> {
             override fun onSuccess(response: Response<BaseResponse<NotificationData>>) {
                 App.instance.hideLoadingOverlayDialog()
                 if (response.isSuccessful) {

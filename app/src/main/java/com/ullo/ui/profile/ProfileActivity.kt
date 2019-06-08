@@ -1,10 +1,14 @@
 package com.ullo.ui.profile
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProviders
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.gson.JsonObject
 import com.ullo.BR
 import com.ullo.BuildConfig
@@ -12,14 +16,17 @@ import com.ullo.R
 import com.ullo.api.response.AppUser
 import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivityProfileBinding
+import com.ullo.utils.ImageFilePath
 import com.ullo.utils.Validation
 import com.ullo.utils.ViewModelProviderFactory
+import java.io.File
 import javax.inject.Inject
+
 
 class ProfileActivity : BaseActivity<ActivityProfileBinding, ProfileViewModel>(), ProfileNavigator {
 
-
     companion object {
+        const val GET_FROM_GALLERY = 101
         fun newIntent(context: Context): Intent {
             return Intent(context, ProfileActivity::class.java)
         }
@@ -32,6 +39,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding, ProfileViewModel>()
         get() = ViewModelProviders.of(this, factory).get(ProfileViewModel::class.java)
 
     private var mActivityProfileBinding: ActivityProfileBinding? = null
+    private var file: File? = null
 
     override val bindingVariable: Int
         get() = BR.viewModel
@@ -52,11 +60,22 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding, ProfileViewModel>()
             finish()
         })
 
+        mActivityProfileBinding!!.imgUser.setOnClickListener {
+            startActivityForResult(Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY)
+        }
+
         viewModel.getSession().getAppUser()?.run {
             mActivityProfileBinding!!.etFullName.setText(userData.fullName)
             mActivityProfileBinding!!.etEmail.setText(userData.email)
             mActivityProfileBinding!!.etCountry.setText(userData.countryCode)
             mActivityProfileBinding!!.etMobileNo.setText(userData.phoneNumber)
+
+            Glide.with(this@ProfileActivity)
+                    .load(if (userData.image != null) userData.image else "")
+                    .centerCrop()
+                    .placeholder(R.drawable.user_icon)
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(mActivityProfileBinding!!.imgUser)
         }
     }
 
@@ -70,7 +89,11 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding, ProfileViewModel>()
             loginReq.addProperty("user_type", BuildConfig.USER_TYPE)
             loginReq.addProperty("device_id", viewModel.getSession().getAppDeviceId())
             loginReq.addProperty("device_type", BuildConfig.DEVICE_TYPE)
-            viewModel.userUpdateProfile(loginReq)
+            if (file == null) {
+                viewModel.userUpdateProfile(loginReq)
+            } else {
+                viewModel.userUploadImage(loginReq, file!!)
+            }
         }
     }
 
@@ -121,5 +144,22 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding, ProfileViewModel>()
 
     override fun onUpdateSuccessful(data: AppUser) {
         handleError("Profile Successfully Updated")
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
+            val realPath = ImageFilePath.getPath(this, data!!.data)
+            if (realPath != null) {
+                Log.d("mytag", "File::$realPath")
+                file = File(realPath)
+                Glide.with(this@ProfileActivity)
+                        .load(file)
+                        .centerCrop()
+                        .placeholder(R.drawable.user_icon)
+                        .apply(RequestOptions.circleCropTransform())
+                        .into(mActivityProfileBinding!!.imgUser)
+            }
+        }
     }
 }

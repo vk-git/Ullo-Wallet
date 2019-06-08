@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProviders
+import com.google.gson.JsonObject
 import com.ullo.BR
 import com.ullo.R
 import com.ullo.base.BaseActivity
@@ -20,6 +21,7 @@ import com.ullo.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
 class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>(), SettingNavigator {
+
 
     companion object {
         fun newIntent(context: Context): Intent {
@@ -54,6 +56,20 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>()
             finish()
         })
 
+        viewModel.run {
+            mActivitySettingBinding!!.swSyncContact.isChecked = getSession().getSyncContact()
+            mActivitySettingBinding!!.swPushNotification.isChecked = getSession().getPushNotification()
+            mActivitySettingBinding!!.swEmailNotification.isChecked = getSession().getEmailNotification()
+        }
+
+        mActivitySettingBinding!!.swSyncContact.setOnCheckedChangeListener { buttonView, isChecked ->
+            viewModel.getSession().setSyncContact(isChecked)
+        }
+        mActivitySettingBinding!!.swPushNotification.setOnCheckedChangeListener { buttonView, isChecked ->
+            val registerReq = JsonObject()
+            registerReq.addProperty("is_notification", if (isChecked) 1 else 0)
+            viewModel.userNotificationSetting(registerReq)
+        }
     }
 
     override fun onMyProfileHandle() {
@@ -121,5 +137,9 @@ class SettingActivity : BaseActivity<ActivitySettingBinding, SettingViewModel>()
             startActivity(this)
         }
         finish()
+    }
+
+    override fun onNotificationSettingSuccess() {
+        viewModel.getSession().setPushNotification(mActivitySettingBinding!!.swPushNotification.isChecked)
     }
 }

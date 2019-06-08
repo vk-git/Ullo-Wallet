@@ -78,7 +78,7 @@ class Validation(private val mEdittextview: EditText, private val valType: Valid
         }
 
         fun isValidNumber(str: String): Boolean {
-            return Pattern.compile("^[0-9]$").matcher(str).matches()
+            return str.isNotEmpty()
         }
 
         fun isValidateZIP(str: String): Boolean {

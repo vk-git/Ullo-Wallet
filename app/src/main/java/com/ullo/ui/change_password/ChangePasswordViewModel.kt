@@ -25,7 +25,7 @@ class ChangePasswordViewModel(application: Application, ulloService: UlloService
 
     fun changePassword(loginReq: JsonObject) {
         App.instance.showLoadingOverlayDialog(App.instance.getString(R.string.loading))
-        getCompositeDisposable()?.add(getLinderaService().userChangePassword(loginReq, object : ResponseListener<Response<BaseResponse<AppUser>>, String> {
+        getCompositeDisposable()?.add(getUlloService().userChangePassword(loginReq, object : ResponseListener<Response<BaseResponse<AppUser>>, String> {
             override fun onSuccess(response: Response<BaseResponse<AppUser>>) {
                 App.instance.hideLoadingOverlayDialog()
                 if (response.isSuccessful) {

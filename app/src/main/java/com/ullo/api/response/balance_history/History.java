@@ -1,8 +1,13 @@
 
 package com.ullo.api.response.balance_history;
 
+import android.text.format.DateFormat;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.Calendar;
+import java.util.Locale;
 
 public class History {
 
@@ -12,6 +17,9 @@ public class History {
     @SerializedName("type")
     @Expose
     private String type;
+    @SerializedName("name")
+    @Expose
+    private String name;
     @SerializedName("amount")
     @Expose
     private String amount;
@@ -38,8 +46,20 @@ public class History {
         this.type = type;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getAmount() {
-        return amount;
+        if (type.equals("C")) {
+            return "+ $" + amount;
+        } else {
+            return "- $" + amount;
+        }
     }
 
     public void setAmount(String amount) {
@@ -55,7 +75,10 @@ public class History {
     }
 
     public String getTimestamp() {
-        return timestamp;
+        Calendar cal = Calendar.getInstance(Locale.ENGLISH);
+        cal.setTimeInMillis(Integer.parseInt(timestamp) * 1000L);
+        String date = DateFormat.format("dd. MMM. yyyy", cal).toString();
+        return date;
     }
 
     public void setTimestamp(String timestamp) {

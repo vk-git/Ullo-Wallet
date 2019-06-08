@@ -13,7 +13,12 @@ import com.ullo.api.response.notification.NotificationData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
+import java.io.File
+
 
 class UlloService(private val ulloApi: UlloApi) {
 
@@ -275,5 +280,56 @@ class UlloService(private val ulloApi: UlloApi) {
                         listener.onFailure(error)
                     }
                 })
+    }
+
+    fun userNotificationSetting(registerReq: JsonObject, listener: ResponseListener<Response<BaseResponse<JsonElement>>, String>): Disposable {
+        return ulloApi.userNotificationSetting(registerReq)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : ApiResponseCallbackWrapper<Response<BaseResponse<JsonElement>>>() {
+
+                    override fun onSuccess(response: Response<BaseResponse<JsonElement>>) {
+                        listener.onSuccess(response)
+                    }
+
+                    override fun onInternetConnectionError() {
+                        listener.onInternetConnectionError()
+                    }
+
+                    override fun onFailure(error: String) {
+                        listener.onFailure(error)
+                    }
+                })
+    }
+
+    fun userUploadImage(registerReq: JsonObject, file: File, listener: ResponseListener<Response<BaseResponse<AppUser>>, String>): Disposable {
+        val params = HashMap<String, RequestBody>()
+        registerReq.entrySet().forEach {
+            params[it.key] = createRequestBody(it.value.asString)
+        }
+        val requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file)
+        val body = MultipartBody.Part.createFormData("image", file.name, requestFile)
+
+        return ulloApi.userUploadImage(body, params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : ApiResponseCallbackWrapper<Response<BaseResponse<AppUser>>>() {
+
+                    override fun onSuccess(response: Response<BaseResponse<AppUser>>) {
+                        listener.onSuccess(response)
+                    }
+
+                    override fun onInternetConnectionError() {
+                        listener.onInternetConnectionError()
+                    }
+
+                    override fun onFailure(error: String) {
+                        listener.onFailure(error)
+                    }
+                })
+    }
+
+    private fun createRequestBody(s: String): RequestBody {
+        return RequestBody.create(MediaType.parse("text/plain"), s)
     }
 }

@@ -165,6 +165,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<*>> : AppComp
             view.findViewById<TextView>(R.id.message).text = msg
             loadingOverlayDialog!!.setContentView(view)
             loadingOverlayDialog!!.window!!.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
+            loadingOverlayDialog!!.setCancelable(false)
             loadingOverlayDialog!!.show()
         } catch (e: Exception) {
             e.printStackTrace()
