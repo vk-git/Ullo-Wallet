@@ -25,6 +25,10 @@ import retrofit2.Response
 
 class ChooseContactViewModel(application: Application, ulloService: UlloService, session: Session, dataManager: DataManager) : BaseViewModel<ChooseContactNavigator>(application, ulloService, session, dataManager) {
 
+    fun onScanQrCodeButtonClick(){
+        getNavigator()?.onScanQrCodeHandle()
+    }
+
     fun fetchContactAndUpload() {
         val q = Contacts.getQuery()
         q.hasPhoneNumber()

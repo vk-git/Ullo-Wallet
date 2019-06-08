@@ -60,8 +60,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
             mActivityMainBinding!!.txtUserEmail.text = userData.email
             mActivityMainBinding!!.txtUserFullName.text = userData.fullName
         }
-
-        fetchContacts()
+        viewModel.run {
+            allContacts.observeForever {
+                if (it.isEmpty()) {
+                    fetchContacts()
+                }
+            }
+        }
 
         viewModel.getSession().getAccountInfo()?.run {
             onAccountInfoSuccess(this)
@@ -112,7 +117,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
     }
 
     override fun onAccountInfoSuccess(data: JsonElement) {
-        mActivityMainBinding!!.txtCurrentBalance.text = "$" + data.asJsonObject.get("current_balance").asInt
-        mActivityMainBinding!!.txtCreditTotal.text = "$" + data.asJsonObject.get("credit_balance").asInt
+        if (data.asJsonObject.get("current_balance") != null) {
+            mActivityMainBinding!!.txtCurrentBalance.text = "$" + data.asJsonObject.get("current_balance").asInt
+            mActivityMainBinding!!.txtCreditTotal.text = "$" + data.asJsonObject.get("credit_balance").asInt
+        }
     }
 }

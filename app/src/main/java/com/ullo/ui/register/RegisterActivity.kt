@@ -119,7 +119,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
         if (mobileNo.isEmpty() || !Validation.isValidMobile(mobileNo)) {
             mActivityRegisterBinding!!.tIMobileNo.visible()
             mActivityRegisterBinding!!.tIMobileNo.text = "Not Valid Number"
-            bPassword = false
+            bCountryCode = false
         } else {
             mActivityRegisterBinding!!.tIMobileNo.gone()
         }

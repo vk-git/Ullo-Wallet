@@ -95,7 +95,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<*>> : Fragmen
     override fun handleError(error: String) {
         activity?.run {
             AlertDialog.Builder(this)
-                    .setTitle("Error")
+                    .setTitle("Opps!")
                     .setIcon(R.drawable.error)
                     .setMessage(error)
                     .setPositiveButton(android.R.string.yes) { dialog, _ ->
@@ -108,7 +108,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<*>> : Fragmen
     override fun onInternetConnectionError() {
         activity?.run {
             AlertDialog.Builder(this)
-                    .setTitle("Error")
+                    .setTitle("Opps!")
                     .setIcon(R.drawable.error)
                     .setMessage(getString(R.string.please_check_your_internet_connection_or_try_again_later))
                     .setPositiveButton(android.R.string.yes) { dialog, _ ->

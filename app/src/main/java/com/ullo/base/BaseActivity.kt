@@ -100,7 +100,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<*>> : AppComp
 
     override fun handleError(error: String) {
         AlertDialog.Builder(this)
-                .setTitle("Error")
+                .setTitle("Opps!")
                 .setIcon(R.drawable.error)
                 .setMessage(error)
                 .setPositiveButton(android.R.string.yes) { dialog, _ ->
@@ -111,7 +111,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<*>> : AppComp
 
     override fun onInternetConnectionError() {
         AlertDialog.Builder(this)
-                .setTitle("Error")
+                .setTitle("Opps!")
                 .setIcon(R.drawable.error)
                 .setMessage(getString(R.string.please_check_your_internet_connection_or_try_again_later))
                 .setPositiveButton(android.R.string.yes) { dialog, _ ->

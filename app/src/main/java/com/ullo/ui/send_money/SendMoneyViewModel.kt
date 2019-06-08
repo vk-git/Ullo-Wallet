@@ -3,6 +3,8 @@ package com.ullo.ui.send_money
 import android.app.Application
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
+import com.ullo.App
+import com.ullo.R
 import com.ullo.api.ResponseListener
 import com.ullo.api.response.BaseResponse
 import com.ullo.api.service.UlloService
@@ -15,22 +17,25 @@ import retrofit2.Response
 class SendMoneyViewModel(application: Application, ulloService: UlloService, session: Session, dataManager: DataManager) : BaseViewModel<SendMoneyNavigator>(application, ulloService, session, dataManager) {
 
     fun userSendMoney(registerReq: JsonObject) {
+        App.instance.showLoadingOverlayDialog(App.instance.getString(R.string.sending_money))
         getCompositeDisposable()?.add(getLinderaService().userSendMoney(registerReq, object : ResponseListener<Response<BaseResponse<JsonElement>>, String> {
             override fun onSuccess(response: Response<BaseResponse<JsonElement>>) {
+                App.instance.hideLoadingOverlayDialog()
                 if (response.isSuccessful) {
                     response.body()?.run {
-                        getSession().setAccountInfo(data)
                         getNavigator()?.onSendMoneySuccess()
                     }
                 }
             }
 
             override fun onInternetConnectionError() {
-                //BackGround Call
+                App.instance.hideLoadingOverlayDialog()
+                getNavigator()?.onInternetConnectionError()
             }
 
             override fun onFailure(error: String) {
-                //BackGround Call
+                App.instance.hideLoadingOverlayDialog()
+                getNavigator()?.handleError(error)
             }
         }))
     }

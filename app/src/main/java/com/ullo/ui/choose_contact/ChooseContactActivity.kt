@@ -12,6 +12,7 @@ import com.ullo.adapter.ContactAdapter
 import com.ullo.api.response.contact.Contact
 import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivityChooseContactBinding
+import com.ullo.ui.scan_qr_code.ScanQrCodeActivity
 import com.ullo.ui.send_money.SendMoneyActivity
 import com.ullo.utils.Constant
 import com.ullo.utils.RxSearch
@@ -22,7 +23,6 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class ChooseContactActivity : BaseActivity<ActivityChooseContactBinding, ChooseContactViewModel>(), ChooseContactNavigator {
-
 
     companion object {
         fun newIntent(context: Context): Intent {
@@ -111,6 +111,12 @@ class ChooseContactActivity : BaseActivity<ActivityChooseContactBinding, ChooseC
     override fun setFilterPatientList(filteredDataList: ArrayList<Contact>) {
         contactAdapter?.run {
             setContactListData(filteredDataList)
+        }
+    }
+
+    override fun onScanQrCodeHandle() {
+        ScanQrCodeActivity.newIntent(this).apply {
+            startActivity(this)
         }
     }
 }

@@ -56,7 +56,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        android:text="Augusta F"
+                        tools:text="Augusta F"
                         android:textColor="#FFFFFF"
                         android:textSize="16sp" />
 
@@ -65,7 +65,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        android:text="augusta@yaypay"
+                        tools:text="augusta@yaypay"
                         android:textColor="#FFFFFF"
                         android:textSize="16sp" />
 
@@ -125,7 +125,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="13dp"
                             android:layout_marginTop="11dp"
-                            android:text="$121,700"
+                            tools:text="$0.0"
                             android:fontFamily="@font/quicksand_regular"
                             android:textColor="#4A4956"
                             android:textSize="28sp" />
@@ -186,7 +186,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="13dp"
                             android:layout_marginTop="11dp"
-                            android:text="$221,700"
+                            tools:text="$0.0"
                             android:fontFamily="@font/quicksand_regular"
                             android:textColor="#4A4956"
                             android:textSize="28sp" />

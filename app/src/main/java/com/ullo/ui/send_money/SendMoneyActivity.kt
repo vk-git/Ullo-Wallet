@@ -87,9 +87,9 @@ class SendMoneyActivity : BaseActivity<ActivitySendMoneyBinding, SendMoneyViewMo
         var bAmount = true
         val amount = mActivitySendMoneyBinding!!.etAmount.text.toString()
 
-        if (!Validation.isValidName(amount)) {
+        if (!Validation.isValidNumber(amount)) {
             //  mActivitySendMoneyBinding!!.etAmount.isErrorEnabled = true
-            mActivitySendMoneyBinding!!.etAmount.error = "The entered name is not correct."
+            mActivitySendMoneyBinding!!.etAmount.error = "The entered amount is not correct."
             bAmount = false
         } else {
             //  mActivitySendMoneyBinding!!.etAmount.isErrorEnabled = false
