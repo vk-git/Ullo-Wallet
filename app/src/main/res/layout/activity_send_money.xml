@@ -81,6 +81,7 @@
                 android:drawableStart="@drawable/ic_doller_money"
                 android:gravity="center"
                 android:hint="10"
+                android:fontFamily="@font/quicksand_regular"
                 android:inputType="number"
                 android:maxWidth="300dp"
                 android:singleLine="true"

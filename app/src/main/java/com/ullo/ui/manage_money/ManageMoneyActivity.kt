@@ -89,5 +89,6 @@ class ManageMoneyActivity : BaseActivity<ActivityManageMoneyBinding, ManageMoney
     override fun onAddMoneySuccess() {
         mActivityManageMoneyBinding!!.imgSuccess.visible()
         mActivityManageMoneyBinding!!.btnUpdate.text = "Close"
+        mActivityManageMoneyBinding!!.toolbar.setToolbarTitle("Success")
     }
 }

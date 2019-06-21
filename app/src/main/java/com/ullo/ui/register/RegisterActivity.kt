@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
+import android.text.method.PasswordTransformationMethod
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProviders
 import com.google.gson.JsonObject
 import com.ullo.BR
@@ -50,6 +52,10 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
         mActivityRegisterBinding = getViewDataBinding()
         viewModel.setNavigator(this)
 
+        val typeface = ResourcesCompat.getFont(this, R.font.quicksand_regular)
+        mActivityRegisterBinding!!.etPassword.typeface = typeface
+        mActivityRegisterBinding!!.etPassword.transformationMethod = PasswordTransformationMethod()
+
         val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID);
         viewModel.getSession().setAppDeviceId(deviceId)
     }
@@ -79,6 +85,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
        MainActivity.newIntent(this).apply {
            startActivity(this)
        }
+        finishAffinity()
     }
 
     private fun isValid(): Boolean {

@@ -159,6 +159,7 @@
                             android:id="@+id/etMobileNo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:drawableEnd="@drawable/ic_blue_circle"
                             android:background="@android:color/transparent"                            android:drawableRight="@drawable/right_arrow_with_bg"
                             android:fontFamily="@font/quicksand_regular"
                             android:hint="Mobile No."

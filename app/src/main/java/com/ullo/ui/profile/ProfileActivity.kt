@@ -1,11 +1,15 @@
 package com.ullo.ui.profile
 
+import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -16,6 +20,9 @@ import com.ullo.R
 import com.ullo.api.response.AppUser
 import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivityProfileBinding
+import com.ullo.extensions.gone
+import com.ullo.extensions.visible
+import com.ullo.ui.main.MainActivity
 import com.ullo.utils.ImageFilePath
 import com.ullo.utils.Validation
 import com.ullo.utils.ViewModelProviderFactory
@@ -26,6 +33,7 @@ import javax.inject.Inject
 class ProfileActivity : BaseActivity<ActivityProfileBinding, ProfileViewModel>(), ProfileNavigator {
 
     companion object {
+        private const val READ_STORAGE_PERMISSION_REQUEST_CODE = 76
         const val GET_FROM_GALLERY = 101
         fun newIntent(context: Context): Intent {
             return Intent(context, ProfileActivity::class.java)
@@ -61,21 +69,33 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding, ProfileViewModel>()
         })
 
         mActivityProfileBinding!!.imgUser.setOnClickListener {
-            startActivityForResult(Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY)
+            selectImageFromGalary()
         }
 
         viewModel.getSession().getAppUser()?.run {
             mActivityProfileBinding!!.etFullName.setText(userData.fullName)
             mActivityProfileBinding!!.etEmail.setText(userData.email)
-            mActivityProfileBinding!!.etCountry.setText(userData.countryCode)
+            mActivityProfileBinding!!.etCountryCode.setText(userData.countryCode)
             mActivityProfileBinding!!.etMobileNo.setText(userData.phoneNumber)
 
             Glide.with(this@ProfileActivity)
-                    .load(if (userData.image != null) userData.image else "")
+                    .load(userData.image ?: "")
                     .centerCrop()
                     .placeholder(R.drawable.user_icon)
                     .apply(RequestOptions.circleCropTransform())
                     .into(mActivityProfileBinding!!.imgUser)
+        }
+    }
+
+    private fun selectImageFromGalary() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
+                PackageManager.PERMISSION_GRANTED) {
+            startActivityForResult(Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY)
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                        READ_STORAGE_PERMISSION_REQUEST_CODE)
+            }
         }
     }
 
@@ -84,7 +104,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding, ProfileViewModel>()
             val loginReq = JsonObject()
             loginReq.addProperty("full_name", mActivityProfileBinding!!.etFullName.text.toString())
             loginReq.addProperty("email", mActivityProfileBinding!!.etEmail.text.toString())
-            loginReq.addProperty("country_code", mActivityProfileBinding!!.etCountry.text.toString())
+            loginReq.addProperty("country_code", mActivityProfileBinding!!.etCountryCode.text.toString())
             loginReq.addProperty("phone_number", mActivityProfileBinding!!.etMobileNo.text.toString())
             loginReq.addProperty("user_type", BuildConfig.USER_TYPE)
             loginReq.addProperty("device_id", viewModel.getSession().getAppDeviceId())
@@ -104,7 +124,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding, ProfileViewModel>()
         var bMobile = true
         val firstName = mActivityProfileBinding!!.etFullName.text.toString()
         val email = mActivityProfileBinding!!.etEmail.text.toString()
-        val country = mActivityProfileBinding!!.etCountry.text.toString()
+        val country = mActivityProfileBinding!!.etCountryCode.text.toString()
         val mobileNo = mActivityProfileBinding!!.etMobileNo.text.toString()
 
         if (!Validation.isValidName(firstName)) {
@@ -124,19 +144,19 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding, ProfileViewModel>()
         }
 
         if (mobileNo.isEmpty() || !Validation.isValidMobile(mobileNo)) {
-            mActivityProfileBinding!!.tIMobileNo.isErrorEnabled = true
+            mActivityProfileBinding!!.tIMobileNo.visible()
             mActivityProfileBinding!!.tIMobileNo.error = "Not Valid Number"
             bMobile = false
         } else {
-            mActivityProfileBinding!!.tIMobileNo.isErrorEnabled = false
+            mActivityProfileBinding!!.tIMobileNo.gone()
         }
 
         if (country.isEmpty() || mobileNo.isEmpty() || !Validation.isValidCountryCode(country, mobileNo)) {
-            mActivityProfileBinding!!.tICountry.isErrorEnabled = true
-            mActivityProfileBinding!!.tICountry.error = "Not Valid Country Code"
+            mActivityProfileBinding!!.tIMobileNo.visible()
+            mActivityProfileBinding!!.tIMobileNo.error = "Not Valid Country Code"
             bCountry = false
         } else {
-            mActivityProfileBinding!!.tICountry.isErrorEnabled = false
+            mActivityProfileBinding!!.tIMobileNo.gone()
         }
 
         return bFullName && bEmail && bCountry && bMobile
@@ -151,7 +171,6 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding, ProfileViewModel>()
         if (requestCode == GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
             val realPath = ImageFilePath.getPath(this, data!!.data)
             if (realPath != null) {
-                Log.d("mytag", "File::$realPath")
                 file = File(realPath)
                 Glide.with(this@ProfileActivity)
                         .load(file)
@@ -160,6 +179,13 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding, ProfileViewModel>()
                         .apply(RequestOptions.circleCropTransform())
                         .into(mActivityProfileBinding!!.imgUser)
             }
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        if (requestCode == READ_STORAGE_PERMISSION_REQUEST_CODE
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            startActivityForResult(Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY)
         }
     }
 }

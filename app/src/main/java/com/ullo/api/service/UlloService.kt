@@ -330,6 +330,6 @@ class UlloService(private val ulloApi: UlloApi) {
     }
 
     private fun createRequestBody(s: String): RequestBody {
-        return RequestBody.create(MediaType.parse("text/plain"), s)
+        return RequestBody.create(MediaType.parse("multipart/form-data"), s)
     }
 }

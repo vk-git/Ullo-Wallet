@@ -102,5 +102,6 @@ class SendMoneyActivity : BaseActivity<ActivitySendMoneyBinding, SendMoneyViewMo
     override fun onSendMoneySuccess() {
         mActivitySendMoneyBinding!!.imgSuccess.visible()
         mActivitySendMoneyBinding!!.btnUpdate.text = "Close"
+        mActivitySendMoneyBinding!!.toolbar.setToolbarTitle("Success")
     }
 }

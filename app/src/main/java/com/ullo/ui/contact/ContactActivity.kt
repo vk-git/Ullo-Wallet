@@ -50,6 +50,11 @@ class ContactActivity : BaseActivity<ActivityContactBinding, ContactViewModel>()
         mActivityContactBinding!!.toolbar.setBackButtonListener(listener = View.OnClickListener {
             finish()
         })
+
+        viewModel.getSession().getAppUser()?.run {
+            mActivityContactBinding!!.etFullName.setText(userData.fullName)
+            mActivityContactBinding!!.etEmail.setText(userData.email)
+        }
     }
 
     override fun onSendButtonHandle() {
@@ -99,13 +104,17 @@ class ContactActivity : BaseActivity<ActivityContactBinding, ContactViewModel>()
         }
 
         if (!Validation.isValidName(message)) {
+            mActivityContactBinding!!.tIMessage.isErrorEnabled = true
+            mActivityContactBinding!!.tIMessage.error = "The entered subject is not correct."
             bMessage = false
+        }else{
+            mActivityContactBinding!!.tIMessage.isErrorEnabled = false
         }
 
         return bEmail && bFullName && bSubject && bMessage
     }
 
     override fun onContactUsSuccessfully() {
-        handleError("Message sent to contact us.")
+        handleError("Query submitted successfully")
     }
 }

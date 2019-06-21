@@ -12,9 +12,9 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField("String", "SERVICE_ENDPOINT", '"https://wallet.atithiinfosoft.com/api/"')
+        buildConfigField("String", "SERVICE_ENDPOINT", '"https://wallet.squirreltechnolabs.com/api/"')
         buildConfigField("String", "USER_TYPE", '"2"')
-        buildConfigField("String", "DEVICE_TYPE", '"a"')
+        buildConfigField("String", "DEVICE_TYPE", '"android"')
     }
     dataBinding {
         enabled = true

@@ -2,8 +2,10 @@ package com.ullo.ui.login
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import android.provider.Settings
+import android.text.method.PasswordTransformationMethod
 import androidx.lifecycle.ViewModelProviders
 import com.google.gson.JsonObject
 import com.ullo.BR
@@ -17,6 +19,9 @@ import com.ullo.ui.register.RegisterActivity
 import com.ullo.utils.Validation
 import com.ullo.utils.ViewModelProviderFactory
 import javax.inject.Inject
+import androidx.core.content.res.ResourcesCompat
+
+
 
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), LoginNavigator {
 
@@ -47,6 +52,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), Logi
         super.onCreate(savedInstanceState)
         mActivityLoginBinding = getViewDataBinding()
         viewModel.setNavigator(this)
+
+        val typeface = ResourcesCompat.getFont(this, R.font.quicksand_regular)
+        mActivityLoginBinding!!.txtUserPassword.typeface = typeface
+        mActivityLoginBinding!!.txtUserPassword.transformationMethod = PasswordTransformationMethod()
 
         val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID);
         viewModel.getSession().setAppDeviceId(deviceId)
@@ -98,10 +107,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), Logi
     override fun onMainScreen() {
         viewModel.let {
             MainActivity.newIntent(this).apply {
-                flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or  Intent.FLAG_ACTIVITY_SINGLE_TOP
                 startActivity(this)
             }
-            finish()
+            finishAffinity()
         }
     }
 

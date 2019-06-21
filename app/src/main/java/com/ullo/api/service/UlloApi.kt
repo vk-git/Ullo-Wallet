@@ -34,10 +34,10 @@ interface UlloApi {
     @GET("cms/2/")
     fun userCMS(): Observable<Response<BaseResponse<CmsData>>>
 
-    @POST("contactus")
+    @POST("contact-us")
     fun userContactUs(@Body registerReq: JsonObject): Observable<Response<BaseResponse<JsonElement>>>
 
-    @POST("contactlist")
+    @POST("contact-list")
     fun userContactlist(@Body registerReq: JsonObject): Observable<Response<BaseResponse<ContactData>>>
 
     @POST("notification/list")
