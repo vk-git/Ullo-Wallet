@@ -42,6 +42,26 @@ class UlloService(private val ulloApi: UlloApi) {
                 })
     }
 
+    fun userVerifyOtp(registerReq: JsonObject, listener: ResponseListener<Response<BaseResponse<JsonElement>>, String>): Disposable {
+        return ulloApi.userVerifyOtp(registerReq)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : ApiResponseCallbackWrapper<Response<BaseResponse<JsonElement>>>() {
+
+                    override fun onSuccess(response: Response<BaseResponse<JsonElement>>) {
+                        listener.onSuccess(response)
+                    }
+
+                    override fun onInternetConnectionError() {
+                        listener.onInternetConnectionError()
+                    }
+
+                    override fun onFailure(error: String) {
+                        listener.onFailure(error)
+                    }
+                })
+    }
+
     fun userLogin(loginReq: JsonObject, listener: ResponseListener<Response<BaseResponse<AppUser>>, String>): Disposable {
         return ulloApi.userLogin(loginReq)
                 .subscribeOn(Schedulers.io())
@@ -202,8 +222,8 @@ class UlloService(private val ulloApi: UlloApi) {
                 })
     }
 
-    fun userBalanceHistorylist(listener: ResponseListener<Response<BaseResponse<BalanceHistoryData>>, String>): Disposable {
-        return ulloApi.userBalanceHistorylist()
+    fun userBalanceHistorylist(registerReq: JsonObject,listener: ResponseListener<Response<BaseResponse<BalanceHistoryData>>, String>): Disposable {
+        return ulloApi.userBalanceHistorylist(registerReq)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : ApiResponseCallbackWrapper<Response<BaseResponse<BalanceHistoryData>>>() {

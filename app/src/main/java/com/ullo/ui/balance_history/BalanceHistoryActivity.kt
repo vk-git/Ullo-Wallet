@@ -6,12 +6,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.JsonObject
 import com.ullo.BR
 import com.ullo.R
 import com.ullo.adapter.BalanceHistoryAdapter
 import com.ullo.api.response.balance_history.BalanceHistoryData
 import com.ullo.api.response.balance_history.History
-import com.ullo.api.response.contact.Contact
 import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivityBalanceHistoryBinding
 import com.ullo.ui.setting.SettingActivity
@@ -62,7 +62,11 @@ class BalanceHistoryActivity : BaseActivity<ActivityBalanceHistoryBinding, Balan
             }
         })
 
-        viewModel.run { userBalanceHistorylist() }
+        viewModel.run {
+            val jsonReq = JsonObject();
+            jsonReq.addProperty("type", "W")
+            userBalanceHistorylist(jsonReq)
+        }
     }
 
     private fun setBalanceHistoryData(patientList: List<History>) {

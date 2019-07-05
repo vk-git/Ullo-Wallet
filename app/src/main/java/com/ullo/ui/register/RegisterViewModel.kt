@@ -61,4 +61,37 @@ class RegisterViewModel(application: Application, ulloService: UlloService, sess
             }
         }))
     }
+
+    fun userVerifyOtp(registerReq: JsonObject) {
+        App.instance.showLoadingOverlayDialog(App.instance.getString(R.string.loading))
+        getCompositeDisposable()?.add(getUlloService().userVerifyOtp(registerReq, object : ResponseListener<Response<BaseResponse<JsonElement>>, String> {
+            override fun onSuccess(response: Response<BaseResponse<JsonElement>>) {
+                App.instance.hideLoadingOverlayDialog()
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        getNavigator()?.onOtpVerificationSuccessful()
+                    }
+                } else {
+                    try {
+                        response.errorBody()?.run {
+                            val errorResponse = SharedPreferenceHelper.getObjectFromString(string(), object : TypeToken<BaseResponse<JsonElement>>() {})
+                            getNavigator()?.handleError(errorResponse.error.asJsonArray[0].asString)
+                        }
+                    } catch (e: Exception) {
+                        getNavigator()?.handleError(e.message!!)
+                    }
+                }
+            }
+
+            override fun onInternetConnectionError() {
+                App.instance.hideLoadingOverlayDialog()
+                getNavigator()?.onInternetConnectionError()
+            }
+
+            override fun onFailure(error: String) {
+                App.instance.hideLoadingOverlayDialog()
+                getNavigator()?.handleError(error)
+            }
+        }))
+    }
 }

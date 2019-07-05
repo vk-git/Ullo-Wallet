@@ -2,6 +2,7 @@ package com.ullo.ui.balance_history
 
 import android.app.Application
 import com.google.gson.JsonElement
+import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import com.ullo.App
 import com.ullo.R
@@ -18,9 +19,9 @@ import retrofit2.Response
 
 class BalanceHistoryViewModel(application: Application, ulloService: UlloService, session: Session, dataManager: DataManager) : BaseViewModel<BalanceHistoryNavigator>(application, ulloService, session, dataManager) {
 
-    fun userBalanceHistorylist() {
+    fun userBalanceHistorylist(registerReq: JsonObject) {
         App.instance.showLoadingOverlayDialog(App.instance.getString(R.string.loading))
-        getCompositeDisposable()?.add(getUlloService().userBalanceHistorylist(object : ResponseListener<Response<BaseResponse<BalanceHistoryData>>, String> {
+        getCompositeDisposable()?.add(getUlloService().userBalanceHistorylist(registerReq,object : ResponseListener<Response<BaseResponse<BalanceHistoryData>>, String> {
             override fun onSuccess(response: Response<BaseResponse<BalanceHistoryData>>) {
                 App.instance.hideLoadingOverlayDialog()
                 if (response.isSuccessful) {

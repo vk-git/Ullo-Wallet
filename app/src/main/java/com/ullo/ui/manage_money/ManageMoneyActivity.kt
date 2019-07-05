@@ -10,6 +10,7 @@ import com.ullo.BR
 import com.ullo.R
 import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivityManageMoneyBinding
+import com.ullo.extensions.disable
 import com.ullo.extensions.visible
 import com.ullo.ui.setting.SettingActivity
 import com.ullo.utils.Validation
@@ -90,5 +91,7 @@ class ManageMoneyActivity : BaseActivity<ActivityManageMoneyBinding, ManageMoney
         mActivityManageMoneyBinding!!.imgSuccess.visible()
         mActivityManageMoneyBinding!!.btnUpdate.text = "Close"
         mActivityManageMoneyBinding!!.toolbar.setToolbarTitle("Success")
+        mActivityManageMoneyBinding!!.txtContactInfo.text = "Payment Successfully added to your wallet"
+        mActivityManageMoneyBinding!!.etAmount.disable()
     }
 }

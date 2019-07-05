@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.multidex.MultiDex
 import com.github.tamir7.contacts.Contacts
 import com.ullo.base.BaseActivity
 import com.ullo.dagger.DaggerAppComponent
@@ -34,6 +35,7 @@ class App : Application(), HasActivityInjector, Application.ActivityLifecycleCal
         super.onCreate()
         instance = this
         Contacts.initialize(this)
+        MultiDex.install(this)
 
         DaggerAppComponent.builder()
                 .application(this)

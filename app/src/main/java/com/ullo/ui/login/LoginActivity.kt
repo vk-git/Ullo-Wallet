@@ -2,10 +2,10 @@ package com.ullo.ui.login
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Typeface
 import android.os.Bundle
 import android.provider.Settings
 import android.text.method.PasswordTransformationMethod
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProviders
 import com.google.gson.JsonObject
 import com.ullo.BR
@@ -19,8 +19,6 @@ import com.ullo.ui.register.RegisterActivity
 import com.ullo.utils.Validation
 import com.ullo.utils.ViewModelProviderFactory
 import javax.inject.Inject
-import androidx.core.content.res.ResourcesCompat
-
 
 
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), LoginNavigator {
@@ -79,12 +77,18 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), Logi
         val email = mActivityLoginBinding!!.txtUserName.text.toString()
         val password = mActivityLoginBinding!!.txtUserPassword.text.toString()
 
-        if (!Validation.isValidEmail(email)) {
-            mActivityLoginBinding!!.tIEmail.isErrorEnabled = true
-            mActivityLoginBinding!!.tIEmail.error = "The entered Email is not correct."
-            bEmail = false
+        if (email.isNotEmpty()) {
+            if (!Validation.isValidEmail(email)) {
+                mActivityLoginBinding!!.tIEmail.isErrorEnabled = true
+                mActivityLoginBinding!!.tIEmail.error = "Please enter valid email address"
+                bEmail = false
+            } else {
+                mActivityLoginBinding!!.tIEmail.isErrorEnabled = false
+            }
         } else {
-            mActivityLoginBinding!!.tIEmail.isErrorEnabled = false
+            mActivityLoginBinding!!.tIEmail.isErrorEnabled = true
+            mActivityLoginBinding!!.tIEmail.error = "Please enter email"
+            bEmail = false
         }
 
         if (!Validation.isValidPassword(password)) {
@@ -99,15 +103,15 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), Logi
     }
 
     override fun onForgotPasswordHandle() {
-       ForgotPasswordActivity.newIntent(this).apply {
-           startActivity(this)
-       }
+        ForgotPasswordActivity.newIntent(this).apply {
+            startActivity(this)
+        }
     }
 
     override fun onMainScreen() {
         viewModel.let {
             MainActivity.newIntent(this).apply {
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or  Intent.FLAG_ACTIVITY_SINGLE_TOP
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
                 startActivity(this)
             }
             finishAffinity()

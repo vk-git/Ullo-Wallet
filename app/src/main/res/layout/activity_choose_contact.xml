@@ -39,13 +39,13 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginEnd="30dp"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_34sdp"
+                    android:layout_marginEnd="@dimen/_24sdp"
                     android:background="@color/white"
                     android:orientation="horizontal"
-                    android:paddingTop="16sp"
-                    android:paddingBottom="16dp"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp"
                     android:weightSum="2">
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -58,20 +58,20 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawableLeft="@drawable/ic_search"
-                            android:drawablePadding="10dp"
+                            android:drawablePadding="@dimen/_6sdp"
                             android:fontFamily="@font/quicksand_regular"
                             android:hint="Search people or enter a number"
                             android:singleLine="true"
                             android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            android:textSize="@dimen/_12ssp" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_24sdp"
                     android:onClick="@{()->viewModel.onScanQrCodeButtonClick()}"
                     android:orientation="vertical">
 
@@ -84,12 +84,12 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="14dp"
+                        android:layout_marginTop="@dimen/_8sdp"
                         android:gravity="center"
                         android:text="@string/scan_qa_code"
                         android:fontFamily="@font/quicksand_bold"
                         android:textColor="#712CE2"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/_12ssp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -97,23 +97,23 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="44dp"
+                    android:layout_marginTop="@dimen/_38sdp"
                     android:orientation="vertical">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="30dp"
+                        android:layout_marginStart="@dimen/_24sdp"
                         android:text="YayPay Contacts"
                         android:fontFamily="@font/quicksand_bold"
                         android:textColor="#4A4956"
-                        android:textSize="16sp" />
+                        android:textSize="@dimen/_12ssp" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="30dp"
+                        android:layout_marginTop="@dimen/_24sdp"
                         tools:listitem="@layout/contact_list_item" />
 
                 </LinearLayout>

@@ -38,13 +38,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginStart="@dimen/_14sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
                     android:fontFamily="@font/quicksand_bold"
                     android:text="My Setting"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/_18ssp"
+                    android:layout_marginLeft="@dimen/_14sdp" />
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
@@ -85,13 +86,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginStart="@dimen/_14sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
                     android:fontFamily="@font/quicksand_bold"
                     android:text="Account"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/_18ssp"
+                    android:layout_marginLeft="@dimen/_14sdp" />
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
@@ -111,26 +113,29 @@
 
                             <androidx.appcompat.widget.AppCompatImageView
                                 android:id="@+id/left_icon"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="@dimen/_24sdp"
+                                android:layout_height="@dimen/_24sdp"
                                 android:layout_alignParentStart="true"
                                 android:layout_centerVertical="true"
-                                android:layout_marginStart="20dp"
-                                android:layout_marginEnd="16dp"
-                                android:src="@drawable/sync_contact" />
+                                android:layout_marginStart="@dimen/_14sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:src="@drawable/sync_contact"
+                                android:layout_alignParentLeft="true"
+                                android:layout_marginLeft="@dimen/_14sdp"
+                                android:layout_marginRight="@dimen/_10sdp" />
 
                             <androidx.appcompat.widget.SwitchCompat
                                 android:id="@+id/swSyncContact"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="15dp"
+                                android:layout_marginEnd="@dimen/_10sdp"
                                 android:layout_toRightOf="@id/left_icon"
                                 android:fontFamily="@font/quicksand_bold"
-                                android:paddingTop="18dp"
-                                android:paddingBottom="18dp"
+                                android:paddingTop="@dimen/_12sdp"
+                                android:paddingBottom="@dimen/_12sdp"
                                 android:text="Sync Contact"
                                 android:textColor="@color/black"
-                                android:textSize="16sp" />
+                                android:textSize="@dimen/_14ssp" />
                         </RelativeLayout>
 
                     </LinearLayout>
@@ -139,13 +144,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginStart="@dimen/_14sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
                     android:fontFamily="@font/quicksand_bold"
                     android:text="Notification"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/_18ssp"
+                    android:layout_marginLeft="@dimen/_14sdp" />
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
@@ -165,28 +171,32 @@
 
                             <androidx.appcompat.widget.AppCompatImageView
                                 android:id="@+id/left_icon2"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="@dimen/_24sdp"
+                                android:layout_height="@dimen/_24sdp"
                                 android:layout_alignParentStart="true"
                                 android:layout_centerVertical="true"
-                                android:layout_marginStart="20dp"
-                                android:layout_marginEnd="16dp"
+                                android:layout_marginStart="@dimen/_14sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
                                 android:background="@drawable/setting_icon_bg"
                                 android:padding="5dp"
-                                android:src="@drawable/baseline_notifications" />
+                                android:src="@drawable/baseline_notifications"
+                                android:layout_alignParentLeft="true"
+                                android:layout_marginLeft="@dimen/_14sdp"
+                                android:layout_marginRight="@dimen/_10sdp" />
 
                             <androidx.appcompat.widget.SwitchCompat
                                 android:id="@+id/swPushNotification"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="15dp"
+                                android:layout_marginEnd="@dimen/_10sdp"
                                 android:layout_toRightOf="@id/left_icon2"
                                 android:fontFamily="@font/quicksand_bold"
-                                android:paddingTop="18dp"
-                                android:paddingBottom="18dp"
+                                android:paddingTop="@dimen/_12sdp"
+                                android:paddingBottom="@dimen/_12sdp"
                                 android:text="Push Notification"
                                 android:textColor="@color/black"
-                                android:textSize="16sp" />
+                                android:textSize="@dimen/_14ssp"
+                                android:layout_marginRight="@dimen/_10sdp" />
                         </RelativeLayout>
 
                         <RelativeLayout
@@ -201,25 +211,28 @@
                                 android:layout_height="30dp"
                                 android:layout_alignParentStart="true"
                                 android:layout_centerVertical="true"
-                                android:layout_marginStart="20dp"
-                                android:layout_marginEnd="16dp"
+                                android:layout_marginStart="@dimen/_14sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
                                 android:background="@drawable/setting_icon_bg"
                                 android:backgroundTint="#E61394"
                                 android:padding="5dp"
-                                android:src="@drawable/baseline_email" />
+                                android:src="@drawable/baseline_email"
+                                android:layout_alignParentLeft="true"
+                                android:layout_marginLeft="@dimen/_14sdp"
+                                android:layout_marginRight="@dimen/_10sdp" />
 
                             <androidx.appcompat.widget.SwitchCompat
                                 android:id="@+id/swEmailNotification"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="15dp"
+                                android:layout_marginEnd="@dimen/_10sdp"
                                 android:layout_toRightOf="@id/left_icon1"
                                 android:fontFamily="@font/quicksand_bold"
-                                android:paddingTop="18dp"
-                                android:paddingBottom="18dp"
+                                android:paddingTop="@dimen/_12sdp"
+                                android:paddingBottom="@dimen/_12sdp"
                                 android:text="Email Notification"
                                 android:textColor="@color/black"
-                                android:textSize="16sp" />
+                                android:textSize="@dimen/_14ssp" />
                         </RelativeLayout>
 
                     </LinearLayout>
@@ -228,13 +241,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginStart="@dimen/_14sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
                     android:fontFamily="@font/quicksand_bold"
                     android:text="Other Settings"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/_18ssp"
+                    android:layout_marginLeft="@dimen/_14sdp" />
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
@@ -292,8 +306,8 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
                     android:elevation="5dp">
 
                     <LinearLayout

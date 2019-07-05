@@ -32,7 +32,7 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="@dimen/_24sdp"
             tools:listitem="@layout/balance_list_item" />
     </LinearLayout>
 </layout>

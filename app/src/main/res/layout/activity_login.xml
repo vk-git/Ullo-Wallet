@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/splash_screen_gradient"
-            android:paddingTop="24dp">
+            android:paddingTop="@dimen/_18sdp">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtSignIn"
@@ -30,17 +30,17 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerInParent="true"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/_14sdp"
                 android:text="Sing In"
                 android:fontFamily="@font/quicksand_regular"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="@dimen/_16ssp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/txtSignIn"
-                android:layout_margin="20dp"
+                android:layout_margin="@dimen/_16sdp"
                 android:background="#FFFFFF"
                 android:orientation="vertical">
 
@@ -49,16 +49,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="77dp"
+                    android:layout_marginTop="@dimen/_70ssp"
                     android:src="@drawable/app_logo_blue" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tIEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="26dp"
-                    android:layout_marginTop="39dp"
-                    android:layout_marginRight="26dp">
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_32sdp"
+                    android:layout_marginRight="@dimen/_20sdp">
 
                     <EditText
                         android:id="@+id/txtUserName"
@@ -68,7 +68,7 @@
                         android:fontFamily="@font/quicksand_regular"
                         android:hint="Email Address"
                         android:inputType="textEmailAddress"
-                        android:textSize="14sp" />
+                        android:textSize="@dimen/_12ssp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -76,9 +76,9 @@
                     android:id="@+id/tIPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="26dp"
-                    android:layout_marginTop="42dp"
-                    android:layout_marginRight="26dp">
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_9sdp"
+                    android:layout_marginRight="@dimen/_20sdp">
 
                     <EditText
                         android:id="@+id/txtUserPassword"
@@ -87,7 +87,7 @@
                         android:drawableRight="@drawable/baseline_security"
                         android:fontFamily="@font/quicksand_regular"
                         android:hint="@string/password_hint"
-                        android:textSize="14sp" />
+                        android:textSize="@dimen/_12ssp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -95,47 +95,47 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:layout_marginBottom="@dimen/_4sdp"
                     android:background="@color/white"
                     android:fontFamily="@font/quicksand_regular"
                     android:onClick="@{()->viewModel.onForgotPasswordButtonClick()}"
-                    android:paddingTop="16dp"
-                    android:paddingBottom="16dp"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp"
                     android:text="@string/forgot_password"
                     android:textAllCaps="false"
                     android:textColor="#0A39F5"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/_12ssp" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:layout_width="match_parent"
-                    android:layout_height="54dp"
-                    android:layout_marginLeft="26dp"
-                    android:layout_marginRight="26dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_20sdp"
                     android:background="@drawable/login_button_gradient"
                     android:fontFamily="@font/quicksand_bold"
                     android:onClick="@{()->viewModel.onLoginButtonClick()}"
                     android:text="Sign In"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/_14ssp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
                     android:background="@color/white"
                     android:fontFamily="@font/quicksand_regular"
                     android:onClick="@{()->viewModel.onSignUpButtonClick()}"
-                    android:paddingTop="16dp"
-                    android:paddingBottom="16dp"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp"
                     android:text="New to Ullo? Sign up now"
                     android:textAllCaps="false"
                     android:textColor="#0A39F5"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/_12ssp" />
 
             </LinearLayout>
         </RelativeLayout>

@@ -11,6 +11,7 @@ import com.ullo.R
 import com.ullo.api.response.contact.Contact
 import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivitySendMoneyBinding
+import com.ullo.extensions.disable
 import com.ullo.extensions.visible
 import com.ullo.ui.setting.SettingActivity
 import com.ullo.utils.Constant
@@ -103,5 +104,7 @@ class SendMoneyActivity : BaseActivity<ActivitySendMoneyBinding, SendMoneyViewMo
         mActivitySendMoneyBinding!!.imgSuccess.visible()
         mActivitySendMoneyBinding!!.btnUpdate.text = "Close"
         mActivitySendMoneyBinding!!.toolbar.setToolbarTitle("Success")
+        mActivitySendMoneyBinding!!.txtContactInfo.text = "Payment transfer to ${contact.fullName}"
+        mActivitySendMoneyBinding!!.etAmount.disable()
     }
 }

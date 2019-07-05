@@ -47,6 +47,8 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
     override val layoutId: Int
         get() = R.layout.activity_register
 
+    var otpStr = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mActivityRegisterBinding = getViewDataBinding()
@@ -56,7 +58,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
         mActivityRegisterBinding!!.etPassword.typeface = typeface
         mActivityRegisterBinding!!.etPassword.transformationMethod = PasswordTransformationMethod()
 
-        val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID);
+        val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
         viewModel.getSession().setAppDeviceId(deviceId)
     }
 
@@ -67,25 +69,44 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
     }
 
     override fun onCheckValidation() {
-        if (isValid()) {
-            val loginReq = JsonObject()
-            loginReq.addProperty("full_name", mActivityRegisterBinding!!.etFullName.text.toString())
-            loginReq.addProperty("email", mActivityRegisterBinding!!.etEmail.text.toString())
-            loginReq.addProperty("password", mActivityRegisterBinding!!.etPassword.text.toString())
-            loginReq.addProperty("country_code", mActivityRegisterBinding!!.etCountryCode.text.toString())
-            loginReq.addProperty("phone_number", mActivityRegisterBinding!!.etMobileNo.text.toString())
-            loginReq.addProperty("user_type", BuildConfig.USER_TYPE)
-            loginReq.addProperty("device_id", viewModel.getSession().getAppDeviceId())
-            loginReq.addProperty("device_type", BuildConfig.DEVICE_TYPE)
-            viewModel.register(loginReq)
+        if (mActivityRegisterBinding!!.btnSignUp.text == "Verify OTP") {
+            if (isValidOTP()) {
+                val loginReq = JsonObject()
+                loginReq.addProperty("user_type", BuildConfig.USER_TYPE)
+                loginReq.addProperty("country_code", mActivityRegisterBinding!!.etCountryCode.selectedCountryCode)
+                loginReq.addProperty("phone_number", mActivityRegisterBinding!!.etMobileNo.text.toString())
+                loginReq.addProperty("otp", otpStr)
+            } else {
+                handleError("Please enter valid OTP!")
+            }
+        } else {
+            if (isValid()) {
+                val loginReq = JsonObject()
+                loginReq.addProperty("full_name", mActivityRegisterBinding!!.etFullName.text.toString())
+                loginReq.addProperty("email", mActivityRegisterBinding!!.etEmail.text.toString())
+                loginReq.addProperty("password", mActivityRegisterBinding!!.etPassword.text.toString())
+                loginReq.addProperty("country_code", "+" + mActivityRegisterBinding!!.etCountryCode.selectedCountryCode)
+                loginReq.addProperty("phone_number", mActivityRegisterBinding!!.etMobileNo.text.toString())
+                loginReq.addProperty("user_type", BuildConfig.USER_TYPE)
+                loginReq.addProperty("device_id", viewModel.getSession().getAppDeviceId())
+                loginReq.addProperty("device_type", BuildConfig.DEVICE_TYPE)
+                viewModel.register(loginReq)
+            }
         }
     }
 
+    private fun isValidOTP(): Boolean {
+        var bOTP = true
+        if (otpStr.isEmpty() || otpStr.length != 4) {
+            bOTP = false
+        }
+        return bOTP
+    }
+
     override fun onRegisterSuccessful(appUser: AppUser) {
-       MainActivity.newIntent(this).apply {
-           startActivity(this)
-       }
-        finishAffinity()
+        mActivityRegisterBinding!!.btnSignUp.text = "Verify OTP"
+        mActivityRegisterBinding!!.txtOTPView.visible()
+        mActivityRegisterBinding!!.etOTPView.visible()
     }
 
     private fun isValid(): Boolean {
@@ -97,7 +118,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
         val email = mActivityRegisterBinding!!.etEmail.text.toString()
         val password = mActivityRegisterBinding!!.etPassword.text.toString()
         val mobileNo = mActivityRegisterBinding!!.etMobileNo.text.toString()
-        val countryCode = mActivityRegisterBinding!!.etCountryCode.text.toString()
+        val countryCode = mActivityRegisterBinding!!.etCountryCode.selectedCountryCode
 
         if (!Validation.isValidName(firstName)) {
             mActivityRegisterBinding!!.tIFullName.isErrorEnabled = true
@@ -107,12 +128,18 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
             mActivityRegisterBinding!!.tIFullName.isErrorEnabled = false
         }
 
-        if (!Validation.isValidEmail(email)) {
-            mActivityRegisterBinding!!.tIEmail.isErrorEnabled = true
-            mActivityRegisterBinding!!.tIEmail.error = "The entered Email is not correct."
-            bEmail = false
+        if (email.isNotEmpty()) {
+            if (!Validation.isValidEmail(email)) {
+                mActivityRegisterBinding!!.tIEmail.isErrorEnabled = true
+                mActivityRegisterBinding!!.tIEmail.error = "Please enter valid email address"
+                bEmail = false
+            } else {
+                mActivityRegisterBinding!!.tIEmail.isErrorEnabled = false
+            }
         } else {
-            mActivityRegisterBinding!!.tIEmail.isErrorEnabled = false
+            mActivityRegisterBinding!!.tIEmail.isErrorEnabled = true
+            mActivityRegisterBinding!!.tIEmail.error = "Please enter email"
+            bEmail = false
         }
 
         if (!Validation.isValidPassword(password)) {
@@ -123,22 +150,29 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
             mActivityRegisterBinding!!.tIPassword.isErrorEnabled = false
         }
 
-        if (mobileNo.isEmpty() || !Validation.isValidMobile(mobileNo)) {
+        if (countryCode.isEmpty()) {
             mActivityRegisterBinding!!.tIMobileNo.visible()
-            mActivityRegisterBinding!!.tIMobileNo.text = "Not Valid Number"
+            mActivityRegisterBinding!!.tIMobileNo.text = "Not valid country code"
             bCountryCode = false
         } else {
             mActivityRegisterBinding!!.tIMobileNo.gone()
         }
 
-        if (countryCode.isEmpty() || mobileNo.isEmpty() || !Validation.isValidCountryCode(countryCode, mobileNo)) {
+        if (mobileNo.isEmpty() || !Validation.isValidMobile(mobileNo)) {
             mActivityRegisterBinding!!.tIMobileNo.visible()
-            mActivityRegisterBinding!!.tIMobileNo.text = "Not Valid Country Code"
+            mActivityRegisterBinding!!.tIMobileNo.text = "Not valid phone number"
             bCountryCode = false
         } else {
             mActivityRegisterBinding!!.tIMobileNo.gone()
         }
 
         return bFullName && bEmail && bPassword && bCountryCode
+    }
+
+    override fun onOtpVerificationSuccessful() {
+        MainActivity.newIntent(this).apply {
+            startActivity(this)
+        }
+        finishAffinity()
     }
 }

@@ -93,18 +93,19 @@ class ScanQrCodeActivity : BaseActivity<ActivityScanQrCodeBinding, ScanQrCodeVie
     private fun isValid(): Boolean {
         var bCountryCode = true
         val mobileNo = mActivityScanQrCodeBinding!!.etMobileNo.text.toString()
-        val countryCode = mActivityScanQrCodeBinding!!.etCountryCode.text.toString()
-        if (mobileNo.isEmpty() || !Validation.isValidMobile(mobileNo)) {
+        val countryCode = mActivityScanQrCodeBinding!!.etCountryCode.selectedCountryCode
+
+        if (countryCode.isEmpty()) {
             mActivityScanQrCodeBinding!!.tIMobileNo.visible()
-            mActivityScanQrCodeBinding!!.tIMobileNo.text = "Not valid mobile number"
+            mActivityScanQrCodeBinding!!.tIMobileNo.text = "Not valid country code"
             bCountryCode = false
         } else {
             mActivityScanQrCodeBinding!!.tIMobileNo.gone()
         }
 
-        if (countryCode.isEmpty() || mobileNo.isEmpty() || !Validation.isValidCountryCode(countryCode, mobileNo)) {
+        if (mobileNo.isEmpty() || !Validation.isValidMobile(mobileNo)) {
             mActivityScanQrCodeBinding!!.tIMobileNo.visible()
-            mActivityScanQrCodeBinding!!.tIMobileNo.text = "Not valid country code"
+            mActivityScanQrCodeBinding!!.tIMobileNo.text = "Not valid mobile number"
             bCountryCode = false
         } else {
             mActivityScanQrCodeBinding!!.tIMobileNo.gone()

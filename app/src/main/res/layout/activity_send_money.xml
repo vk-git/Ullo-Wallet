@@ -37,7 +37,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="@dimen/_24sdp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -49,8 +49,8 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="27dp"
-                    android:layout_marginEnd="27dp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
                     android:src="@drawable/send_money" />
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -65,28 +65,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="@dimen/_30sdp"
                 android:fontFamily="@font/quicksand_bold"
                 android:gravity="center"
                 android:text="@string/paying_money_to_sophia_fields"
                 android:textColor="#0A39F5"
-                android:textSize="16sp" />
+                android:textSize="@dimen/_12ssp" />
 
             <EditText
                 android:id="@+id/etAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="26dp"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:drawableStart="@drawable/ic_doller_money"
                 android:gravity="center"
                 android:hint="10"
                 android:fontFamily="@font/quicksand_regular"
                 android:inputType="number"
-                android:maxWidth="300dp"
+                android:maxWidth="@dimen/_260sdp"
                 android:singleLine="true"
                 android:textColor="#0A39F5"
-                android:textSize="40sp" />
+                android:textSize="@dimen/_34ssp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
@@ -95,13 +95,13 @@
                 android:fontFamily="@font/quicksand_regular"
                 android:text="What’s this for?"
                 android:textColor="#0A39F5"
-                android:textSize="14sp" />
+                android:textSize="@dimen/_12ssp" />
 
             <ImageView
                 android:id="@+id/imgSuccess"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="31dp"
+                android:layout_marginTop="@dimen/_24sdp"
                 android:src="@drawable/send_money_success"
                 android:visibility="gone" />
 
@@ -111,13 +111,14 @@
             android:id="@+id/btnUpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="33dp"
-            android:layout_marginTop="58dp"
-            android:layout_marginEnd="33dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginStart="@dimen/_26sdp"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:layout_marginEnd="@dimen/_26sdp"
+            android:layout_marginBottom="@dimen/_14sdp"
             android:background="@drawable/login_button_gradient"
             android:fontFamily="@font/quicksand_bold"
             android:text="Send"
+            android:textSize="@dimen/_14ssp"
             android:textAllCaps="false"
             android:textColor="@color/white" />
 

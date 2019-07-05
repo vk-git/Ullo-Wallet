@@ -79,16 +79,16 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnGetStarted"
-                    android:layout_width="114dp"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_width="@dimen/_108sdp"
+                    android:layout_height="@dimen/_34sdp"
+                    android:layout_marginEnd="6dp"
                     android:background="#3B5998"
                     android:fontFamily="@font/quicksand_bold"
                     android:onClick="@{()->viewModel.onGetStartedButtonClick()}"
                     android:text="Get Started"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
-                    android:textSize="13sp"
+                    android:textSize="@dimen/_10ssp"
                     android:visibility="gone" />
             </LinearLayout>
 

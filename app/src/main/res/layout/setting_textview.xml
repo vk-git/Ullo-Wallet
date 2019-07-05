@@ -7,13 +7,16 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/left_icon"
-        android:layout_width="20dp"
-        android:layout_height="30dp"
+        android:layout_width="@dimen/_14sdp"
+        android:layout_height="@dimen/_24sdp"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="17dp"
-        android:src="@drawable/arrow_right_small" />
+        android:layout_marginStart="@dimen/_14sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:src="@drawable/arrow_right_small"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/_14sdp"
+        android:layout_marginRight="@dimen/_10sdp" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txtView"
@@ -21,20 +24,23 @@
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@id/right_icon"
         android:layout_toRightOf="@+id/left_icon"
-        android:paddingStart="21dp"
-        android:paddingTop="18dp"
+        android:paddingStart="@dimen/_14sdp"
+        android:paddingTop="@dimen/_12sdp"
         android:paddingEnd="5dp"
-        android:textSize="16sp"
+        android:textSize="@dimen/_14ssp"
         android:fontFamily="@font/quicksand_bold"
-        android:paddingBottom="21dp" />
+        android:paddingBottom="@dimen/_14sdp"
+        android:paddingLeft="@dimen/_14sdp"
+        android:paddingRight="5dp" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/right_icon"
-        android:layout_width="20dp"
-        android:layout_height="30dp"
+        android:layout_width="@dimen/_14sdp"
+        android:layout_height="@dimen/_24sdp"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:src="@drawable/arrow_right_small" />
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:src="@drawable/arrow_right_small"
+        android:layout_alignParentRight="true" />
 </RelativeLayout>

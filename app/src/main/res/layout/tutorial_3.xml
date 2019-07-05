@@ -11,10 +11,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/_14sdp"
         android:text="ullo"
         android:textColor="#FFFFFF"
-        android:textSize="72dp" />
+        android:textSize="@dimen/_66sdp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,29 +26,31 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="@dimen/_12sdp"
             android:src="@drawable/tutorial_three" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="28dp"
-            android:layout_marginTop="44dp"
+            android:paddingStart="22sp"
+            android:layout_marginTop="@dimen/_38sdp"
             android:text="Automatically organize"
             android:textColor="#FFFFFF"
-            android:textSize="23sp"
+            android:textSize="@dimen/_18ssp"
             android:fontFamily="@font/quicksand_regular"
-            android:textStyle="italic" />
+            android:textStyle="italic"
+            android:paddingLeft="22sp" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="28dp"
+            android:paddingStart="@dimen/_22sdp"
             android:layout_marginTop="9dp"
             android:text="organize your your expenses and secure your account by pin code every time you use the app."
             android:textColor="#FFFFFF"
             android:fontFamily="@font/quicksand_regular"
-            android:textSize="16sp" />
+            android:textSize="@dimen/_14ssp"
+            android:paddingLeft="@dimen/_22sdp" />
 
     </LinearLayout>
 

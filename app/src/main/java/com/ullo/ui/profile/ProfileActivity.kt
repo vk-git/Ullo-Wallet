@@ -7,7 +7,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
@@ -22,7 +21,6 @@ import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivityProfileBinding
 import com.ullo.extensions.gone
 import com.ullo.extensions.visible
-import com.ullo.ui.main.MainActivity
 import com.ullo.utils.ImageFilePath
 import com.ullo.utils.Validation
 import com.ullo.utils.ViewModelProviderFactory
@@ -75,7 +73,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding, ProfileViewModel>()
         viewModel.getSession().getAppUser()?.run {
             mActivityProfileBinding!!.etFullName.setText(userData.fullName)
             mActivityProfileBinding!!.etEmail.setText(userData.email)
-            mActivityProfileBinding!!.etCountryCode.setText(userData.countryCode)
+            mActivityProfileBinding!!.etCountryCode.setCountryForPhoneCode(userData.countryCode.toInt())
             mActivityProfileBinding!!.etMobileNo.setText(userData.phoneNumber)
 
             Glide.with(this@ProfileActivity)
@@ -104,7 +102,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding, ProfileViewModel>()
             val loginReq = JsonObject()
             loginReq.addProperty("full_name", mActivityProfileBinding!!.etFullName.text.toString())
             loginReq.addProperty("email", mActivityProfileBinding!!.etEmail.text.toString())
-            loginReq.addProperty("country_code", mActivityProfileBinding!!.etCountryCode.text.toString())
+            loginReq.addProperty("country_code", "+" + mActivityProfileBinding!!.etCountryCode.selectedCountryCode)
             loginReq.addProperty("phone_number", mActivityProfileBinding!!.etMobileNo.text.toString())
             loginReq.addProperty("user_type", BuildConfig.USER_TYPE)
             loginReq.addProperty("device_id", viewModel.getSession().getAppDeviceId())
@@ -124,7 +122,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding, ProfileViewModel>()
         var bMobile = true
         val firstName = mActivityProfileBinding!!.etFullName.text.toString()
         val email = mActivityProfileBinding!!.etEmail.text.toString()
-        val country = mActivityProfileBinding!!.etCountryCode.text.toString()
+        val country = mActivityProfileBinding!!.etCountryCode.selectedCountryCode
         val mobileNo = mActivityProfileBinding!!.etMobileNo.text.toString()
 
         if (!Validation.isValidName(firstName)) {
@@ -143,18 +141,18 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding, ProfileViewModel>()
             mActivityProfileBinding!!.tIEmail.isErrorEnabled = false
         }
 
-        if (mobileNo.isEmpty() || !Validation.isValidMobile(mobileNo)) {
+        if (country.isEmpty()) {
             mActivityProfileBinding!!.tIMobileNo.visible()
-            mActivityProfileBinding!!.tIMobileNo.error = "Not Valid Number"
-            bMobile = false
+            mActivityProfileBinding!!.tIMobileNo.error = "Not Valid Country Code"
+            bCountry = false
         } else {
             mActivityProfileBinding!!.tIMobileNo.gone()
         }
 
-        if (country.isEmpty() || mobileNo.isEmpty() || !Validation.isValidCountryCode(country, mobileNo)) {
+        if (mobileNo.isEmpty() || !Validation.isValidMobile(mobileNo)) {
             mActivityProfileBinding!!.tIMobileNo.visible()
-            mActivityProfileBinding!!.tIMobileNo.error = "Not Valid Country Code"
-            bCountry = false
+            mActivityProfileBinding!!.tIMobileNo.error = "Not Valid Number"
+            bMobile = false
         } else {
             mActivityProfileBinding!!.tIMobileNo.gone()
         }

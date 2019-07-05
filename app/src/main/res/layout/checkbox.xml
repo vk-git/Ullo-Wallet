@@ -3,6 +3,6 @@
     android:id="@+id/checkbox"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="10dp"
+    android:paddingLeft="@dimen/_4sdp"
     android:text="CheckBox"
     android:textAppearance="?android:attr/textAppearanceLarge" />

@@ -19,6 +19,9 @@ interface UlloApi {
     @POST("auth/register")
     fun userRegister(@Body registerReq: JsonObject): Observable<Response<BaseResponse<AppUser>>>
 
+    @POST("auth/verifyotp")
+    fun userVerifyOtp(@Body registerReq: JsonObject): Observable<Response<BaseResponse<JsonElement>>>
+
     @POST("auth/login")
     fun userLogin(@Body loginReq: JsonObject): Observable<Response<BaseResponse<AppUser>>>
 
@@ -44,7 +47,7 @@ interface UlloApi {
     fun userNotificationlist(): Observable<Response<BaseResponse<NotificationData>>>
 
     @POST("balance-history")
-    fun userBalanceHistorylist(): Observable<Response<BaseResponse<BalanceHistoryData>>>
+    fun userBalanceHistorylist(@Body registerReq: JsonObject): Observable<Response<BaseResponse<BalanceHistoryData>>>
 
     @POST("add-money")
     fun userAddMoney(@Body registerReq: JsonObject): Observable<Response<BaseResponse<JsonElement>>>
