@@ -18,11 +18,11 @@ import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
 import com.ullo.BR
 import com.ullo.R
+import com.ullo.api.response.Payment
 import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivityManageMoneyBinding
 import com.ullo.extensions.disable
 import com.ullo.extensions.visible
-import com.ullo.ui.main.MainActivity
 import com.ullo.ui.setting.SettingActivity
 import com.ullo.utils.Validation
 import com.ullo.utils.ViewModelProviderFactory
@@ -107,8 +107,8 @@ class ManageMoneyActivity : BaseActivity<ActivityManageMoneyBinding, ManageMoney
                 .setfName(viewModel.getSession().getAppUser().userData.fullName)
                 .setlName("")
                 .setNarration("")
-                .setPublicKey("FLWPUBK_TEST-307eea8597a8466c701ee5d9aa67c822-X")
-                .setEncryptionKey("FLWSECK_TESTf18977a09f40")
+                .setPublicKey("FLWPUBK_TEST-21244d5acebd6bab4942f7c1c49cafbc-X")
+                .setEncryptionKey("FLWSECK_TESTe564bbb0c8ab")
                 .setTxRef("") //OrderId
                 .acceptAccountPayments(true)
                 .acceptCardPayments(true)
@@ -128,7 +128,7 @@ class ManageMoneyActivity : BaseActivity<ActivityManageMoneyBinding, ManageMoney
         mActivityManageMoneyBinding!!.etAmount.disable()
     }
 
-    private fun onPermissionCheck(payableAmount: Double){
+    private fun onPermissionCheck(payableAmount: Double) {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) ==
                 PackageManager.PERMISSION_GRANTED) {
             onAddMoney(payableAmount)
@@ -149,10 +149,10 @@ class ManageMoneyActivity : BaseActivity<ActivityManageMoneyBinding, ManageMoney
                     val gsonBuilder = GsonBuilder()
                     val gson = gsonBuilder.create()
                     Log.d("mytag", "message:$message")
-                    /* val newPayment = gson.fromJson(message, Example::class.java)
-                     val txref = String.valueOf(newPayment.getData().getTxRef())
-                     val amount = String.valueOf(newPayment.getData().getAmount())
-                     apiPaymentLink(txref, amount)*/
+                    val newPayment = gson.fromJson(message, Payment::class.java)
+                    val txref = newPayment.data.txRef
+                    val amount = newPayment.data.amount
+                    apiPaymentLink(txref, amount)
                 }
                 RavePayActivity.RESULT_ERROR -> Toast.makeText(this, "ERROR $message", Toast.LENGTH_SHORT).show()
                 RavePayActivity.RESULT_CANCELLED -> Toast.makeText(this, "CANCELLED $message", Toast.LENGTH_SHORT).show()
@@ -174,6 +174,7 @@ class ManageMoneyActivity : BaseActivity<ActivityManageMoneyBinding, ManageMoney
         val req = JsonObject()
         req.addProperty("amount", amount)
         req.addProperty("txref", txref)
+
         viewModel.userAddMoney(req)
     }
 }
