@@ -95,5 +95,8 @@ dependencies {
     //https://github.com/ChaosLeung/PinView
     implementation 'com.chaos.view:pinview:1.4.3'
 
+    //https://github.com/Flutterwave/rave-android
+    implementation 'com.github.Flutterwave:rave-android:1.0.36'
+
     implementation fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude: [])
 }
