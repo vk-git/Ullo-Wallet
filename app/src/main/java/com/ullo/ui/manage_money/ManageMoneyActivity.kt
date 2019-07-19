@@ -1,11 +1,15 @@
 package com.ullo.ui.manage_money
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
 import com.flutterwave.raveandroid.RaveConstants
 import com.flutterwave.raveandroid.RavePayActivity
@@ -18,6 +22,7 @@ import com.ullo.base.BaseActivity
 import com.ullo.databinding.ActivityManageMoneyBinding
 import com.ullo.extensions.disable
 import com.ullo.extensions.visible
+import com.ullo.ui.main.MainActivity
 import com.ullo.ui.setting.SettingActivity
 import com.ullo.utils.Validation
 import com.ullo.utils.ViewModelProviderFactory
@@ -27,6 +32,7 @@ import javax.inject.Inject
 class ManageMoneyActivity : BaseActivity<ActivityManageMoneyBinding, ManageMoneyViewModel>(), ManageMoneyNavigator {
 
     companion object {
+        private const val READ_PHONE_STATE_PERMISSION_REQUEST_CODE = 76
         fun newIntent(context: Context): Intent {
             return Intent(context, ManageMoneyActivity::class.java)
         }
@@ -70,8 +76,7 @@ class ManageMoneyActivity : BaseActivity<ActivityManageMoneyBinding, ManageMoney
             if (mActivityManageMoneyBinding!!.btnUpdate.text.toString() == "Add Money") {
                 if (isValid()) {
                     val payableAmount = mActivityManageMoneyBinding!!.etAmount.text.toString().toDouble()
-                    onAddMoney(payableAmount)
-                    /*   */
+                    onPermissionCheck(payableAmount)
                 }
             } else {
                 finish()
@@ -123,6 +128,18 @@ class ManageMoneyActivity : BaseActivity<ActivityManageMoneyBinding, ManageMoney
         mActivityManageMoneyBinding!!.etAmount.disable()
     }
 
+    private fun onPermissionCheck(payableAmount: Double){
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) ==
+                PackageManager.PERMISSION_GRANTED) {
+            onAddMoney(payableAmount)
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(arrayOf(Manifest.permission.READ_PHONE_STATE),
+                        READ_PHONE_STATE_PERMISSION_REQUEST_CODE)
+            }
+        }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RaveConstants.RAVE_REQUEST_CODE && data != null) {
@@ -140,6 +157,16 @@ class ManageMoneyActivity : BaseActivity<ActivityManageMoneyBinding, ManageMoney
                 RavePayActivity.RESULT_ERROR -> Toast.makeText(this, "ERROR $message", Toast.LENGTH_SHORT).show()
                 RavePayActivity.RESULT_CANCELLED -> Toast.makeText(this, "CANCELLED $message", Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        if (requestCode == READ_PHONE_STATE_PERMISSION_REQUEST_CODE
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            val payableAmount = mActivityManageMoneyBinding!!.etAmount.text.toString().toDouble()
+            onPermissionCheck(payableAmount)
+        } else {
+            viewModel.getSession().setSyncContact(false)
         }
     }
 

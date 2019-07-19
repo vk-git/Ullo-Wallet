@@ -7,7 +7,8 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -26,8 +27,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.landing.LandingActivity" />
-        <activity android:name=".ui.login.LoginActivity"
-            android:launchMode="singleTask"/>
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".ui.register.RegisterActivity" />
         <activity
             android:name=".ui.main.MainActivity"
@@ -43,10 +45,12 @@
         <activity android:name=".ui.my_qr_code.MyQrCodeActivity" />
         <activity android:name=".ui.balance_history.BalanceHistoryActivity" />
         <activity android:name=".ui.notification.NotificationActivity" />
-        <activity android:name=".ui.send_money.SendMoneyActivity"
-            android:windowSoftInputMode="stateVisible"/>
+        <activity
+            android:name=".ui.send_money.SendMoneyActivity"
+            android:windowSoftInputMode="stateVisible" />
         <activity android:name=".ui.scan_qr_code.ScanQrCodeActivity" />
-        <activity android:name=".ui.manage_money.ManageMoneyActivity"
-            android:windowSoftInputMode="stateVisible"/>
+        <activity
+            android:name=".ui.manage_money.ManageMoneyActivity"
+            android:windowSoftInputMode="stateVisible" />
     </application>
 </manifest>
