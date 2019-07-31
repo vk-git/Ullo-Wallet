@@ -107,9 +107,9 @@ class ManageMoneyActivity : BaseActivity<ActivityManageMoneyBinding, ManageMoney
                 .setfName(viewModel.getSession().getAppUser().userData.fullName)
                 .setlName("")
                 .setNarration("")
-                .setPublicKey("FLWPUBK_TEST-21244d5acebd6bab4942f7c1c49cafbc-X")
-                .setEncryptionKey("FLWSECK_TESTe564bbb0c8ab")
-                .setTxRef("") //OrderId
+                .setPublicKey("FLWPUBK-93c0878ad323386aa1a37037835bd5b6-X")
+                .setEncryptionKey("68ef6fe723eb90ae66ae1bc0")
+                .setTxRef("" + System.currentTimeMillis()) //OrderId
                 .acceptAccountPayments(true)
                 .acceptCardPayments(true)
                 .acceptMpesaPayments(true)
@@ -117,6 +117,7 @@ class ManageMoneyActivity : BaseActivity<ActivityManageMoneyBinding, ManageMoney
                 .onStagingEnv(false)
                 .allowSaveCardFeature(false)
                 .isPreAuth(false)
+                .onStagingEnv(true)
                 .initialize()
     }
 
@@ -148,7 +149,6 @@ class ManageMoneyActivity : BaseActivity<ActivityManageMoneyBinding, ManageMoney
                 RavePayActivity.RESULT_SUCCESS -> {
                     val gsonBuilder = GsonBuilder()
                     val gson = gsonBuilder.create()
-                    Log.d("mytag", "message:$message")
                     val newPayment = gson.fromJson(message, Payment::class.java)
                     val txref = newPayment.data.txRef
                     val amount = newPayment.data.amount
